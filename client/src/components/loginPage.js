@@ -13,13 +13,16 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const MotionButton = motion(Button);
 
 const LoginPage = () => {
 	const [loading, setLoading] = useState(false);
 	const handleLogin = () => {
 		setLoading(true);
 		setTimeout(() => setLoading(false), 3000);
-		setTimeout(() => push("/home"), 4000);
+		// setTimeout(() => push("/home"), 4000);
 	};
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
@@ -40,6 +43,8 @@ const LoginPage = () => {
 										md: "40px",
 										lg: "50px",
 									}}
+									fontWeight="bold"
+									fontFamily="Comfortaa"
 								>
 									Log In
 								</Text>
@@ -48,7 +53,7 @@ const LoginPage = () => {
 								<FormLabel>Username</FormLabel>
 								<InputGroup>
 									<Input
-										placeholder="Username"
+										placeholder="Enter your username..."
 										variant="filled"
 									/>
 								</InputGroup>
@@ -59,7 +64,7 @@ const LoginPage = () => {
 									<Input
 										variant="filled"
 										type={show ? "text" : "password"}
-										placeholder="Password"
+										placeholder="Enter your password..."
 									/>
 									<InputRightElement width="4.5rem">
 										<Button
@@ -73,14 +78,15 @@ const LoginPage = () => {
 								</InputGroup>
 							</FormControl>
 							<Stack spacing="15px">
-								<Button
+								<MotionButton
+									whileHover={{ scale: 1.2 }}
 									colorScheme="cyan"
 									variant="ghost"
 									isLoading={loading}
 									onClick={handleLogin}
 								>
 									Log In
-								</Button>
+								</MotionButton>
 								<Stack direction="row">
 									<Divider height="12px" />
 									<Text>
@@ -88,13 +94,15 @@ const LoginPage = () => {
 									</Text>
 									<Divider height="12px" />
 								</Stack>
-								<Button
+								<MotionButton
 									colorScheme="orange"
+									whileHover={{ scale: 1.2 }}
+									whileTap={{ scale: 0.9 }}
 									variant="ghost"
 									onClick={handleSignUp}
 								>
 									Sign Up
-								</Button>
+								</MotionButton>
 							</Stack>
 						</Stack>
 					</Center>

@@ -41,6 +41,8 @@ const SignUpPage = () => {
 										md: "40px",
 										lg: "50px",
 									}}
+									fontWeight="bold"
+									fontFamily="Comfortaa"
 								>
 									Sign Up
 								</Text>
@@ -49,7 +51,7 @@ const SignUpPage = () => {
 								<FormLabel>Username</FormLabel>
 								<InputGroup>
 									<Input
-										placeholder="Username"
+										placeholder="Enter your username..."
 										variant="filled"
 									/>
 								</InputGroup>
@@ -60,7 +62,7 @@ const SignUpPage = () => {
 									<Input
 										variant="filled"
 										type={showPass ? "text" : "password"}
-										placeholder="Password"
+										placeholder="Enter your password..."
 									/>
 									<InputRightElement width="4.5rem">
 										<Button
@@ -79,7 +81,7 @@ const SignUpPage = () => {
 									<Input
 										variant="filled"
 										type={showConfirm ? "text" : "password"}
-										placeholder="Confirm Password"
+										placeholder="Confirm your password..."
 									/>
 									<InputRightElement width="4.5rem">
 										<Button
