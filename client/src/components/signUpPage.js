@@ -3,35 +3,52 @@ import {
 	Box,
 	Button,
 	Center,
+	Checkbox,
 	Divider,
 	FormControl,
 	FormLabel,
+	Image,
 	Input,
 	InputGroup,
 	InputRightElement,
+	Link,
 	Stack,
 	Text,
+	useToast,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const MotionButton = motion(Button);
 
 const SignUpPage = () => {
 	const [loading, setLoading] = useState(false);
 	const handleSignUp = () => {
 		setLoading(true);
+		toast({
+			title: "Signed up successfully",
+			isClosable: true,
+			variant: "left-accent",
+			status: "success",
+		});
 		setTimeout(() => setLoading(false), 3000);
 	};
 	const [showPass, setShowPass] = useState(false);
 	const [showConfirm, setShowConfirm] = useState(false);
+	const [agree, setAgree] = useState(false);
+	const handleAgreeClick = () => setAgree(!agree);
 	const handlePassClick = () => setShowPass(!showPass);
 	const handleConfirmClick = () => setShowConfirm(!showConfirm);
 	const { push } = useHistory();
 	const handleLogin = () => {
 		push("/login");
 	};
+	const toast = useToast();
+
 	return (
 		<Box h="100vh" w="100vw" bg="beige">
 			<Center h="100%">
-				<Box h="70vh" w={[300, 400, 560]} p="5px" bg="beige">
+				<Box h="80vh" w={[300, 400, 560]} p="1px" bg="beige">
 					<Center>
 						<Stack spacing={[5, 10, 25]} w={[300, 350, 350]}>
 							<Center>
@@ -48,10 +65,23 @@ const SignUpPage = () => {
 								</Text>
 							</Center>
 							<FormControl isRequired>
+								<FormLabel>Name</FormLabel>
+								<InputGroup>
+									<Input
+										placeholder="Enter your name..."
+										_active={{ background: "#B7E3CC" }}
+										_focus={{ background: "white" }}
+										variant="filled"
+									/>
+								</InputGroup>
+							</FormControl>
+							<FormControl isRequired>
 								<FormLabel>Username</FormLabel>
 								<InputGroup>
 									<Input
 										placeholder="Enter your username..."
+										_active={{ background: "#B7E3CC" }}
+										_focus={{ background: "white" }}
 										variant="filled"
 									/>
 								</InputGroup>
@@ -61,8 +91,10 @@ const SignUpPage = () => {
 								<InputGroup>
 									<Input
 										variant="filled"
+										_active={{ background: "#B7E3CC" }}
 										type={showPass ? "text" : "password"}
 										placeholder="Enter your password..."
+										_focus={{ background: "white" }}
 									/>
 									<InputRightElement width="4.5rem">
 										<Button
@@ -82,6 +114,8 @@ const SignUpPage = () => {
 										variant="filled"
 										type={showConfirm ? "text" : "password"}
 										placeholder="Confirm your password..."
+										_active={{ background: "#B7E3CC" }}
+										_focus={{ background: "white" }}
 									/>
 									<InputRightElement width="4.5rem">
 										<Button
@@ -95,14 +129,32 @@ const SignUpPage = () => {
 								</InputGroup>
 							</FormControl>
 							<Stack spacing="15px">
-								<Button
+								<Center>
+									<Stack direction="row">
+										<Checkbox onChange={handleAgreeClick} />
+										<Text>
+											I agree to the{" "}
+											<Link
+												isExternal
+												color="teal"
+												href="#"
+											>
+												<u>terms and conditions</u>
+											</Link>
+										</Text>
+									</Stack>
+								</Center>
+								<MotionButton
 									colorScheme="cyan"
 									variant="ghost"
 									isLoading={loading}
 									onClick={handleSignUp}
+									isDisabled={!agree}
+									whileHover={{ scale: 1.1 }}
+									whileTap={{ scale: 0.9 }}
 								>
 									Sign Up
-								</Button>
+								</MotionButton>
 								<Stack direction="row">
 									<Divider height="12px" />
 									<Text>
@@ -110,13 +162,15 @@ const SignUpPage = () => {
 									</Text>
 									<Divider height="12px" />
 								</Stack>
-								<Button
+								<MotionButton
 									colorScheme="orange"
 									variant="ghost"
+									whileHover={{ scale: 1.1 }}
+									whileTap={{ scale: 0.9 }}
 									onClick={handleLogin}
 								>
 									Log In
-								</Button>
+								</MotionButton>
 							</Stack>
 						</Stack>
 					</Center>
