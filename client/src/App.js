@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./components/homePage";
 import LoginPage from "./components/loginPage";
+import Playground from "./components/playground";
 import SignUpPage from "./components/signUpPage";
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
 					</Route>
 					<Route exact path="/login">
 						<LoginPage />
+					</Route>
+					<Route exact path="/playground">
+						<Playground />
 					</Route>
 					<Route exact path="/">
 						<HomePage />

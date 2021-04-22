@@ -11,6 +11,7 @@ import {
 	InputRightElement,
 	Stack,
 	Text,
+	useToast,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -22,6 +23,12 @@ const LoginPage = () => {
 	const handleLogin = () => {
 		setLoading(true);
 		setTimeout(() => setLoading(false), 3000);
+		toast({
+			title: "Welcome back",
+			isClosable: true,
+			variant: "left-accent",
+			status: "success",
+		});
 		// setTimeout(() => push("/home"), 4000);
 	};
 	const [show, setShow] = useState(false);
@@ -30,8 +37,10 @@ const LoginPage = () => {
 	const handleSignUp = () => {
 		push("/signup");
 	};
+	const toast = useToast();
 	return (
 		<Box h="100vh" w="100vw" bg="beige">
+			{/* <Image boxSize="100px" src="../assets/logo.png" /> */}
 			<Center h="100vh">
 				<Box h="70vh" w={[300, 400, 560]} p="5px" bg="beige">
 					<Center>
@@ -53,6 +62,8 @@ const LoginPage = () => {
 								<FormLabel>Username</FormLabel>
 								<InputGroup>
 									<Input
+										_active={{ background: "#B7E3CC" }}
+										_focus={{ background: "white" }}
 										placeholder="Enter your username..."
 										variant="filled"
 									/>
@@ -63,7 +74,9 @@ const LoginPage = () => {
 								<InputGroup>
 									<Input
 										variant="filled"
+										_active={{ background: "#B7E3CC" }}
 										type={show ? "text" : "password"}
+										_focus={{ background: "white" }}
 										placeholder="Enter your password..."
 									/>
 									<InputRightElement width="4.5rem">
@@ -79,10 +92,11 @@ const LoginPage = () => {
 							</FormControl>
 							<Stack spacing="15px">
 								<MotionButton
-									whileHover={{ scale: 1.2 }}
+									whileHover={{ scale: 1.1 }}
 									colorScheme="cyan"
 									variant="ghost"
 									isLoading={loading}
+									whileTap={{ scale: 0.9 }}
 									onClick={handleLogin}
 								>
 									Log In
@@ -96,7 +110,7 @@ const LoginPage = () => {
 								</Stack>
 								<MotionButton
 									colorScheme="orange"
-									whileHover={{ scale: 1.2 }}
+									whileHover={{ scale: 1.1 }}
 									whileTap={{ scale: 0.9 }}
 									variant="ghost"
 									onClick={handleSignUp}
