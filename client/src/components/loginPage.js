@@ -6,7 +6,6 @@ import {
 	Divider,
 	FormControl,
 	FormLabel,
-	IconButton,
 	Input,
 	InputGroup,
 	InputRightElement,
@@ -50,6 +49,7 @@ const LoginPage = () => {
 				<img
 					onClick={handleHome}
 					src={logo}
+					alt="sqlverse"
 					height="100vh"
 					width="100vw"
 				/>

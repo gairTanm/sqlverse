@@ -1,13 +1,15 @@
-import { Center, Box, Text } from "@chakra-ui/layout";
+import { Center, Box, Text, Flex } from "@chakra-ui/layout";
 import React from "react";
 import Copyright from "./copyright";
 import Navbar from "./navbar";
+import home from "../assets/home-image.svg";
 
 const Footer = () => {
 	return (
 		<Box
 			h="100px"
-			bg="white"
+			bg="black"
+			color="white"
 			w="100vw"
 			position="absolute"
 			bottom={0}
@@ -24,7 +26,7 @@ const Title = () => {
 	return (
 		<Box>
 			<Center>
-				<Text fontSize="7xl" fontFamily="Comfortaa">
+				<Text fontSize="7vw" fontFamily="Indie Flower">
 					SQLVERSE
 				</Text>
 			</Center>
@@ -34,11 +36,17 @@ const Title = () => {
 
 const HomePage = () => {
 	return (
-		<Box overflowX="hidden" h="140vh" w="100vw" bg="beige">
+		<Box h="200vh" w="100vw" bg="white">
 			<Navbar />
-			<img src="" alt="home-pic" />
-			<Title />
-			<Footer />
+			<Flex alignContent="center" direction="column">
+				<Center>
+					<img src={home} alt="home-pic" />
+				</Center>
+				<Title />
+			</Flex>
+			<Box>
+				<Footer />
+			</Box>
 		</Box>
 	);
 };
