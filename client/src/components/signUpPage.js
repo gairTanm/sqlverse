@@ -18,6 +18,8 @@ import {
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
+import logo from "../assets/logo.png";
+import Copyright from "./copyright";
 
 const MotionButton = motion(Button);
 
@@ -43,10 +45,21 @@ const SignUpPage = () => {
 	const handleLogin = () => {
 		push("/login");
 	};
+	const handleHome = () => {
+		push("/home");
+	};
 	const toast = useToast();
 
 	return (
 		<Box h="100vh" w="100vw" bg="beige">
+			<Box position="absolute" h="12vh" w="12vw" left="5vw" top="2vh">
+				<img
+					onClick={handleHome}
+					src={logo}
+					height="100vh"
+					width="100vw"
+				/>
+			</Box>
 			<Center h="100%">
 				<Box h="80vh" w={[300, 400, 560]} p="1px" bg="beige">
 					<Center>
@@ -171,6 +184,7 @@ const SignUpPage = () => {
 								>
 									Log In
 								</MotionButton>
+								<Copyright />
 							</Stack>
 						</Stack>
 					</Center>

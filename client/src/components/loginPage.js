@@ -6,6 +6,7 @@ import {
 	Divider,
 	FormControl,
 	FormLabel,
+	IconButton,
 	Input,
 	InputGroup,
 	InputRightElement,
@@ -15,6 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
+import logo from "../assets/logo.png";
+import Copyright from "./copyright";
 
 const MotionButton = motion(Button);
 
@@ -29,7 +32,7 @@ const LoginPage = () => {
 			variant: "left-accent",
 			status: "success",
 		});
-		// setTimeout(() => push("/home"), 4000);
+		// setTimeout(() => push("/playground"), 4000);
 	};
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
@@ -37,9 +40,20 @@ const LoginPage = () => {
 	const handleSignUp = () => {
 		push("/signup");
 	};
+	const handleHome = () => {
+		push("/home");
+	};
 	const toast = useToast();
 	return (
 		<Box h="100vh" w="100vw" bg="beige">
+			<Box position="absolute" h="12vh" w="12vw" left="5vw" top="2vh">
+				<img
+					onClick={handleHome}
+					src={logo}
+					height="100vh"
+					width="100vw"
+				/>
+			</Box>
 			{/* <Image boxSize="100px" src="../assets/logo.png" /> */}
 			<Center h="100vh">
 				<Box h="70vh" w={[300, 400, 560]} p="5px" bg="beige">
@@ -117,6 +131,7 @@ const LoginPage = () => {
 								>
 									Sign Up
 								</MotionButton>
+								<Copyright />
 							</Stack>
 						</Stack>
 					</Center>
