@@ -7,7 +7,6 @@ import {
 	Divider,
 	FormControl,
 	FormLabel,
-	Image,
 	Input,
 	InputGroup,
 	InputRightElement,
@@ -56,6 +55,7 @@ const SignUpPage = () => {
 				<img
 					onClick={handleHome}
 					src={logo}
+					alt="sqlverse"
 					height="100vh"
 					width="100vw"
 				/>
@@ -63,7 +63,7 @@ const SignUpPage = () => {
 			<Center h="100%">
 				<Box h="80vh" w={[300, 400, 560]} p="1px" bg="beige">
 					<Center>
-						<Stack spacing={[5, 10, 25]} w={[300, 350, 350]}>
+						<Stack spacing={[5, 10, 30]} w={[300, 350, 350]}>
 							<Center>
 								<Text
 									fontSize={{
@@ -141,7 +141,7 @@ const SignUpPage = () => {
 									</InputRightElement>
 								</InputGroup>
 							</FormControl>
-							<Stack spacing="15px">
+							<Stack spacing="1vh">
 								<Center>
 									<Stack direction="row">
 										<Checkbox onChange={handleAgreeClick} />
