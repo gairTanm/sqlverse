@@ -41,11 +41,23 @@ const Navbar = () => {
 		{ text: "Team", clickHandler: handleTeam },
 	];
 	return (
-		<Box borderRadius="lg" overflow="hidden" w="100vw" bg="white">
+		<Box
+			borderRadius="lg"
+			overflow="hidden"
+			position="fixed"
+			style={{ backdropFilter: "blur(20px)" }}
+			w="100vw"
+			bg="transparent"
+		>
 			<Flex alignSelf="flex-end" p={2}>
 				<Center>
 					<HStack paddingLeft="3vw">
-						<img src={icon} height="35px" width="35px" />
+						<img
+							alt="sqlverse"
+							src={icon}
+							height="35px"
+							width="35px"
+						/>
 						<Text fontFamily="Comfortaa">sqlverse</Text>
 					</HStack>
 				</Center>
