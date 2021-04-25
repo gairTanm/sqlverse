@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/homePage";
 import LoginPage from "./components/loginPage";
@@ -10,10 +10,14 @@ import { Box } from "@chakra-ui/layout";
 import Team from "./components/team";
 import RoutingAnimation from "./components/routingAnimation";
 import Testimonials from "./components/testimonials";
+import "dotenv";
+const { REACT_APP_TEST_HASH } = process.env;
 
 function App() {
 	const location = useLocation();
-
+	useEffect(() => {
+		console.log(REACT_APP_TEST_HASH);
+	}, []);
 	return (
 		<Box overflowX="hidden" overflowY="hidden">
 			<AnimatePresence exitBeforeEnter>
