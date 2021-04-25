@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/homePage";
-import LoginPage from "./components/loginPage";
+import LoginPage from "./components/loginPage/index";
 import Playground from "./components/playground";
 import SignUpPage from "./components/signUpPage";
 import { useLocation } from "react-router-dom";
@@ -11,6 +11,7 @@ import Team from "./components/team";
 import RoutingAnimation from "./components/routingAnimation";
 import Testimonials from "./components/testimonials";
 import "dotenv";
+import ContactUs from "./components/contactUs";
 const { REACT_APP_TEST_HASH } = process.env;
 
 function App() {
@@ -30,6 +31,11 @@ function App() {
 					<Route exact path="/signup">
 						<RoutingAnimation>
 							<SignUpPage />
+						</RoutingAnimation>
+					</Route>
+					<Route exact path="/contact">
+						<RoutingAnimation>
+							<ContactUs />
 						</RoutingAnimation>
 					</Route>
 					<Route exact path="/login">
