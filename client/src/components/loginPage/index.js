@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import LoginForm from "./loginForm";
 
-const Brand = () => {
+export const Brand = () => {
 	const { push } = useHistory();
 	const handleHome = () => {
 		push("/home");
