@@ -15,7 +15,7 @@ const BarButton = ({ text, clickHandler }) => {
 			style={{ marginLeft: "2px", marginRight: "2px" }}
 			onClick={clickHandler}
 			variant="ghost"
-			_hover={{ background: "#EDEDED" }}
+			_hover={{ background: "black", color: "white" }}
 			colorScheme="white"
 			borderRadius={5}
 		>
@@ -44,8 +44,9 @@ const Navbar = () => {
 		<Box
 			borderRadius="lg"
 			overflow="hidden"
+			top="0px"
 			position="fixed"
-			style={{ backdropFilter: "blur(20px)" }}
+			style={{ backdropFilter: "blur(10px)" }}
 			w="100vw"
 			bg="transparent"
 		>
