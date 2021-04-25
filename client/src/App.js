@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/homePage";
 import LoginPage from "./components/loginPage/index";
 import Playground from "./components/playground";
-import SignUpPage from "./components/signUpPage";
+import SignUpPage from "./components/signUpPage/index";
 import { useLocation } from "react-router-dom";
 import { Box } from "@chakra-ui/layout";
 import Team from "./components/team";
