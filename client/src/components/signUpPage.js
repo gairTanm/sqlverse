@@ -50,7 +50,7 @@ const SignUpPage = () => {
 	const toast = useToast();
 
 	return (
-		<Box h="100vh" w="100vw" bg="beige">
+		<Box h="100vh" w="100vw" bg="white">
 			<Box position="absolute" h="12vh" w="12vw" left="5vw" top="2vh">
 				<img
 					onClick={handleHome}
@@ -61,7 +61,7 @@ const SignUpPage = () => {
 				/>
 			</Box>
 			<Center h="100%">
-				<Box h="80vh" w={[300, 400, 560]} p="1px" bg="beige">
+				<Box h="80vh" w={[300, 400, 560]} p="1px" bg="white">
 					<Center>
 						<Stack spacing={[5, 10, 30]} w={[300, 350, 350]}>
 							<Center>
