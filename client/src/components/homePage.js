@@ -13,6 +13,7 @@ import Navbar from "./navbar";
 import home from "../assets/home-image.svg";
 import ex from "../assets/maybe (1).svg";
 import z from "../assets/maybe2.svg";
+import journey from "../assets/journey.svg";
 
 const Footer = () => {
 	return (
@@ -23,7 +24,7 @@ const Footer = () => {
 			w="100vw"
 			position="absolute"
 			bottom={0}
-			overflow="hidden"
+			overflowX="hidden"
 		>
 			<Center h="100px">
 				<Copyright />
@@ -46,8 +47,8 @@ const Title = () => {
 
 const Why = () => {
 	return (
-		<Container bg="beige" maxW="container.xl">
-			<Text fontFamily="Comfortaa" fontSize="20px">
+		<Container bg="white" maxW="container.xl">
+			<Text textAlign="center" fontFamily="Comfortaa" fontSize="20px">
 				SQL, and managing databases in general, is a hard skill to
 				master. Computer Science students spend four whole months trying
 				to grasp just the basics. We want to take out the hard part of
@@ -65,16 +66,42 @@ const How = () => {
 			<HStack>
 				<Container
 					maxW="container.md"
-					bg="beige"
+					bg="white"
 					alignSelf="start"
 					fontSize="20px"
 					fontFamily="Comfortaa"
+					textAlign="center"
 				>
 					Featuring an intuitive drag-and-drop UI, <i>sqlverse</i>{" "}
-					makes learning and tinkering with SQL as easy as playing
-					with blocks...
+					makes tinkering with SQL as easy as playing with blocks, and
+					learning it as easy as...ummm...let's be honest, learning
+					and thinking in SQL is not easy, but <i>sqlverse</i> is as
+					easy it gets
 				</Container>
 				<img height="500px" width="500px" src={ex} alt="ex" />
+			</HStack>
+		</Center>
+	);
+};
+
+const Journey = () => {
+	return (
+		<Center>
+			<HStack>
+				<Container
+					maxW="container.md"
+					bg="white"
+					alignSelf="start"
+					fontSize="20px"
+					fontFamily="Comfortaa"
+					textAlign="center"
+				>
+					So, let's start going down that road, let's that journey to
+					master <i>the art of the SQL</i> (totally original journey
+					name), with us by your side, helping you learn the ropes of
+					SQL for whatever reason that you might want to learn it!
+				</Container>
+				<img height="500px" width="500px" src={journey} alt="journey" />
 			</HStack>
 		</Center>
 	);
@@ -87,8 +114,9 @@ const You = () => {
 				<img height="400px" width="400px" src={z} alt="z" />
 				<Center h="400px">
 					<Container
+						textAlign="center"
 						maxW="container.md"
-						bg="beige"
+						bg="white"
 						alignSelf="start"
 						fontSize="20px"
 						fontFamily="Comfortaa"
@@ -107,7 +135,13 @@ const You = () => {
 
 const HomePage = () => {
 	return (
-		<Box h="400vh" w="100vw" bg="white">
+		<div
+			style={{
+				width: "100vw",
+				height: "400vh",
+				overflowX: "hidden",
+			}}
+		>
 			<Flex h="100%" flexDirection="column">
 				<Navbar />
 				<Center>
@@ -121,11 +155,12 @@ const HomePage = () => {
 				<Spacer />
 				<You />
 				<Spacer />
-			</Flex>
-			<Box>
+				<Journey />
+				<Spacer />
 				<Footer />
-			</Box>
-		</Box>
+				<Spacer />
+			</Flex>
+		</div>
 	);
 };
 

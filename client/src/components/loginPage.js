@@ -44,7 +44,7 @@ const LoginPage = () => {
 	};
 	const toast = useToast();
 	return (
-		<Box h="100vh" w="100vw" bg="beige">
+		<Box h="100vh" w="100vw" bg="white">
 			<Box position="absolute" h="12vh" w="12vw" left="5vw" top="2vh">
 				<img
 					onClick={handleHome}
@@ -56,7 +56,7 @@ const LoginPage = () => {
 			</Box>
 			{/* <Image boxSize="100px" src="../assets/logo.png" /> */}
 			<Center h="100vh">
-				<Box h="70vh" w={[300, 400, 560]} p="5px" bg="beige">
+				<Box h="70vh" w={[300, 400, 560]} p="5px" bg="white">
 					<Center>
 						<Stack spacing={[5, 10, 25]} w={[300, 350, 350]}>
 							<Center>
