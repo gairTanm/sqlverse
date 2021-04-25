@@ -30,7 +30,7 @@ const Navbar = () => {
 	const handleSignUp = () => push("/signup");
 	const handleTeam = () => push("/team");
 	const handleTestimonials = () => push("/testimonials");
-
+	const handleContact = () => push("/contact");
 	const destinations = [
 		{ text: "Log In", clickHandler: handleLogin },
 		{ text: "Sign Up", clickHandler: handleSignUp },
@@ -39,6 +39,7 @@ const Navbar = () => {
 			clickHandler: handleTestimonials,
 		},
 		{ text: "Team", clickHandler: handleTeam },
+		{ text: "Contact Us", clickHandler: handleContact },
 	];
 	return (
 		<Box

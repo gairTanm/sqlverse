@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@chakra-ui/icons": "^1.0.12",
 		"@chakra-ui/react": "^1.5.2",
 		"@emotion/react": "^11.1.5",
 		"@emotion/styled": "^11.3.0",
@@ -28,10 +29,17 @@
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
-		"extends": ["react-app", "react-app/jest"]
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
 	},
 	"browserslist": {
-		"production": [">0.2%", "not dead", "not op_mini all"],
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",

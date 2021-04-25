@@ -11,14 +11,18 @@ import {
 	ListIcon,
 } from "@chakra-ui/layout";
 import React from "react";
-import tanmay from "../assets/tanmay.jpeg";
+import tanmay from "../assets/tanmay.png";
+import amogh from "../assets/amogh.png";
+import { IconButton } from "@chakra-ui/button";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useHistory } from "react-router";
 
 const Amogh = () => {
 	return (
 		<HStack>
 			<Container>Amogh</Container>
 			<Spacer />
-			<img src="" alt="amogh" />
+			<img height="300px" width="300px" src={amogh} alt="amogh" />
 		</HStack>
 	);
 };
@@ -30,8 +34,8 @@ const Tanmay = () => {
 				style={{ borderRadius: "20px" }}
 				src={tanmay}
 				alt="tanmay"
-				height="400px"
-				width="400px"
+				height="300px"
+				width="300px"
 			/>
 			<Spacer />
 			<Container>
@@ -71,12 +75,27 @@ const Tanmay = () => {
 };
 
 const Team = () => {
+	const { push } = useHistory();
 	return (
-		<Box h="100vh" bg="beige" w="100vw">
+		<Box h="100vh" bg="white" w="100vw">
+			<Box position="absolute" top="2vh" left="2vw">
+				<IconButton
+					variant="ghost"
+					colorScheme="gray"
+					h="5vh"
+					w="5vw"
+					_hover={{ color: "white", background: "black" }}
+					icon={<ArrowBackIcon h="30px" w="30px" />}
+					onClick={() => push("/home")}
+				/>
+			</Box>
 			<Center>
 				<VStack>
-					<Text>Team</Text>
+					<Text fontSize="7vw" fontFamily="Indie Flower">
+						The Team
+					</Text>
 					<Tanmay />
+					<br />
 					<Amogh />
 				</VStack>
 			</Center>
