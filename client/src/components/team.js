@@ -38,7 +38,11 @@ const Tanmay = () => {
 				<UnorderedList>
 					<ListItem>About me?</ListItem>
 					<ListItem>
-						<a href="https://gairTanm.github.io" target="_blank">
+						<a
+							href="https://gairTanm.github.io"
+							target="_blank"
+							rel="noreferrer"
+						>
 							Website
 						</a>
 					</ListItem>
@@ -46,6 +50,7 @@ const Tanmay = () => {
 						<a
 							href="https://www.github.com/gairTanm"
 							target="_blank"
+							rel="noreferrer"
 						>
 							Github
 						</a>
@@ -53,6 +58,7 @@ const Tanmay = () => {
 					<ListItem>
 						<a
 							target="_blank"
+							rel="noreferrer"
 							href="https://randomtanmay.vercel.app"
 						>
 							Blog
