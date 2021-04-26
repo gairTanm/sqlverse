@@ -16,6 +16,7 @@ import amogh from "../assets/amogh.png";
 import { IconButton } from "@chakra-ui/button";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router";
+import { Flex } from "@chakra-ui/layout";
 
 const Amogh = () => {
 	return (
@@ -29,7 +30,13 @@ const Amogh = () => {
 
 const Tanmay = () => {
 	return (
-		<HStack>
+		<Flex
+			alignItems="center"
+			alignContent="space-around"
+			justifyContent="space-evenly"
+			w="100vw"
+			direction="row"
+		>
 			<img
 				style={{ borderRadius: "20px" }}
 				src={tanmay}
@@ -37,7 +44,6 @@ const Tanmay = () => {
 				height="300px"
 				width="300px"
 			/>
-			<Spacer />
 			<Container>
 				<UnorderedList>
 					<ListItem>About me?</ListItem>
@@ -70,7 +76,7 @@ const Tanmay = () => {
 					</ListItem>
 				</UnorderedList>
 			</Container>
-		</HStack>
+		</Flex>
 	);
 };
 
