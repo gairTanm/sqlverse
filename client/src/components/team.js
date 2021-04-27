@@ -8,7 +8,6 @@ import {
 	Spacer,
 	UnorderedList,
 	ListItem,
-	ListIcon,
 } from "@chakra-ui/layout";
 import React from "react";
 import tanmay from "../assets/tanmay.png";
@@ -36,7 +35,13 @@ const Amogh = () => {
 	const classes = useStyles({ rot: -15 });
 	return (
 		<HStack>
-			<Container>Amogh</Container>
+			<Container>
+				<UnorderedList>
+					<ListItem>Amogh Sachdeva</ListItem>
+					<ListItem>LinkedIn</ListItem>
+					<ListItem>Github</ListItem>
+				</UnorderedList>
+			</Container>
 			<img
 				className={classes.img}
 				height="300px"
@@ -62,7 +67,7 @@ const Tanmay = () => {
 			<Spacer />
 			<Container>
 				<UnorderedList>
-					<ListItem>About me?</ListItem>
+					<ListItem>Tanmay Gairola</ListItem>
 					<ListItem>
 						<a
 							href="https://gairTanm.github.io"
