@@ -17,33 +17,49 @@ import { IconButton } from "@chakra-ui/button";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router";
 import { Flex } from "@chakra-ui/layout";
+import { createUseStyles } from "react-jss";
+
+const useStyles = createUseStyles({
+	img: (props) => ({
+		borderRadius: "20px",
+		filter: "grayscale(100%)",
+		transition: "all .2s",
+		transform: `rotate(${props.rot}deg)`,
+		"&:hover": {
+			filter: "grayscale(0%)",
+			transform: `rotate(0deg)`,
+		},
+	}),
+});
 
 const Amogh = () => {
+	const classes = useStyles({ rot: -15 });
 	return (
 		<HStack>
 			<Container>Amogh</Container>
-			<Spacer />
-			<img height="300px" width="300px" src={amogh} alt="amogh" />
+			<img
+				className={classes.img}
+				height="300px"
+				width="300px"
+				src={amogh}
+				alt="amogh"
+			/>
 		</HStack>
 	);
 };
 
 const Tanmay = () => {
+	const classes = useStyles({ rot: 15 });
 	return (
-		<Flex
-			alignItems="center"
-			alignContent="space-around"
-			justifyContent="space-evenly"
-			w="100vw"
-			direction="row"
-		>
+		<Flex alignItems="center" justifyContent="space-evenly" direction="row">
 			<img
-				style={{ borderRadius: "20px" }}
+				className={classes.img}
 				src={tanmay}
 				alt="tanmay"
 				height="300px"
 				width="300px"
 			/>
+			<Spacer />
 			<Container>
 				<UnorderedList>
 					<ListItem>About me?</ListItem>
@@ -80,27 +96,39 @@ const Tanmay = () => {
 	);
 };
 
-const Team = () => {
+export const HomeButton = () => {
 	const { push } = useHistory();
 	return (
+		<Box position="absolute" top="2vh" left="2vw">
+			<IconButton
+				variant="ghost"
+				colorScheme="gray"
+				h="5vh"
+				w="5vw"
+				_hover={{
+					transform: "scale(0.8)",
+					color: "white",
+					background: "black",
+				}}
+				icon={<ArrowBackIcon h="30px" w="30px" />}
+				onClick={() => push("/home")}
+			/>
+		</Box>
+	);
+};
+
+const Team = () => {
+	return (
 		<Box h="100vh" bg="white" w="100vw">
-			<Box position="absolute" top="2vh" left="2vw">
-				<IconButton
-					variant="ghost"
-					colorScheme="gray"
-					h="5vh"
-					w="5vw"
-					_hover={{ color: "white", background: "black" }}
-					icon={<ArrowBackIcon h="30px" w="30px" />}
-					onClick={() => push("/home")}
-				/>
-			</Box>
+			<HomeButton />
 			<Center>
-				<VStack>
+				<VStack alignItems="center">
 					<Text fontSize="7vw" fontFamily="Indie Flower">
 						The Team
 					</Text>
-					<Tanmay />
+					<Center>
+						<Tanmay />
+					</Center>
 					<br />
 					<Amogh />
 				</VStack>
