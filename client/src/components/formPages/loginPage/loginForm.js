@@ -15,13 +15,16 @@ const LoginForm = () => {
 	const handleLogin = (e) => {
 		e.preventDefault();
 		setLoading(true);
-		setTimeout(() => setLoading(false), 3000);
-		toast({
-			title: "Welcome back",
-			isClosable: true,
-			variant: "left-accent",
-			status: "success",
-		});
+		setTimeout(() => {
+			setLoading(false);
+			toast({
+				title: "Welcome back!",
+				isClosable: true,
+				variant: "left-accent",
+				status: "success",
+			});
+		}, 3000);
+
 		// setTimeout(() => push("/playground"), 4000);
 	};
 	const [show, setShow] = useState(false);
