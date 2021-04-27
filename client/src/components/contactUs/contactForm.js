@@ -1,11 +1,12 @@
 import React from "react";
-import emailjs from "emailjs-com";
-import { Box, Center, Flex, Text } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
 import { motion } from "framer-motion";
 import { Button } from "@chakra-ui/button";
 import { Textarea } from "@chakra-ui/textarea";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import emailjs from "emailjs-com";
+import { Center, Flex, Text } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 
 const FormItem = ({ isRequired = true, label, placeholder }) => {
 	return (
@@ -26,8 +27,14 @@ const MotionButton = motion(Button);
 const MailForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("lessgoo");
+		toast({
+			title: "We'll get back to you shortly!",
+			isClosable: true,
+			variant: "left-accent",
+			status: "info",
+		});
 	};
+	const toast = useToast();
 
 	return (
 		<Center>
@@ -36,7 +43,7 @@ const MailForm = () => {
 					direction="column"
 					justifyContent="space-around"
 					h="80vh"
-					w="70vw"
+					w="60vw"
 				>
 					<Center>
 						<Text fontSize="35px" fontFamily="Comfortaa">
@@ -51,6 +58,7 @@ const MailForm = () => {
 					<FormControl isRequired>
 						<FormLabel>Message</FormLabel>
 						<Textarea
+							h="30vh"
 							variant="filled"
 							_active={{ background: "#B7E3CC" }}
 							_focus={{ background: "white" }}
@@ -75,23 +83,4 @@ const MailForm = () => {
 	);
 };
 
-const ContactUs = () => {
-	return (
-		<Flex
-			direction="column"
-			justifyContent="space-between"
-			h="100vh"
-			w="100vw"
-			alignItems="center"
-		>
-			<Center>
-				<Text fontSize="7vw" fontFamily="Indie Flower">
-					Contact Us
-				</Text>
-			</Center>
-			<MailForm />
-		</Flex>
-	);
-};
-
-export default ContactUs;
+export default MailForm;

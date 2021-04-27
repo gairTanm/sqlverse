@@ -15,9 +15,14 @@ const BarButton = ({ text, clickHandler }) => {
 			style={{ marginLeft: "2px", marginRight: "2px" }}
 			onClick={clickHandler}
 			variant="ghost"
-			_hover={{ background: "black", color: "white" }}
+			_hover={{
+				transform: "scale(0.8)",
+				background: "black",
+				color: "white",
+			}}
 			colorScheme="white"
 			borderRadius={5}
+			fontFamily="Hachi Maru Pop"
 		>
 			{text}
 		</MotionButton>

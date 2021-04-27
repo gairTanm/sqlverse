@@ -21,9 +21,9 @@ const Footer = () => {
 			h="100px"
 			bg="black"
 			color="white"
-			w="100vw"
 			position="absolute"
-			bottom={0}
+			w="100%"
+			bottom="0px"
 			overflowX="hidden"
 		>
 			<Center h="100px">
@@ -138,7 +138,7 @@ const HomePage = () => {
 		<div
 			style={{
 				width: "100vw",
-				height: "400vh",
+				height: "350vh",
 				overflowX: "hidden",
 			}}
 		>

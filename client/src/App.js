@@ -2,16 +2,17 @@ import { AnimatePresence } from "framer-motion";
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/homePage";
-import LoginPage from "./components/loginPage/index";
+import LoginPage from "./components/formPages/loginPage/index";
 import Playground from "./components/playground";
-import SignUpPage from "./components/signUpPage/index";
+import SignUpPage from "./components/formPages/signUpPage/index";
 import { useLocation } from "react-router-dom";
 import { Box } from "@chakra-ui/layout";
 import Team from "./components/team";
 import RoutingAnimation from "./components/routingAnimation";
 import Testimonials from "./components/testimonials";
+import ContactUs from "./components/contactUs/index.js";
 import "dotenv";
-import ContactUs from "./components/contactUs";
+
 const { REACT_APP_TEST_HASH } = process.env;
 
 function App() {

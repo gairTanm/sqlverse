@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Center } from "@chakra-ui/react";
 import SignUpForm from "./signUpForm";
-import { Brand } from "../loginPage/index";
+import { Brand } from "../formHelpers";
 
 const SignUpPage = () => {
 	return (
