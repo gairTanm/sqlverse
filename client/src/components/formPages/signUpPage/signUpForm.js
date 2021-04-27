@@ -24,13 +24,15 @@ const SignUpForm = () => {
 	const handleSignUp = (e) => {
 		e.preventDefault();
 		setLoading(true);
-		toast({
-			title: "Signed up successfully",
-			isClosable: true,
-			variant: "left-accent",
-			status: "success",
-		});
-		setTimeout(() => setLoading(false), 3000);
+		setTimeout(() => {
+			setLoading(false);
+			toast({
+				title: "Signed up successfully",
+				isClosable: true,
+				variant: "left-accent",
+				status: "success",
+			});
+		}, 3000);
 	};
 
 	const [showPass, setShowPass] = useState(false);

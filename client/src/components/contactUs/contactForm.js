@@ -7,6 +7,9 @@ import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import emailjs from "emailjs-com";
 import { Center, Flex, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
+import "dotenv";
+
+const { REACT_APP_TEMPLATE_ID, REACT_APP_SERVICE_ID } = process.env;
 
 const FormItem = ({ isRequired = true, label, placeholder }) => {
 	return (
@@ -27,12 +30,34 @@ const MotionButton = motion(Button);
 const MailForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		toast({
-			title: "We'll get back to you shortly!",
-			isClosable: true,
-			variant: "left-accent",
-			status: "info",
-		});
+		var templateParams = {
+			name: "test",
+			notes: "temp",
+		};
+
+		emailjs
+			.send(REACT_APP_SERVICE_ID, REACT_APP_TEMPLATE_ID, templateParams)
+			.then(
+				function (response) {
+					console.log("SUCCESS!", response.status, response.text);
+					toast({
+						title: "We'll get back to you shortly!",
+						isClosable: true,
+						variant: "left-accent",
+						status: "info",
+					});
+				},
+				function (error) {
+					console.log("FAILED...", error);
+					toast({
+						title:
+							"Unfortunately, the mail could not be sent, try again?",
+						isClosable: true,
+						variant: "left-accent",
+						status: "error",
+					});
+				}
+			);
 	};
 	const toast = useToast();
 

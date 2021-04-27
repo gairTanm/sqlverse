@@ -11,14 +11,16 @@ import Team from "./components/team";
 import RoutingAnimation from "./components/routingAnimation";
 import Testimonials from "./components/testimonials";
 import ContactUs from "./components/contactUs/index.js";
-import "dotenv";
+import { init } from "emailjs-com";
 
-const { REACT_APP_TEST_HASH } = process.env;
+const { REACT_APP_TEST_HASH, REACT_APP_EMAIL_USER_ID } = process.env;
 
 function App() {
 	const location = useLocation();
 	useEffect(() => {
 		console.log(REACT_APP_TEST_HASH);
+		console.log(REACT_APP_EMAIL_USER_ID);
+		init(REACT_APP_EMAIL_USER_ID);
 	}, []);
 	return (
 		<Box overflowX="hidden" overflowY="hidden">

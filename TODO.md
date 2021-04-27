@@ -4,4 +4,5 @@
 -   [ ] Go backend
 -   [x] Routing animations
 -   [ ] Responsive navbar, mobile first
--   [ ] Refactor out a lot of the forms
+-   [x] Refactor out a lot of the forms
+-   [ ] ContactUs form validation and actual emails
