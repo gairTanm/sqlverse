@@ -15,7 +15,7 @@ import ex from "../assets/maybe (1).svg";
 import z from "../assets/maybe2.svg";
 import journey from "../assets/journey.svg";
 
-const Footer = () => {
+export const Footer = () => {
 	return (
 		<Box
 			h="100px"
