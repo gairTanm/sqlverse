@@ -4,26 +4,18 @@ import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Box, Center, Divider, Stack, Text } from "@chakra-ui/layout";
 import { motion } from "framer-motion";
 import React from "react";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 const ButtonWMotion = motion(Button);
 
 export const Brand = () => {
-	const { push } = useHistory();
-	const handleHome = () => {
-		push("/home");
-	};
 	return (
-		<Box position="absolute" h="12vh" w="12vw" left="5vw" top="2vh">
-			<img
-				onClick={handleHome}
-				src={logo}
-				alt="sqlverse"
-				height="100vh"
-				width="100vw"
-			/>
-		</Box>
+		<Link to="/home">
+			<Box position="absolute" h="4vh" w="4vw" left="5vw" top="2vh">
+				<img src={logo} alt="sqlverse" height="100vh" width="100vw" />
+			</Box>
+		</Link>
 	);
 };
 
