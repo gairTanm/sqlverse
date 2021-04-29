@@ -15,7 +15,7 @@ export const Brand = () => {
 		push("/home");
 	};
 	return (
-		<Box position="absolute" h="12vh" w="12vw" left="5vw" top="2vh">
+		<Box position="absolute" h="4vh" w="4vw" left="5vw" top="2vh">
 			<img
 				onClick={handleHome}
 				src={logo}
