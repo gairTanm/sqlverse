@@ -54,6 +54,9 @@ const Navbar = () => {
 			position="fixed"
 			style={{ backdropFilter: "blur(10px)" }}
 			w="100vw"
+			borderBottom="1px"
+			borderRadius="10px"
+			borderBottomColor="lightgray"
 			bg="transparent"
 		>
 			<Flex alignSelf="flex-end" p={2}>
