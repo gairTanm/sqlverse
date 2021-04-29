@@ -57,6 +57,8 @@ export const FormItem = ({
 	isRequired = true,
 	label,
 	placeholder,
+	value,
+	onChange,
 	variant = "filled",
 }) => {
 	return (
@@ -64,9 +66,11 @@ export const FormItem = ({
 			<FormLabel>{label}</FormLabel>
 			<InputGroup>
 				<Input
+					onChange={onChange}
+					value={value}
 					placeholder={placeholder}
+					focusBorderColor="cyan.300"
 					_active={{ background: "#B7E3CC" }}
-					_focus={{ background: "white" }}
 					variant={variant}
 				/>
 			</InputGroup>
@@ -79,6 +83,8 @@ export const SecureFormItem = ({
 	label,
 	toggle,
 	show,
+	value,
+	onChange,
 	placeholder,
 }) => {
 	return (
@@ -86,11 +92,13 @@ export const SecureFormItem = ({
 			<FormLabel>{label}</FormLabel>
 			<InputGroup>
 				<Input
+					onChange={onChange}
+					value={value}
 					variant="filled"
 					_active={{ background: "#B7E3CC" }}
 					type={show ? "text" : "password"}
+					focusBorderColor="cyan.300"
 					placeholder={placeholder}
-					_focus={{ background: "white" }}
 				/>
 				<InputRightElement width="4.5rem">
 					<Button h="1.75rem" size="sm" onClick={toggle}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@chakra-ui/input";
 import { motion } from "framer-motion";
 import { Button } from "@chakra-ui/button";
@@ -11,29 +11,39 @@ import "dotenv";
 
 const { REACT_APP_TEMPLATE_ID, REACT_APP_SERVICE_ID } = process.env;
 
-const FormItem = ({ isRequired = true, label, placeholder }) => {
+const MotionButton = motion(Button);
+
+const FormItem = ({
+	isRequired = true,
+	type = "text",
+	value,
+	onChange,
+	label,
+	placeholder,
+}) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
 			<Input
 				variant="filled"
+				onChange={onChange}
+				value={value}
 				_active={{ background: "#B7E3CC" }}
-				_focus={{ background: "white" }}
+				focusBorderColor="cyan.300"
 				placeholder={placeholder}
+				type={type}
 			/>
 		</FormControl>
 	);
 };
 
-const MotionButton = motion(Button);
-
 const MailForm = () => {
+	const [form, setForm] = useState({ name: "", email: "", message: "" });
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		var templateParams = {
-			name: "test",
-			notes: "temp",
-		};
+
+		var templateParams = form;
 
 		emailjs
 			.send(REACT_APP_SERVICE_ID, REACT_APP_TEMPLATE_ID, templateParams)
@@ -46,6 +56,7 @@ const MailForm = () => {
 						variant: "left-accent",
 						status: "info",
 					});
+					setForm({ name: "", email: "", message: "" });
 				},
 				function (error) {
 					console.log("FAILED...", error);
@@ -61,6 +72,16 @@ const MailForm = () => {
 	};
 	const toast = useToast();
 
+	const handleNameChange = (e) => {
+		setForm({ ...form, name: e.target.value });
+	};
+	const handleEmailChange = (e) => {
+		setForm({ ...form, email: e.target.value });
+	};
+	const handleMessageChange = (e) => {
+		setForm({ ...form, message: e.target.value });
+	};
+
 	return (
 		<Center>
 			<form onSubmit={handleSubmit}>
@@ -75,18 +96,28 @@ const MailForm = () => {
 							We would love to hear from you!
 						</Text>
 					</Center>
-					<FormItem label="Name" placeholder="Enter your name..." />
+					<FormItem
+						value={form.name}
+						onChange={handleNameChange}
+						label="Name"
+						placeholder="Enter your name..."
+					/>
 					<FormItem
 						label="Mail"
+						value={form.email}
+						onChange={handleEmailChange}
+						type="email"
 						placeholder="Enter your email address..."
 					/>
 					<FormControl isRequired>
 						<FormLabel>Message</FormLabel>
 						<Textarea
 							h="30vh"
+							value={form.message}
+							onChange={handleMessageChange}
 							variant="filled"
+							focusBorderColor="cyan.300"
 							_active={{ background: "#B7E3CC" }}
-							_focus={{ background: "white" }}
 							placeholder="Enter your message..."
 						/>
 					</FormControl>
