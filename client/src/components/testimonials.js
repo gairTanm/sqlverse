@@ -1,21 +1,61 @@
 import { Box, Center, Container, Flex, Spacer, Text } from "@chakra-ui/layout";
 import React from "react";
 import { HomeButton } from "./team";
+import one from "../assets/one.png";
+import two from "../assets/two.png";
+import three from "../assets/three.png";
+import four from "../assets/four.png";
+import { Footer } from "./homePage";
+import { createUseStyles } from "react-jss";
 
-const TestimonialTemplate = ({ image, text, left, name, alt }) => {
+const useStyles = createUseStyles({
+	img: {
+		filter: "grayscale(100%)",
+		transition: "all .3s",
+		"&:hover": {
+			filter: "none",
+		},
+	},
+});
+
+const TestimonialTemplate = ({ image, text, left, name, alt, title }) => {
+	const classes = useStyles();
 	return (
 		<Flex direction="row" w="100vw" justifyContent="space-between">
 			<Spacer />
-			{left ? <img src={image} alt={alt} /> : null}
+			{left ? (
+				<img
+					className={classes.img}
+					src={image}
+					height="300px"
+					width="300px"
+					alt={alt}
+				/>
+			) : null}
 			<Spacer />
-			<Container>
-				<Flex fontFamily="Comfortaa" direction="column">
-					<Text fontSize="4xl">{name}</Text>
-					<Text>{text}</Text>
-				</Flex>
-			</Container>
+			<Center>
+				<Container>
+					<Flex
+						alignItems="center"
+						fontFamily="Comfortaa"
+						direction="column"
+					>
+						<Text fontSize="4xl">{name}</Text>
+						<Text fontSize="2xl">{title}</Text>
+						<Text>{text}</Text>
+					</Flex>
+				</Container>
+			</Center>
 			<Spacer />
-			{left ? null : <img src={image} alt={alt} />}
+			{left ? null : (
+				<img
+					className={classes.img}
+					height="300px"
+					width="300px"
+					src={image}
+					alt={alt}
+				/>
+			)}
 			<Spacer />
 		</Flex>
 	);
@@ -23,7 +63,7 @@ const TestimonialTemplate = ({ image, text, left, name, alt }) => {
 
 const Testimonials = () => {
 	return (
-		<Box h="100vh" w="100vw">
+		<Box w="100%" h="200vh">
 			<HomeButton />
 			<Center>
 				<Flex w="100vw" direction="column">
@@ -45,44 +85,46 @@ const Testimonials = () => {
 							the right foundation required for managing
 							databases, and for that matter, SQL databases. Below
 							are some of the people that went through it all and
-							came out with a skill learnt!
+							came out with a skill learnt !
 						</Text>
 					</Center>
-					<Flex
-						h="100vh"
-						justifyContent="space-evenly"
-						direction="column"
-					>
+					<Spacer />
+					<Flex justifyContent="space-evenly" direction="column">
 						<TestimonialTemplate
-							image={null}
+							image={one}
 							alt="hewwo"
+							title="Student"
 							text="Lorem ipsum dolor"
 							name="Tanmay"
 							left={true}
 						/>
 						<TestimonialTemplate
-							image={null}
+							image={two}
 							left={false}
 							alt="gg"
+							title="Student"
 							text="Lorem ipsum dolor sit"
 							name="Amogh"
 						/>
 						<TestimonialTemplate
-							image={null}
+							image={three}
 							left={true}
-							alt="ex"
+							alt="exo"
+							title="SWE"
 							text="Lorem ipsum dolor sit"
-							name="John"
+							name="Jane"
 						/>
 						<TestimonialTemplate
-							image={null}
+							image={four}
 							left={false}
 							alt="ji"
+							title="SDE"
 							text="Lorem ipsum dolor sit"
 							name="Doe"
 						/>
 					</Flex>
 				</Flex>
+				<Footer />
 			</Center>
 		</Box>
 	);
