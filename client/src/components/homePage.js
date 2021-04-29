@@ -123,9 +123,9 @@ const You = () => {
 					>
 						<i>sqlverse</i> features everything, from the basic
 						SELECT and WHERE queries, all the way upto SQL window
-						functions and complex JOIN queries, and become the
-						rockstar-astronaut-SQL-hero, or whatever that guy on the
-						left is, you always wanted to be!
+						functions and complex JOIN queries, to help you become
+						the rockstar-astronaut-SQL-hero, or whatever that guy on
+						the left is, you always wanted to be!
 					</Container>
 				</Center>
 			</HStack>

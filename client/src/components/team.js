@@ -36,7 +36,7 @@ const Amogh = () => {
 	return (
 		<HStack>
 			<Container>
-				<UnorderedList>
+				<UnorderedList fontFamily="Comfortaa">
 					<ListItem>Amogh Sachdeva</ListItem>
 					<ListItem>LinkedIn</ListItem>
 					<ListItem>Github</ListItem>
@@ -66,7 +66,7 @@ const Tanmay = () => {
 			/>
 			<Spacer />
 			<Container>
-				<UnorderedList>
+				<UnorderedList fontFamily="Comfortaa">
 					<ListItem>Tanmay Gairola</ListItem>
 					<ListItem>
 						<a
