@@ -17,6 +17,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router";
 import { Flex } from "@chakra-ui/layout";
 import { createUseStyles } from "react-jss";
+import { Heading } from "@chakra-ui/layout";
 
 const useStyles = createUseStyles({
 	img: (props) => ({
@@ -35,11 +36,27 @@ const Amogh = () => {
 	const classes = useStyles({ rot: -15 });
 	return (
 		<HStack>
-			<Container>
-				<UnorderedList fontFamily="Comfortaa">
-					<ListItem>Amogh Sachdeva</ListItem>
+			<Container fontFamily="Comfortaa">
+				<Text
+					fontFamily="Hachi Maru Pop"
+					fontSize={30}
+					fontWeight="bold"
+					paddingBottom={5}
+					paddingLeft={10}
+				>
+					Amogh Sachdeva
+				</Text>
+				<UnorderedList spacing={3}>
 					<ListItem>LinkedIn</ListItem>
-					<ListItem>Github</ListItem>
+					<ListItem>
+						<a
+							href="https://github.com/amogh24"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Github
+						</a>
+					</ListItem>
 				</UnorderedList>
 			</Container>
 			<img
@@ -56,7 +73,13 @@ const Amogh = () => {
 const Tanmay = () => {
 	const classes = useStyles({ rot: 15 });
 	return (
-		<Flex alignItems="center" justifyContent="space-evenly" direction="row">
+		<Flex
+			w="100%"
+			h="100%"
+			alignItems="center"
+			justifyContent="space-evenly"
+			direction="row"
+		>
 			<img
 				className={classes.img}
 				src={tanmay}
@@ -65,9 +88,17 @@ const Tanmay = () => {
 				width="300px"
 			/>
 			<Spacer />
-			<Container>
-				<UnorderedList fontFamily="Comfortaa">
-					<ListItem>Tanmay Gairola</ListItem>
+			<Container fontFamily="Comfortaa">
+				<Text
+					fontFamily="Hachi Maru Pop"
+					fontSize={30}
+					fontWeight="bold"
+					paddingBottom={5}
+					paddingLeft={10}
+				>
+					Tanmay Gairola
+				</Text>
+				<UnorderedList spacing={3}>
 					<ListItem>
 						<a
 							href="https://gairTanm.github.io"
