@@ -68,6 +68,7 @@ const LoginForm = () => {
 							value={formik.values.username}
 							label="Username"
 							error={formik.errors.username}
+							touched={formik.touched.username}
 							placeholder="Enter your username"
 						/>
 						<SecureFormItem
@@ -77,6 +78,7 @@ const LoginForm = () => {
 							placeholder="Enter your password"
 							toggle={handleClick}
 							error={formik.errors.password}
+							touched={formik.touched.password}
 							show={show}
 						/>
 						<Stack spacing="15px">

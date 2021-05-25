@@ -56,6 +56,7 @@ export const FormItem = ({
 	value,
 	onChange,
 	error,
+	touched,
 	variant = "filled",
 }) => {
 	return (
@@ -72,7 +73,7 @@ export const FormItem = ({
 				/>
 			</InputGroup>
 			<Box h="1vh" textColor="palevioletred">
-				{error}
+				{error && touched ? error : null}
 			</Box>
 		</FormControl>
 	);
@@ -86,6 +87,7 @@ export const SecureFormItem = ({
 	value,
 	onChange,
 	error,
+	touched,
 	placeholder,
 }) => {
 	return (
@@ -108,7 +110,7 @@ export const SecureFormItem = ({
 				</InputRightElement>
 			</InputGroup>
 			<Box h="1vh" textColor="palevioletred">
-				{error}
+				{error && touched ? error : null}
 			</Box>
 		</FormControl>
 	);
