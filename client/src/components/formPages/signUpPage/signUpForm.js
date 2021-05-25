@@ -93,6 +93,7 @@ const SignUpForm = () => {
 						<FormItem
 							label="Name"
 							value={formik.values.name}
+							touched={formik.touched.name}
 							onChange={formik.handleChange("name")}
 							placeholder="Enter your name..."
 							error={formik.errors.name}
@@ -100,6 +101,7 @@ const SignUpForm = () => {
 						<FormItem
 							label="Username"
 							value={formik.values.username}
+							touched={formik.touched.username}
 							onChange={formik.handleChange("username")}
 							placeholder="Enter your username..."
 							error={formik.errors.username}
@@ -108,6 +110,7 @@ const SignUpForm = () => {
 							placeholder="Enter your password..."
 							label="Password"
 							value={formik.values.password}
+							touched={formik.touched.password}
 							onChange={formik.handleChange("password")}
 							show={showPass}
 							toggle={handlePassClick}
@@ -119,6 +122,7 @@ const SignUpForm = () => {
 							value={formik.values.confirm}
 							onChange={formik.handleChange("confirm")}
 							show={showConfirm}
+							touched={formik.touched.confirm}
 							toggle={handleConfirmClick}
 							error={formik.errors.confirm}
 						/>
