@@ -39,11 +39,13 @@ const FormItem = ({
 
 const MailForm = () => {
 	const [form, setForm] = useState({ name: "", email: "", message: "" });
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		var templateParams = form;
+		setLoading(true);
 
 		emailjs
 			.send(REACT_APP_SERVICE_ID, REACT_APP_TEMPLATE_ID, templateParams)
@@ -56,6 +58,7 @@ const MailForm = () => {
 						variant: "left-accent",
 						status: "info",
 					});
+					setLoading(false);
 					setForm({ name: "", email: "", message: "" });
 				},
 				function (error) {
@@ -67,6 +70,7 @@ const MailForm = () => {
 						variant: "left-accent",
 						status: "error",
 					});
+					setLoading(false);
 				}
 			);
 	};
@@ -127,6 +131,7 @@ const MailForm = () => {
 							variant="ghost"
 							w="20vw"
 							type="submit"
+							isLoading={loading}
 							whileHover={{ scale: 1.1 }}
 							whileTap={{ scale: 0.9 }}
 						>

@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/button";
+import { Button, IconButton } from "@chakra-ui/button";
 import { Box, Center, HStack, Text } from "@chakra-ui/layout";
 import React from "react";
 import { motion } from "framer-motion";
@@ -16,7 +16,7 @@ const BarButton = ({ text, clickHandler }) => {
 			onClick={clickHandler}
 			variant="ghost"
 			_hover={{
-				transform: "scale(0.8)",
+				transform: "scale(0.85)",
 				background: "black",
 				color: "white",
 			}}
@@ -31,6 +31,7 @@ const BarButton = ({ text, clickHandler }) => {
 
 const Navbar = () => {
 	const { push } = useHistory();
+
 	const handleLogin = () => push("/login");
 	const handleSignUp = () => push("/signup");
 	const handleTeam = () => push("/team");
