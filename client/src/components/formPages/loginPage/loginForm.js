@@ -10,6 +10,16 @@ import {
 	SecureFormItem,
 } from "../formHelpers";
 import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+	username: Yup.string()
+		.required("Username is required")
+		.min(5, "A username is at least 5 characters in length"),
+	password: Yup.string()
+		.required("Password is required")
+		.min(6, "A password is at least 6 characters in length"),
+});
 
 const LoginForm = () => {
 	const [loading, setLoading] = useState(false);
@@ -20,6 +30,7 @@ const LoginForm = () => {
 			username: "",
 			password: "",
 		},
+		validationSchema,
 		onSubmit: (values) => {
 			setLoading(true);
 			setTimeout(() => {
@@ -56,6 +67,7 @@ const LoginForm = () => {
 							onChange={formik.handleChange("username")}
 							value={formik.values.username}
 							label="Username"
+							error={formik.errors.username}
 							placeholder="Enter your username"
 						/>
 						<SecureFormItem
@@ -64,6 +76,7 @@ const LoginForm = () => {
 							value={formik.values.password}
 							placeholder="Enter your password"
 							toggle={handleClick}
+							error={formik.errors.password}
 							show={show}
 						/>
 						<Stack spacing="15px">

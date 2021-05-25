@@ -1,5 +1,9 @@
 import { Button } from "@chakra-ui/button";
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import {
+	FormControl,
+	FormErrorMessage,
+	FormLabel,
+} from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Box, Center, Divider, Stack, Text } from "@chakra-ui/layout";
 import { motion } from "framer-motion";
@@ -51,6 +55,7 @@ export const FormItem = ({
 	placeholder,
 	value,
 	onChange,
+	error,
 	variant = "filled",
 }) => {
 	return (
@@ -66,6 +71,9 @@ export const FormItem = ({
 					variant={variant}
 				/>
 			</InputGroup>
+			<Box h="1vh" textColor="palevioletred">
+				{error}
+			</Box>
 		</FormControl>
 	);
 };
@@ -77,6 +85,7 @@ export const SecureFormItem = ({
 	show,
 	value,
 	onChange,
+	error,
 	placeholder,
 }) => {
 	return (
@@ -98,6 +107,9 @@ export const SecureFormItem = ({
 					</Button>
 				</InputRightElement>
 			</InputGroup>
+			<Box h="1vh" textColor="palevioletred">
+				{error}
+			</Box>
 		</FormControl>
 	);
 };
