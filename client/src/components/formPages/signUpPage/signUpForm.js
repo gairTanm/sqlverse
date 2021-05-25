@@ -18,6 +18,21 @@ import {
 	MotionButton,
 } from "../formHelpers";
 import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+	name: Yup.string().required("Name is required"),
+	username: Yup.string()
+		.required("Username is required")
+		.min(5, "A username is at least 5 characters in length"),
+	password: Yup.string()
+		.required("Password is required")
+		.min(6, "A password is at least 6 characters in length"),
+	confirm: Yup.string()
+		.required("Confirm the password entered above")
+		.min(6)
+		.oneOf([Yup.ref("password"), null], "Passwords must match"),
+});
 
 const SignUpForm = () => {
 	const [loading, setLoading] = useState(false);
@@ -29,6 +44,7 @@ const SignUpForm = () => {
 			password: "",
 			confirm: "",
 		},
+		validationSchema,
 		onSubmit: (values) => {
 			setLoading(true);
 			setTimeout(() => {
@@ -79,12 +95,14 @@ const SignUpForm = () => {
 							value={formik.values.name}
 							onChange={formik.handleChange("name")}
 							placeholder="Enter your name..."
+							error={formik.errors.name}
 						/>
 						<FormItem
 							label="Username"
 							value={formik.values.username}
 							onChange={formik.handleChange("username")}
 							placeholder="Enter your username..."
+							error={formik.errors.username}
 						/>
 						<SecureFormItem
 							placeholder="Enter your password..."
@@ -93,6 +111,7 @@ const SignUpForm = () => {
 							onChange={formik.handleChange("password")}
 							show={showPass}
 							toggle={handlePassClick}
+							error={formik.errors.password}
 						/>
 						<SecureFormItem
 							placeholder="Confirm your password..."
@@ -101,6 +120,7 @@ const SignUpForm = () => {
 							onChange={formik.handleChange("confirm")}
 							show={showConfirm}
 							toggle={handleConfirmClick}
+							error={formik.errors.confirm}
 						/>
 						<Stack spacing="1vh">
 							<Center>
