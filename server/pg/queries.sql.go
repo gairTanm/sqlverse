@@ -11,11 +11,16 @@ import (
 const authenticateUser = `-- name: AuthenticateUser :one
 SELECT id, username, name, password FROM users
 WHERE username = $1
-AND password = crypt($1, password)
+AND password = $2
 `
 
-func (q *Queries) AuthenticateUser(ctx context.Context, username string) (User, error) {
-	row := q.db.QueryRowContext(ctx, authenticateUser, username)
+type AuthenticateUserParams struct {
+	Username string
+	Password string
+}
+
+func (q *Queries) AuthenticateUser(ctx context.Context, arg AuthenticateUserParams) (User, error) {
+	row := q.db.QueryRowContext(ctx, authenticateUser, arg.Username, arg.Password)
 	var i User
 	err := row.Scan(
 		&i.ID,
@@ -28,18 +33,18 @@ func (q *Queries) AuthenticateUser(ctx context.Context, username string) (User, 
 
 const createUser = `-- name: CreateUser :one
 INSERT INTO users (username, name, password)
-VALUES ($1, $2, crypt($3, gen_salt('bf')))
+VALUES ($1, $2, $3)
 RETURNING id, username, name, password
 `
 
 type CreateUserParams struct {
 	Username string
 	Name     string
-	Crypt    interface{}
+	Password string
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
-	row := q.db.QueryRowContext(ctx, createUser, arg.Username, arg.Name, arg.Crypt)
+	row := q.db.QueryRowContext(ctx, createUser, arg.Username, arg.Name, arg.Password)
 	var i User
 	err := row.Scan(
 		&i.ID,
@@ -74,12 +79,17 @@ func (q *Queries) DeleteDetails(ctx context.Context, username sql.NullString) (U
 const deleteUser = `-- name: DeleteUser :one
 DELETE FROM users
 WHERE username = $1
-AND password = crypt($1, password)
+AND password = $2
 RETURNING id, username, name, password
 `
 
-func (q *Queries) DeleteUser(ctx context.Context, username string) (User, error) {
-	row := q.db.QueryRowContext(ctx, deleteUser, username)
+type DeleteUserParams struct {
+	Username string
+	Password string
+}
+
+func (q *Queries) DeleteUser(ctx context.Context, arg DeleteUserParams) (User, error) {
+	row := q.db.QueryRowContext(ctx, deleteUser, arg.Username, arg.Password)
 	var i User
 	err := row.Scan(
 		&i.ID,
@@ -92,11 +102,11 @@ func (q *Queries) DeleteUser(ctx context.Context, username string) (User, error)
 
 const getUser = `-- name: GetUser :one
 SELECT id, username, name, password FROM users
-WHERE id = $1
+WHERE username = $1
 `
 
-func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
-	row := q.db.QueryRowContext(ctx, getUser, id)
+func (q *Queries) GetUser(ctx context.Context, username string) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUser, username)
 	var i User
 	err := row.Scan(
 		&i.ID,
