@@ -9,7 +9,7 @@ import (
 )
 
 const authenticateUser = `-- name: AuthenticateUser :one
-SELECT id, username, name, password FROM users
+SELECT username, name, password FROM users
 WHERE username = $1
 AND password = $2
 `
@@ -22,19 +22,14 @@ type AuthenticateUserParams struct {
 func (q *Queries) AuthenticateUser(ctx context.Context, arg AuthenticateUserParams) (User, error) {
 	row := q.db.QueryRowContext(ctx, authenticateUser, arg.Username, arg.Password)
 	var i User
-	err := row.Scan(
-		&i.ID,
-		&i.Username,
-		&i.Name,
-		&i.Password,
-	)
+	err := row.Scan(&i.Username, &i.Name, &i.Password)
 	return i, err
 }
 
 const createUser = `-- name: CreateUser :one
 INSERT INTO users (username, name, password)
 VALUES ($1, $2, $3)
-RETURNING id, username, name, password
+RETURNING username, name, password
 `
 
 type CreateUserParams struct {
@@ -46,12 +41,7 @@ type CreateUserParams struct {
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
 	row := q.db.QueryRowContext(ctx, createUser, arg.Username, arg.Name, arg.Password)
 	var i User
-	err := row.Scan(
-		&i.ID,
-		&i.Username,
-		&i.Name,
-		&i.Password,
-	)
+	err := row.Scan(&i.Username, &i.Name, &i.Password)
 	return i, err
 }
 
@@ -80,7 +70,7 @@ const deleteUser = `-- name: DeleteUser :one
 DELETE FROM users
 WHERE username = $1
 AND password = $2
-RETURNING id, username, name, password
+RETURNING username, name, password
 `
 
 type DeleteUserParams struct {
@@ -91,34 +81,24 @@ type DeleteUserParams struct {
 func (q *Queries) DeleteUser(ctx context.Context, arg DeleteUserParams) (User, error) {
 	row := q.db.QueryRowContext(ctx, deleteUser, arg.Username, arg.Password)
 	var i User
-	err := row.Scan(
-		&i.ID,
-		&i.Username,
-		&i.Name,
-		&i.Password,
-	)
+	err := row.Scan(&i.Username, &i.Name, &i.Password)
 	return i, err
 }
 
 const getUser = `-- name: GetUser :one
-SELECT id, username, name, password FROM users
+SELECT username, name, password FROM users
 WHERE username = $1
 `
 
 func (q *Queries) GetUser(ctx context.Context, username string) (User, error) {
 	row := q.db.QueryRowContext(ctx, getUser, username)
 	var i User
-	err := row.Scan(
-		&i.ID,
-		&i.Username,
-		&i.Name,
-		&i.Password,
-	)
+	err := row.Scan(&i.Username, &i.Name, &i.Password)
 	return i, err
 }
 
 const getUsers = `-- name: GetUsers :many
-SELECT id, username, name, password FROM users
+SELECT username, name, password FROM users
 `
 
 func (q *Queries) GetUsers(ctx context.Context) ([]User, error) {
@@ -130,12 +110,7 @@ func (q *Queries) GetUsers(ctx context.Context) ([]User, error) {
 	var items []User
 	for rows.Next() {
 		var i User
-		if err := rows.Scan(
-			&i.ID,
-			&i.Username,
-			&i.Name,
-			&i.Password,
-		); err != nil {
+		if err := rows.Scan(&i.Username, &i.Name, &i.Password); err != nil {
 			return nil, err
 		}
 		items = append(items, i)
