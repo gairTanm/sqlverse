@@ -14,3 +14,20 @@ type UserDetails{
     password: String!,
     status: Int!
 }
+
+type Query {
+    getUser(username: String!): User!,
+    getUsers: [User!]!,
+}
+
+type Mutation {
+    createUser(data: UserInput!): User!,
+    updateUser(data: UserInput!): User!,
+    deleteUser(username: String!): User!,
+}
+
+input UserInput{
+    username: String!,
+    name: String!,
+    password: String!
+}
