@@ -32,6 +32,7 @@ const LoginForm = () => {
 		},
 		validationSchema,
 		onSubmit: (values) => {
+			formik.resetForm();
 			setLoading(true);
 			setTimeout(() => {
 				setLoading(false);
@@ -42,7 +43,6 @@ const LoginForm = () => {
 					status: "success",
 				});
 			}, 3000);
-			formik.setValues({ username: "", password: "" });
 		},
 	});
 

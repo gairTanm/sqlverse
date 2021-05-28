@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@chakra-ui/button";
+import { Button } from "@chakra-ui/button";
 import { Box, Center, HStack, Text } from "@chakra-ui/layout";
 import React from "react";
 import { motion } from "framer-motion";

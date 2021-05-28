@@ -46,6 +46,7 @@ const SignUpForm = () => {
 		},
 		validationSchema,
 		onSubmit: (values) => {
+			formik.resetForm();
 			setLoading(true);
 			setTimeout(() => {
 				setLoading(false);
@@ -54,12 +55,6 @@ const SignUpForm = () => {
 					isClosable: true,
 					variant: "left-accent",
 					status: "success",
-				});
-				formik.setValues({
-					name: "",
-					username: "",
-					password: "",
-					confirm: "",
 				});
 				setAgree(false);
 			}, 3000);
