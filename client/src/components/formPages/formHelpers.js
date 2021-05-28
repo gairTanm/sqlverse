@@ -1,9 +1,5 @@
 import { Button } from "@chakra-ui/button";
-import {
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
-} from "@chakra-ui/form-control";
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Box, Center, Divider, Stack, Text } from "@chakra-ui/layout";
 import { motion } from "framer-motion";

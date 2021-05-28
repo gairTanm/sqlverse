@@ -17,7 +17,6 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router";
 import { Flex } from "@chakra-ui/layout";
 import { createUseStyles } from "react-jss";
-import { Heading } from "@chakra-ui/layout";
 
 const useStyles = createUseStyles({
 	img: (props) => ({
