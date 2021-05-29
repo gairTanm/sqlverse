@@ -19,6 +19,8 @@ import {
 } from "../formHelpers";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { CREATE_USER } from "../../../mutations";
+import { useMutation } from "@apollo/client";
 
 const validationSchema = Yup.object({
 	name: Yup.string().required("Name is required"),
@@ -35,6 +37,7 @@ const validationSchema = Yup.object({
 });
 
 const SignUpForm = () => {
+	const [createUser] = useMutation(CREATE_USER);
 	const [loading, setLoading] = useState(false);
 	const toast = useToast();
 	const formik = useFormik({
@@ -46,8 +49,17 @@ const SignUpForm = () => {
 		},
 		validationSchema,
 		onSubmit: (values) => {
-			formik.resetForm();
 			setLoading(true);
+			console.log(values);
+			createUser({
+				variables: {
+					data: {
+						name: values.name,
+						username: values.username,
+						password: values.password,
+					},
+				},
+			});
 			setTimeout(() => {
 				setLoading(false);
 				toast({
@@ -57,6 +69,7 @@ const SignUpForm = () => {
 					status: "success",
 				});
 				setAgree(false);
+				formik.resetForm();
 			}, 3000);
 		},
 	});
