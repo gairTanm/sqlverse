@@ -1,17 +1,15 @@
-package gqlgen
-
-// THIS CODE IS A STARTING POINT ONLY. IT WILL NOT BE UPDATED WITH SCHEMA CHANGES.
+package gql
 
 import (
 	"context"
 	"log"
 
-	"github.com/gairTanm/sqlverse/pg"
+	"github.com/gairTanm/sqlverse/db"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type Resolver struct{
-	Repository pg.Repository
+	Repository db.Repository
 }
 
 func hashAndSalt(password string) (string, error){
@@ -34,13 +32,13 @@ func comparePasswords(hashed string, plain string) bool{
 	return true
 }
 
-func (r *mutationResolver) CreateUser(ctx context.Context, data UserInput) (*pg.User, error) {
+func (r *mutationResolver) CreateUser(ctx context.Context, data UserInput) (*db.User, error) {
 	hashedPassword, err := hashAndSalt(data.Password)
 	if err !=nil{
 		return nil, err
 	}
-	//log.Println(data)
-	user, err := r.Repository.CreateUser(ctx, pg.CreateUserParams{
+	log.Println(data)
+	user, err := r.Repository.CreateUser(ctx, db.CreateUserParams{
 		Username: data.Username,
 		Name:     data.Name,
 		Password: hashedPassword,
@@ -51,15 +49,15 @@ func (r *mutationResolver) CreateUser(ctx context.Context, data UserInput) (*pg.
 	return &user, nil
 }
 
-func (r *mutationResolver) UpdateUser(ctx context.Context, data UserInput) (*pg.User, error) {
+func (r *mutationResolver) UpdateUser(ctx context.Context, data UserInput) (*db.User, error) {
 	panic("not implemented")
 }
 
-func (r *mutationResolver) DeleteUser(ctx context.Context, username string) (*pg.User, error) {
+func (r *mutationResolver) DeleteUser(ctx context.Context, username string) (*db.User, error) {
 	panic("not implemented")
 }
 
-func (r *queryResolver) GetUser(ctx context.Context, username string) (*pg.User, error) {
+func (r *queryResolver) GetUser(ctx context.Context, username string) (*db.User, error) {
 	user, err := r.Repository.GetUser(ctx, username)
 	if err!=nil{
 		return nil, err
@@ -67,8 +65,16 @@ func (r *queryResolver) GetUser(ctx context.Context, username string) (*pg.User,
 	return &user, nil
 }
 
-func (r *queryResolver) GetUsers(ctx context.Context) ([]pg.User, error) {
+func (r *queryResolver) GetUsers(ctx context.Context) ([]db.User, error) {
 	return r.Repository.GetUsers(ctx)
+}
+
+func (r *queryResolver) Me(ctx context.Context)(*db.User, error){
+	panic("??")
+}
+
+func (r *mutationResolver) Login(ctx context.Context, username string, password string) (*Token, error){
+	panic("??")
 }
 
 // Mutation returns MutationResolver implementation.

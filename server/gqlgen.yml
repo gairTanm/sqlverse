@@ -1,18 +1,18 @@
 schema: schema.graphql
 
 exec:
-  filename: gqlgen/exec.go
+  filename: gql/exec.go
 model:
-  filename: gqlgen/model.go
+  filename: gql/model.go
 resolver:
-  filename: gqlgen/resolvers.go
+  filename: gql/resolvers.go
   type: Resolver
 
 autobind:
-  - github.com/gairTanm/sqlverse/pg
+  - github.com/gairTanm/sqlverse/db
 
 models:
   ID:
-    model: github.com/99designs/gqlgen/graphql.Int64
+    model: github.com/99designs/gql/graphql.Int64
 
 omit_slice_element_pointers: true
