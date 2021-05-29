@@ -39,6 +39,7 @@ func (r *mutationResolver) CreateUser(ctx context.Context, data UserInput) (*pg.
 	if err !=nil{
 		return nil, err
 	}
+	//log.Println(data)
 	user, err := r.Repository.CreateUser(ctx, pg.CreateUserParams{
 		Username: data.Username,
 		Name:     data.Name,
