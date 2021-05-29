@@ -2,6 +2,7 @@ package gql
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/gairTanm/sqlverse/db"
@@ -74,7 +75,19 @@ func (r *queryResolver) Me(ctx context.Context)(*db.User, error){
 }
 
 func (r *mutationResolver) Login(ctx context.Context, username string, password string) (*Token, error){
-	panic("??")
+	user, err := r.Repository.GetUser(ctx, username)
+	if err!=nil{
+		return nil, err
+	}
+	if !comparePasswords(user.Password, password){
+		return nil, fmt.Errorf("wrong password")
+	}
+	token, err := GenerateToken(username)
+	if err!=nil{
+		return nil, err
+	}
+	t := Token{Value: token}
+	return &t, nil
 }
 
 // Mutation returns MutationResolver implementation.
