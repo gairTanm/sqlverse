@@ -1,4 +1,5 @@
-import { Button } from "@chakra-ui/button";
+import { IconButton } from "@chakra-ui/button";
+import { ArrowUpIcon, CloseIcon } from "@chakra-ui/icons";
 import { Box, Flex } from "@chakra-ui/layout";
 import { Slide } from "@chakra-ui/transition";
 import { motion } from "framer-motion";
@@ -22,8 +23,8 @@ const Draggable = ({ children }) => {
 		<MotionBox
 			fontFamily="monospace"
 			fontSize="1vw"
-			bg="red.500"
 			fontWeight="bold"
+			bg="teal.200"
 			p="10px"
 			borderRadius="10px"
 			dragConstraints={{ left: -300, right: 300, bottom: 20, top: -500 }}
@@ -47,8 +48,15 @@ const Bag = () => {
 
 	return (
 		<>
-			<Button onClick={toggleBag}>Open Bag</Button>
+			<IconButton icon={<ArrowUpIcon />} onClick={toggleBag} />
 			<Slide direction="bottom" in={bag} style={{ zIndex: 10 }}>
+				<Box pos="absolute" top="2vh" right="2vw">
+					<IconButton
+						icon={<CloseIcon />}
+						variant="unstyled"
+						onClick={toggleBag}
+					/>
+				</Box>
 				<Flex
 					direction="row"
 					p="40px"
