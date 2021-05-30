@@ -3,6 +3,7 @@ import { Box, Center } from "@chakra-ui/react";
 import SignUpForm from "./signUpForm";
 import { Brand } from "../formHelpers";
 
+
 const SignUpPage = () => {
 	return (
 		<Box h="100vh" w="100vw" bg="white">
