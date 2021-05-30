@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/homePage";
 import LoginPage from "./components/formPages/loginPage/index";
-import Playground from "./components/playground";
 import SignUpPage from "./components/formPages/signUpPage/index";
 import { useLocation } from "react-router-dom";
 import { Box } from "@chakra-ui/layout";
@@ -13,6 +12,7 @@ import Testimonials from "./components/testimonials";
 import ContactUs from "./components/contactUs/index.js";
 import { init } from "emailjs-com";
 import Loading from "./components/loading";
+import Playground from "./components/playground/index.js";
 
 const { REACT_APP_EMAIL_USER_ID } = process.env;
 
