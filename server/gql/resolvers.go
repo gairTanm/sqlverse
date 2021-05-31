@@ -67,6 +67,10 @@ func (r *queryResolver) GetUser(ctx context.Context, username string) (*db.User,
 }
 
 func (r *queryResolver) GetUsers(ctx context.Context) ([]db.User, error) {
+	user := ForContext(ctx)
+	if user==nil{
+		return []db.User{}, fmt.Errorf("access denied")
+	}
 	return r.Repository.GetUsers(ctx)
 }
 
