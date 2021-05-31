@@ -5,9 +5,12 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gairTanm/sqlverse/db"
 	"github.com/gairTanm/sqlverse/gql"
-	"github.com/rs/cors"
+	"github.com/go-chi/chi/v5"
+	//"github.com/rs/cors"
 )
 
 func main() {
@@ -19,11 +22,16 @@ func main() {
 
 	repo := db.NewRepository(d)
 
-	mux := http.NewServeMux()
-	mux.Handle("/", gql.NewPlaygroundHandler("/graphql"))
-	mux.Handle("/graphql", gql.NewHandler(repo))
-	handler := cors.Default().Handler(mux)
+	router := chi.NewRouter()
+
+	router.Use(gql.Middleware(repo))
+
+	srv:=handler.NewDefaultServer(gql.NewExecutableSchema(gql.Config{Resolvers: &gql.Resolver{Repository: repo}}))
+	router.Handle("/", playground.Handler("Graphql", "/graphql"))
+	router.Handle("/graphql", srv)
+
+	//handler := cors.Default().Handler(mux)
 	port := ":8080"
 	fmt.Fprintf(os.Stdout, "Server ready at http://localhost%s\n", port)
-	fmt.Fprintln(os.Stderr, http.ListenAndServe(port, handler))
+	fmt.Fprintln(os.Stderr, http.ListenAndServe(port,  router))
 }
