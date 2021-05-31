@@ -14,6 +14,7 @@ type Repository interface{
 	DeleteUser(ctx context.Context, arg DeleteUserParams) (User, error)
 	GetUser(ctx context.Context, username string) (User, error)
 	GetUsers(ctx context.Context) ([]User, error)
+	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 
 	DeleteDetails(ctx context.Context, username sql.NullString) (UserDetail, error)
 }
