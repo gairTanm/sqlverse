@@ -9,14 +9,11 @@ import (
 	"github.com/joho/godotenv"
 );
 
-// GenerateToken generates a jwt token and assign a username to it's claims and return it
 func GenerateToken(username string) (string, error) {
 	_ = godotenv.Load(".env")
 	SecretKey := []byte(os.Getenv("JWTKEY"))
 	token := jwt.New(jwt.SigningMethodHS256)
-	/* Create a map to store our claims */
 	claims := token.Claims.(jwt.MapClaims)
-	/* Set token claims */
 	claims["username"] = username
 	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 	tokenString, err := token.SignedString(SecretKey)
@@ -27,7 +24,6 @@ func GenerateToken(username string) (string, error) {
 	return tokenString, nil
 }
 
-// ParseToken parses a jwt token and returns the username in it's claims
 func ParseToken(tokenStr string) (string, error) {
 	_ = godotenv.Load(".env")
 	SecretKey := []byte(os.Getenv("JWTKEY"))
