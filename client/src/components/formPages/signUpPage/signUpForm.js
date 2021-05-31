@@ -48,29 +48,43 @@ const SignUpForm = () => {
 			confirm: "",
 		},
 		validationSchema,
-		onSubmit: (values) => {
+		onSubmit: async (values) => {
 			setLoading(true);
-			console.log(values);
-			createUser({
-				variables: {
-					data: {
-						name: values.name,
-						username: values.username,
-						password: values.password,
+			try {
+				var res = await createUser({
+					variables: {
+						data: {
+							name: values.name,
+							username: values.username,
+							password: values.password,
+						},
 					},
-				},
-			});
-			setTimeout(() => {
-				setLoading(false);
-				toast({
-					title: `Signed up successfully, ${values.name}`,
-					isClosable: true,
-					variant: "left-accent",
-					status: "success",
 				});
-				setAgree(false);
-				formik.resetForm();
-			}, 3000);
+				setTimeout(() => {
+					setLoading(false);
+					toast({
+						title: `Signed up successfully, ${values.name}`,
+						isClosable: true,
+						variant: "left-accent",
+						status: "success",
+					});
+					setAgree(false);
+					formik.resetForm();
+				}, 3000);
+			} catch (e) {
+				console.log(e);
+
+				setTimeout(() => {
+					setLoading(false);
+					toast({
+						title: `Username already taken!`,
+						isClosable: true,
+						variant: "left-accent",
+						status: "error",
+					});
+					setAgree(false);
+				}, 3000);
+			}
 		},
 	});
 
