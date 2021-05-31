@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/lib/pq" // required
+	_ "github.com/lib/pq"
 )
 
 type Repository interface{
