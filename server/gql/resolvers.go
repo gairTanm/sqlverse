@@ -71,8 +71,15 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, data UserInput) (*db.
 }
 
 func (r *mutationResolver) DeleteUser(ctx context.Context, username string) (*db.User, error) {
-	panic("not implemented")
+	user := ForContext(ctx)
+	log.Println(username)
+	if user!=nil{
+		return &db.User{}, fmt.Errorf("access denied")
+	}
+	log.Println(user)
+	return user, nil
 }
+
 
 func (r *queryResolver) GetUser(ctx context.Context, username string) (*db.User, error) {
 	user, err := r.Repository.GetUser(ctx, username)

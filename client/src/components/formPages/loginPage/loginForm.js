@@ -11,6 +11,8 @@ import {
 } from "../formHelpers";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { LOGIN } from "../../../mutations";
+import { useMutation } from "@apollo/client";
 
 const validationSchema = Yup.object({
 	username: Yup.string()
@@ -23,6 +25,7 @@ const validationSchema = Yup.object({
 
 const LoginForm = () => {
 	const [loading, setLoading] = useState(false);
+	const [login] = useMutation(LOGIN);
 
 	const toast = useToast();
 	const formik = useFormik({
@@ -31,18 +34,38 @@ const LoginForm = () => {
 			password: "",
 		},
 		validationSchema,
-		onSubmit: (values) => {
-			formik.resetForm();
+		onSubmit: async (values) => {
 			setLoading(true);
-			setTimeout(() => {
-				setLoading(false);
-				toast({
-					title: `Welcome back, ${values.username}!`,
-					isClosable: true,
-					variant: "left-accent",
-					status: "success",
+			try {
+				var token = await login({
+					variables: {
+						username: values.username,
+						password: values.password,
+					},
 				});
-			}, 3000);
+				console.log(token);
+				setTimeout(() => {
+					setLoading(false);
+					toast({
+						title: `Welcome back, ${values.username}!`,
+						isClosable: true,
+						variant: "left-accent",
+						status: "success",
+					});
+					formik.resetForm();
+				}, 3000);
+			} catch (e) {
+				console.log(e);
+				setTimeout(() => {
+					setLoading(false);
+					toast({
+						title: `Wrong Username or Password`,
+						isClosable: true,
+						variant: "left-accent",
+						status: "error",
+					});
+				}, 3000);
+			}
 		},
 	});
 
