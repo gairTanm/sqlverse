@@ -16,8 +16,15 @@ import {
 } from "@chakra-ui/menu";
 import { Portal } from "@chakra-ui/portal";
 import React from "react";
+import { useHistory } from "react-router";
 
 const Settings = () => {
+	const { push } = useHistory();
+	const handleFriends = (e) => {
+		e.preventDefault();
+		push("/playground/friends");
+	};
+
 	return (
 		<Menu>
 			<MenuButton
@@ -28,7 +35,9 @@ const Settings = () => {
 			<Portal>
 				<MenuList>
 					<MenuGroup>
-						<MenuItem icon={<SearchIcon />}>Find Friends</MenuItem>
+						<MenuItem icon={<SearchIcon />} onClick={handleFriends}>
+							Find Friends
+						</MenuItem>
 						<MenuItem icon={<EditIcon />}>Profile</MenuItem>
 						<MenuItem icon={<QuestionIcon />}>Help</MenuItem>
 					</MenuGroup>
