@@ -11,3 +11,4 @@
 -   [ ] Animate the unmounting of loading animation
 -   [ ] Animate the children components (maybe?)
 -   [ ] DeleteUser resolver
+-   [x] Shell script to start client and server

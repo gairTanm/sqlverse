@@ -1,8 +1,8 @@
 trap "kill 0" EXIT
 
-cd client
+cd client || exit
 npm start &
-cd ../server
+cd ../server || exit
 go run ./cmd/server-ex/main.go &
 
 wait

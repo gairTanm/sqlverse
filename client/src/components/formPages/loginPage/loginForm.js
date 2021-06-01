@@ -44,6 +44,7 @@ const LoginForm = () => {
 					},
 				});
 				console.log(token);
+				localStorage.setItem("login-token", token.data.login.value);
 				setTimeout(() => {
 					setLoading(false);
 					toast({
