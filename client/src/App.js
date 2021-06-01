@@ -13,6 +13,7 @@ import ContactUs from "./components/contactUs/index.js";
 import { init } from "emailjs-com";
 import Loading from "./components/loading";
 import Playground from "./components/playground/index.js";
+import People from "./components/playground/people";
 
 const { REACT_APP_EMAIL_USER_ID } = process.env;
 
@@ -58,6 +59,11 @@ const App = () => {
 							<Route exact path="/playground">
 								<RoutingAnimation>
 									<Playground />
+								</RoutingAnimation>
+							</Route>
+							<Route exact path="/playground/friends">
+								<RoutingAnimation>
+									<People />
 								</RoutingAnimation>
 							</Route>
 							<Route exact path="/team">
