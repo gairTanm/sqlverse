@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"os/exec"
+	"time"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
@@ -11,8 +13,6 @@ import (
 	"github.com/gairTanm/sqlverse/gql"
 	"github.com/go-chi/chi/v5"
 	"github.com/rs/cors"
-
-	//"github.com/rs/cors"
 )
 
 func main() {
@@ -34,6 +34,10 @@ func main() {
 	router.Handle("/graphql", srv)
 
 	port := ":8080"
+	go func() {
+		<-time.After(100 * time.Millisecond)
+		exec.Command("open", "http://localhost:8080").Run()
+	}()
 	fmt.Fprintf(os.Stdout, "Server ready at http://localhost%s\n", port)
 	fmt.Fprintln(os.Stderr, http.ListenAndServe(port,  router))
 }
