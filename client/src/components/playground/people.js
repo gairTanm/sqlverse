@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { Box, Flex } from "@chakra-ui/layout";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import { Checkbox } from "@chakra-ui/checkbox";
+import AwShucks from "../awShucks";
 
 const People = () => {
 	const { loading, error, data } = useQuery(ALL_USERS);
@@ -12,7 +13,7 @@ const People = () => {
 	}
 
 	if (error) {
-		return <div>Some error occurred, try logging in again</div>;
+		return <AwShucks />;
 	}
 	var i = 0;
 	return (

@@ -48,7 +48,11 @@ const AwShucks = () => {
 				<Link to="/contact" className={classes.link}>
 					a mail
 				</Link>{" "}
-				to us?
+				to us? Or just{" "}
+				<Link to="/home" className={classes.link}>
+					go back
+				</Link>{" "}
+				?
 			</Text>
 		</Flex>
 	);

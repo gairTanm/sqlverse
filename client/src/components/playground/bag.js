@@ -26,6 +26,7 @@ const Draggable = ({ children }) => {
 			fontWeight="bold"
 			bg="teal.200"
 			p="10px"
+			key={children}
 			borderRadius="10px"
 			dragConstraints={{ left: -300, right: 300, bottom: 20, top: -500 }}
 			m="1vh"
@@ -68,7 +69,7 @@ const Bag = () => {
 					shadow="md"
 				>
 					{queryLiterals.map((ql) => {
-						return <Draggable>{ql}</Draggable>;
+						return <Draggable key={ql}>{ql}</Draggable>;
 					})}
 				</Flex>
 			</Slide>
