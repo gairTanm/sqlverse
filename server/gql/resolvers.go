@@ -117,6 +117,18 @@ func (r *mutationResolver) Login(ctx context.Context, username string, password 
 	return &t, nil
 }
 
+func (r *mutationResolver) RefreshToken(ctx context.Context, input RefreshTokenInput)(*Token, error){
+	username, err := ParseToken(input.Token)
+	if err != nil {
+		return &Token{}, fmt.Errorf("access denied")
+	}
+	token, err := GenerateToken(username)
+	if err != nil {
+		return &Token{}, err
+	}
+	return &Token{Value: token}, nil
+}
+
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
