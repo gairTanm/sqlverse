@@ -13,6 +13,6 @@ autobind:
 
 models:
   ID:
-    model: github.com/99designs/gql/graphql.Int64
+    model: github.com/99designs/gqlgen/graphql.Int64
 
 omit_slice_element_pointers: true
