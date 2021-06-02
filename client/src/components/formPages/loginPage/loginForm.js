@@ -36,15 +36,16 @@ const LoginForm = () => {
 		validationSchema,
 		onSubmit: async (values) => {
 			setLoading(true);
+			localStorage.removeItem("login-token");
 			try {
-				var token = await login({
+				const { data } = await login({
 					variables: {
 						username: values.username,
 						password: values.password,
 					},
 				});
-				console.log(token);
-				localStorage.setItem("login-token", token.data.login.value);
+				console.log(data);
+				localStorage.setItem("login-token", data.login.value);
 				setTimeout(() => {
 					setLoading(false);
 					toast({

@@ -15,16 +15,30 @@ import {
 	MenuList,
 } from "@chakra-ui/menu";
 import { Portal } from "@chakra-ui/portal";
+import { useToast } from "@chakra-ui/toast";
 import React from "react";
 import { useHistory } from "react-router";
 
 const Settings = () => {
 	const { push } = useHistory();
+	const toast = useToast();
+
 	const handleFriends = (e) => {
 		e.preventDefault();
 		push("/playground/friends");
 	};
 
+	const handleLogout = (e) => {
+		e.preventDefault();
+		push("/login");
+		localStorage.removeItem("login-token");
+		toast({
+			variant: "left-accent",
+			title: `Come back soon!`,
+			status: "info",
+			isClosable: "true",
+		});
+	};
 	return (
 		<Menu>
 			<MenuButton
@@ -44,7 +58,9 @@ const Settings = () => {
 
 					<MenuDivider />
 					<MenuGroup>
-						<MenuItem icon={<CloseIcon />}>Logout</MenuItem>
+						<MenuItem icon={<CloseIcon />} onClick={handleLogout}>
+							Logout
+						</MenuItem>
 					</MenuGroup>
 				</MenuList>
 			</Portal>
