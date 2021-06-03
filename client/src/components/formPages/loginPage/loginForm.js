@@ -26,7 +26,7 @@ const validationSchema = Yup.object({
 const LoginForm = () => {
 	const [loading, setLoading] = useState(false);
 	const [login] = useMutation(LOGIN);
-
+	const { push } = useHistory();
 	const toast = useToast();
 	const formik = useFormik({
 		initialValues: {
@@ -55,7 +55,8 @@ const LoginForm = () => {
 						status: "success",
 					});
 					formik.resetForm();
-				}, 3000);
+					push("/playground");
+				}, 1500);
 			} catch (e) {
 				console.log(e);
 				setTimeout(() => {
@@ -66,7 +67,7 @@ const LoginForm = () => {
 						variant: "left-accent",
 						status: "error",
 					});
-				}, 3000);
+				}, 1500);
 			}
 		},
 	});
@@ -76,7 +77,6 @@ const LoginForm = () => {
 		e.preventDefault();
 		setShow(!show);
 	};
-	const { push } = useHistory();
 	const handleSignUp = (e) => {
 		e.preventDefault();
 		push("/signup");

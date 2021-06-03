@@ -8,7 +8,7 @@ import awshucks from "../assets/awshucks.svg";
 
 const useStyles = createUseStyles({
 	link: {
-		boxShadow: "inset 0 -3px 0 -1px lightcyan",
+		boxShadow: "inset 0 -5px 0 -1px lightcyan",
 		transition: "box-shadow .2s ease-in-out",
 		color: "black",
 		lineHeight: "40px",

@@ -31,13 +31,13 @@ const Settings = () => {
 	const handleLogout = (e) => {
 		e.preventDefault();
 		push("/login");
-		localStorage.removeItem("login-token");
 		toast({
 			variant: "left-accent",
 			title: `Come back soon!`,
 			status: "info",
 			isClosable: "true",
 		});
+		localStorage.removeItem("login-token");
 	};
 	return (
 		<Menu>
