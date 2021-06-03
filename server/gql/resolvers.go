@@ -33,6 +33,10 @@ func comparePasswords(hashed string, plain string) bool{
 	return true
 }
 
+func (r *userResolver)Friends(ctx context.Context, user *db.User)([]db.User, error){
+	panic("??")
+}
+
 func (r *mutationResolver) CreateUser(ctx context.Context, data UserInput) (*db.User, error) {
 	hashedPassword, err := hashAndSalt(data.Password)
 	if err !=nil{
@@ -129,11 +133,18 @@ func (r *mutationResolver) RefreshToken(ctx context.Context, input RefreshTokenI
 	return &Token{Value: token}, nil
 }
 
+func (r *mutationResolver) AddAsFriend(ctx context.Context, username string) (*db.User, error){
+	panic("??")
+}
+
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
+func (r *Resolver) User() UserResolver {return &userResolver{r}}
+
+type userResolver struct {*Resolver}
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
