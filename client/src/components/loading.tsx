@@ -22,7 +22,7 @@ interface LoadingProps {
 	loading?: boolean;
 }
 
-const Loading = ({ loading }: LoadingProps): JSX.Element => {
+const Loading = ({ loading }: LoadingProps) => {
 	return (
 		<AnimatePresence>
 			{loading && (
