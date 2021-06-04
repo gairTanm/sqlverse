@@ -18,7 +18,23 @@ const useStyles = createUseStyles({
 	}
 });
 
-const TestimonialTemplate = ({ image, text, left, name, alt, title }) => {
+interface TestimonialTemplateProps {
+	image: string;
+	text: string;
+	left: boolean;
+	name: string;
+	alt: string;
+	title: string;
+}
+
+const TestimonialTemplate = ({
+	image,
+	text,
+	left,
+	name,
+	alt,
+	title
+}: TestimonialTemplateProps) => {
 	const classes = useStyles();
 	return (
 		<Flex direction="row" w="100vw" justifyContent="space-between">

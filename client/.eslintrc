@@ -14,11 +14,14 @@
     "localStorage": true,
     "console": true,
     "setTimeout": true,
-    "process": true
+    "process": true,
+    "JSX": true
   },
   "rules": {
     "prettier/prettier": 2,
     "no-unused-vars": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",

@@ -19,11 +19,11 @@ import { Flex } from "@chakra-ui/layout";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
-	img: (props) => ({
+	img: ({ rot }: { rot: number }) => ({
 		borderRadius: "20px",
 		filter: "grayscale(100%)",
 		transition: "all .2s",
-		transform: `rotate(${props.rot}deg)`,
+		transform: `rotate(${rot}deg)`,
 		"&:hover": {
 			filter: "grayscale(0%)",
 			transform: `rotate(0deg)`
@@ -136,6 +136,7 @@ export const HomeButton = () => {
 	return (
 		<Box position="absolute" top="2vh" left="2vw">
 			<IconButton
+				aria-label="label"
 				variant="ghost"
 				colorScheme="gray"
 				h="5vh"

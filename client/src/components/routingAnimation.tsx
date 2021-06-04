@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-const RoutingAnimation = ({ children }) => {
+const RoutingAnimation = ({ children }: { children: JSX.Element }) => {
 	return (
 		<motion.div
 			style={{ overflowX: "hidden" }}
