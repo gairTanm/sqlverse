@@ -6,13 +6,9 @@ import { Flex } from "@chakra-ui/layout";
 import { Spacer } from "@chakra-ui/layout";
 import { useHistory } from "react-router";
 import icon from "../assets/icon.png";
+import { BarButtonProps } from "../types";
 
 const MotionButton = motion(Button);
-
-interface BarButtonProps {
-	text: string;
-	clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
 
 const BarButton = ({ text, clickHandler }: BarButtonProps) => {
 	return (

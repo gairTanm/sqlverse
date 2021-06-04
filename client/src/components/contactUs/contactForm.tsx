@@ -13,6 +13,15 @@ const { REACT_APP_TEMPLATE_ID, REACT_APP_SERVICE_ID } = process.env;
 
 const MotionButton = motion(Button);
 
+interface FormItemProps {
+	isRequired?: boolean;
+	type: "email" | "text";
+	value: string;
+	onChange: React.ChangeEventHandler;
+	label: string;
+	placeholder: string;
+}
+
 const FormItem = ({
 	isRequired = true,
 	type = "text",
@@ -20,7 +29,7 @@ const FormItem = ({
 	onChange,
 	label,
 	placeholder
-}) => {
+}: FormItemProps) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -41,7 +50,7 @@ const MailForm = () => {
 	const [form, setForm] = useState({ name: "", email: "", message: "" });
 	const [loading, setLoading] = useState(false);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		var templateParams = form;
@@ -75,13 +84,13 @@ const MailForm = () => {
 	};
 	const toast = useToast();
 
-	const handleNameChange = (e) => {
+	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, name: e.target.value });
 	};
-	const handleEmailChange = (e) => {
+	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, email: e.target.value });
 	};
-	const handleMessageChange = (e) => {
+	const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setForm({ ...form, message: e.target.value });
 	};
 
@@ -100,6 +109,7 @@ const MailForm = () => {
 						</Text>
 					</Center>
 					<FormItem
+						type="text"
 						value={form.name}
 						onChange={handleNameChange}
 						label="Name"

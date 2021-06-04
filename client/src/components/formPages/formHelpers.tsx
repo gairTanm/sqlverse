@@ -19,6 +19,16 @@ export const Brand = () => {
 	);
 };
 
+interface MotionButtonProps {
+	type?: "submit";
+	variant?: "solid" | "ghost" | "outline" | "link";
+	label: string;
+	loading?: boolean;
+	colorScheme: string;
+	isDisabled?: boolean;
+	onClick?: React.MouseEventHandler;
+}
+
 export const MotionButton = ({
 	type,
 	label,
@@ -27,7 +37,7 @@ export const MotionButton = ({
 	variant = "ghost",
 	onClick,
 	isDisabled = false
-}) => {
+}: MotionButtonProps) => {
 	return (
 		<ButtonWMotion
 			whileHover={{ scale: 1.1 }}
@@ -45,6 +55,17 @@ export const MotionButton = ({
 	);
 };
 
+interface FormItemBase {
+	isRequired?: boolean;
+	label: string;
+	placeholder: string;
+	value: string;
+	onChange: React.ChangeEventHandler;
+	error: string;
+	touched: boolean;
+	variant?: "filled" | "ghost" | "outline" | "solid";
+}
+
 export const FormItem = ({
 	isRequired = true,
 	label,
@@ -54,7 +75,7 @@ export const FormItem = ({
 	error,
 	touched,
 	variant = "filled"
-}) => {
+}: FormItemBase) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -75,6 +96,11 @@ export const FormItem = ({
 	);
 };
 
+interface SecureFormItemProps extends FormItemBase {
+	show: boolean;
+	toggle: React.MouseEventHandler;
+}
+
 export const SecureFormItem = ({
 	isRequired = true,
 	label,
@@ -85,7 +111,7 @@ export const SecureFormItem = ({
 	error,
 	touched,
 	placeholder
-}) => {
+}: SecureFormItemProps) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -124,7 +150,7 @@ export const OrDivider = () => {
 	);
 };
 
-export const FormHeading = ({ heading }) => {
+export const FormHeading = ({ heading }: { heading: string }) => {
 	return (
 		<Center>
 			<Text
