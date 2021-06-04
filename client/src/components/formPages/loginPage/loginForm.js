@@ -7,7 +7,7 @@ import {
 	FormItem,
 	MotionButton,
 	OrDivider,
-	SecureFormItem,
+	SecureFormItem
 } from "../formHelpers";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
 		.min(5, "A username is at least 5 characters in length"),
 	password: Yup.string()
 		.required("Password is required")
-		.min(6, "A password is at least 6 characters in length"),
+		.min(6, "A password is at least 6 characters in length")
 });
 
 const LoginForm = () => {
@@ -31,7 +31,7 @@ const LoginForm = () => {
 	const formik = useFormik({
 		initialValues: {
 			username: "",
-			password: "",
+			password: ""
 		},
 		validationSchema,
 		onSubmit: async (values) => {
@@ -41,8 +41,8 @@ const LoginForm = () => {
 				const { data } = await login({
 					variables: {
 						username: values.username,
-						password: values.password,
-					},
+						password: values.password
+					}
 				});
 				console.log(data);
 				localStorage.setItem("login-token", data.login.value);
@@ -52,7 +52,7 @@ const LoginForm = () => {
 						title: `Welcome back, ${values.username}!`,
 						isClosable: true,
 						variant: "left-accent",
-						status: "success",
+						status: "success"
 					});
 					formik.resetForm();
 					push("/playground");
@@ -65,11 +65,11 @@ const LoginForm = () => {
 						title: `Wrong Username or Password`,
 						isClosable: true,
 						variant: "left-accent",
-						status: "error",
+						status: "error"
 					});
 				}, 1500);
 			}
-		},
+		}
 	});
 
 	const [show, setShow] = useState(false);

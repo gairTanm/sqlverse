@@ -5,7 +5,7 @@ import {
 	Flex,
 	Container,
 	HStack,
-	Spacer,
+	Spacer
 } from "@chakra-ui/layout";
 import React from "react";
 import Copyright from "./copyright";
@@ -139,7 +139,7 @@ const HomePage = () => {
 			style={{
 				width: "100vw",
 				height: "350vh",
-				overflowX: "hidden",
+				overflowX: "hidden"
 			}}
 		>
 			<Flex h="100%" flexDirection="column">

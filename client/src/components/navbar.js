@@ -18,7 +18,7 @@ const BarButton = ({ text, clickHandler }) => {
 			_hover={{
 				transform: "scale(0.85)",
 				background: "black",
-				color: "white",
+				color: "white"
 			}}
 			colorScheme="white"
 			borderRadius={5}
@@ -42,10 +42,10 @@ const Navbar = () => {
 		{ text: "Sign Up", clickHandler: handleSignUp },
 		{
 			text: "Testimonials",
-			clickHandler: handleTestimonials,
+			clickHandler: handleTestimonials
 		},
 		{ text: "Team", clickHandler: handleTeam },
-		{ text: "Contact Us", clickHandler: handleContact },
+		{ text: "Contact Us", clickHandler: handleContact }
 	];
 	return (
 		<Box

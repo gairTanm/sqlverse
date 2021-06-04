@@ -6,7 +6,7 @@ import {
 	Link,
 	Stack,
 	Text,
-	useToast,
+	useToast
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import Copyright from "../../copyright";
@@ -15,7 +15,7 @@ import {
 	FormItem,
 	OrDivider,
 	SecureFormItem,
-	MotionButton,
+	MotionButton
 } from "../formHelpers";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -33,7 +33,7 @@ const validationSchema = Yup.object({
 	confirm: Yup.string()
 		.required("Confirm the password entered above")
 		.min(6)
-		.oneOf([Yup.ref("password"), null], "Passwords must match"),
+		.oneOf([Yup.ref("password"), null], "Passwords must match")
 });
 
 const SignUpForm = () => {
@@ -45,7 +45,7 @@ const SignUpForm = () => {
 			name: "",
 			username: "",
 			password: "",
-			confirm: "",
+			confirm: ""
 		},
 		validationSchema,
 		onSubmit: async (values) => {
@@ -56,8 +56,8 @@ const SignUpForm = () => {
 					variables: {
 						name: values.name,
 						username: values.username,
-						password: values.password,
-					},
+						password: values.password
+					}
 				});
 				setTimeout(() => {
 					setLoading(false);
@@ -65,7 +65,7 @@ const SignUpForm = () => {
 						title: `Signed up successfully, ${res.name}`,
 						isClosable: true,
 						variant: "left-accent",
-						status: "success",
+						status: "success"
 					});
 					setAgree(false);
 					formik.resetForm();
@@ -79,12 +79,12 @@ const SignUpForm = () => {
 						title: `Username already taken!`,
 						isClosable: true,
 						variant: "left-accent",
-						status: "error",
+						status: "error"
 					});
 					setAgree(false);
 				}, 3000);
 			}
-		},
+		}
 	});
 
 	const [showPass, setShowPass] = useState(false);

@@ -4,7 +4,7 @@ import {
 	EditIcon,
 	HamburgerIcon,
 	QuestionIcon,
-	SearchIcon,
+	SearchIcon
 } from "@chakra-ui/icons";
 import {
 	Menu,
@@ -12,7 +12,7 @@ import {
 	MenuDivider,
 	MenuGroup,
 	MenuItem,
-	MenuList,
+	MenuList
 } from "@chakra-ui/menu";
 import { Portal } from "@chakra-ui/portal";
 import { useToast } from "@chakra-ui/toast";
@@ -35,7 +35,7 @@ const Settings = () => {
 			variant: "left-accent",
 			title: `Come back soon!`,
 			status: "info",
-			isClosable: "true",
+			isClosable: "true"
 		});
 		localStorage.removeItem("login-token");
 	};

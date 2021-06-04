@@ -8,24 +8,24 @@ const container = {
 		opacity: 1,
 		transition: {
 			duration: 3,
-			ease: [0.6, -0.05, 0.01, 0.99],
-		},
+			ease: [0.6, -0.05, 0.01, 0.99]
+		}
 	},
 	exit: {
-		opacity: 0,
-	},
+		opacity: 0
+	}
 };
 
 const MotionBox = motion(Box);
 
-interface LoadingProps{
+interface LoadingProps {
 	loading?: boolean;
 }
 
-const Loading = ({loading}: LoadingProps): JSX.Element => {
+const Loading = ({ loading }: LoadingProps): JSX.Element => {
 	return (
 		<AnimatePresence>
-			{(loading&&
+			{loading && (
 				<MotionBox
 					variants={container}
 					initial="initial"

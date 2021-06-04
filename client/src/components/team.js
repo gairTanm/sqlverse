@@ -7,7 +7,7 @@ import {
 	VStack,
 	Spacer,
 	UnorderedList,
-	ListItem,
+	ListItem
 } from "@chakra-ui/layout";
 import React from "react";
 import tanmay from "../assets/tanmay.png";
@@ -26,9 +26,9 @@ const useStyles = createUseStyles({
 		transform: `rotate(${props.rot}deg)`,
 		"&:hover": {
 			filter: "grayscale(0%)",
-			transform: `rotate(0deg)`,
-		},
-	}),
+			transform: `rotate(0deg)`
+		}
+	})
 });
 
 const Amogh = () => {
@@ -143,7 +143,7 @@ export const HomeButton = () => {
 				_hover={{
 					transform: "scale(0.8)",
 					color: "white",
-					background: "black",
+					background: "black"
 				}}
 				icon={<ArrowBackIcon h="30px" w="30px" />}
 				onClick={() => push("/home")}

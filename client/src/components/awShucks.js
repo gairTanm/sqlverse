@@ -13,9 +13,9 @@ const useStyles = createUseStyles({
 		color: "black",
 		lineHeight: "40px",
 		"&:hover": {
-			boxShadow: "inset 0 -40px 0 -1px lightcyan",
-		},
-	},
+			boxShadow: "inset 0 -40px 0 -1px lightcyan"
+		}
+	}
 });
 
 const AwShucks = () => {
