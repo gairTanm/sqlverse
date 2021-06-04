@@ -23,19 +23,19 @@ const Settings = () => {
 	const { push } = useHistory();
 	const toast = useToast();
 
-	const handleFriends = (e) => {
+	const handleFriends = (e: React.MouseEvent) => {
 		e.preventDefault();
 		push("/playground/friends");
 	};
 
-	const handleLogout = (e) => {
+	const handleLogout = (e: React.MouseEvent) => {
 		e.preventDefault();
 		push("/login");
 		toast({
 			variant: "left-accent",
 			title: `Come back soon!`,
 			status: "info",
-			isClosable: "true"
+			isClosable: true
 		});
 		localStorage.removeItem("login-token");
 	};

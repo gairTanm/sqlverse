@@ -18,7 +18,7 @@ const queryLiterals = [
 
 const MotionBox = motion(Box);
 
-const Draggable = ({ children }) => {
+const Draggable = ({ children }: { children: string }) => {
 	return (
 		<MotionBox
 			fontFamily="monospace"
@@ -49,10 +49,15 @@ const Bag = () => {
 
 	return (
 		<>
-			<IconButton icon={<ArrowUpIcon />} onClick={toggleBag} />
+			<IconButton
+				aria-label="up"
+				icon={<ArrowUpIcon />}
+				onClick={toggleBag}
+			/>
 			<Slide direction="bottom" in={bag} style={{ zIndex: 10 }}>
 				<Box pos="absolute" top="2vh" right="2vw">
 					<IconButton
+						aria-label="close"
 						icon={<CloseIcon />}
 						variant="unstyled"
 						onClick={toggleBag}
@@ -68,7 +73,7 @@ const Bag = () => {
 					rounded="md"
 					shadow="md"
 				>
-					{queryLiterals.map((ql) => {
+					{queryLiterals.map((ql: string) => {
 						return <Draggable key={ql}>{ql}</Draggable>;
 					})}
 				</Flex>

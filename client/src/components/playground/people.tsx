@@ -6,6 +6,11 @@ import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import { Checkbox } from "@chakra-ui/checkbox";
 import AwShucks from "../awShucks";
 
+interface User {
+	username: string;
+	name: string;
+}
+
 const People = () => {
 	const { loading, error, data } = useQuery(ALL_USERS);
 	if (loading) {
@@ -29,7 +34,7 @@ const People = () => {
 						</Tr>
 					</Thead>
 					<Tbody>
-						{data.getUsers.map((user) => {
+						{data.getUsers.map((user: User) => {
 							i += 1;
 							return (
 								<Tr key={user.username}>

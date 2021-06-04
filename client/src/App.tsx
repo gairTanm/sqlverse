@@ -12,12 +12,13 @@ import Testimonials from "./components/testimonials";
 import ContactUs from "./components/contactUs/index.js";
 import { init } from "emailjs-com";
 import Loading from "./components/loading";
-import Playground from "./components/playground/index.js";
+import Playground from "./components/playground";
 import People from "./components/playground/people";
+import React from "react";
 
 const { REACT_APP_EMAIL_USER_ID } = process.env;
 
-const App = () => {
+const App = (): JSX.Element => {
 	const location = useLocation();
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
