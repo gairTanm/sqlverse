@@ -13,7 +13,7 @@ const queryLiterals = [
 	"PICK",
 	"ON",
 	"JOIN",
-	"AS",
+	"AS"
 ];
 
 const MotionBox = motion(Box);

@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/homePage";
 import LoginPage from "./components/formPages/loginPage/index";
 import SignUpPage from "./components/formPages/signUpPage/index";

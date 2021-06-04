@@ -9,7 +9,12 @@ import icon from "../assets/icon.png";
 
 const MotionButton = motion(Button);
 
-const BarButton = ({ text, clickHandler }) => {
+interface BarButtonProps {
+	text: string;
+	clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const BarButton = ({ text, clickHandler }: BarButtonProps) => {
 	return (
 		<MotionButton
 			style={{ marginLeft: "2px", marginRight: "2px" }}
@@ -18,7 +23,7 @@ const BarButton = ({ text, clickHandler }) => {
 			_hover={{
 				transform: "scale(0.85)",
 				background: "black",
-				color: "white",
+				color: "white"
 			}}
 			colorScheme="white"
 			borderRadius={5}
@@ -42,10 +47,10 @@ const Navbar = () => {
 		{ text: "Sign Up", clickHandler: handleSignUp },
 		{
 			text: "Testimonials",
-			clickHandler: handleTestimonials,
+			clickHandler: handleTestimonials
 		},
 		{ text: "Team", clickHandler: handleTeam },
-		{ text: "Contact Us", clickHandler: handleContact },
+		{ text: "Contact Us", clickHandler: handleContact }
 	];
 	return (
 		<Box

@@ -13,9 +13,9 @@ const useStyles = createUseStyles({
 		filter: "grayscale(100%)",
 		transition: "all .3s",
 		"&:hover": {
-			filter: "none",
-		},
-	},
+			filter: "none"
+		}
+	}
 });
 
 const TestimonialTemplate = ({ image, text, left, name, alt, title }) => {

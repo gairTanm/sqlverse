@@ -1,0 +1,39 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "unused-imports"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "globals": {
+    "localStorage": true,
+    "console": true,
+    "setTimeout": true,
+    "process": true
+  },
+  "rules": {
+    "prettier/prettier": 2,
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ]
+  }
+}

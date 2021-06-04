@@ -26,7 +26,7 @@ export const MotionButton = ({
 	colorScheme,
 	variant = "ghost",
 	onClick,
-	isDisabled = false,
+	isDisabled = false
 }) => {
 	return (
 		<ButtonWMotion
@@ -53,7 +53,7 @@ export const FormItem = ({
 	onChange,
 	error,
 	touched,
-	variant = "filled",
+	variant = "filled"
 }) => {
 	return (
 		<FormControl isRequired={isRequired}>
@@ -84,7 +84,7 @@ export const SecureFormItem = ({
 	onChange,
 	error,
 	touched,
-	placeholder,
+	placeholder
 }) => {
 	return (
 		<FormControl isRequired={isRequired}>
@@ -131,7 +131,7 @@ export const FormHeading = ({ heading }) => {
 				fontSize={{
 					base: "24px",
 					md: "40px",
-					lg: "50px",
+					lg: "50px"
 				}}
 				fontWeight="bold"
 				fontFamily="Comfortaa"

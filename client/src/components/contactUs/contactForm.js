@@ -19,7 +19,7 @@ const FormItem = ({
 	value,
 	onChange,
 	label,
-	placeholder,
+	placeholder
 }) => {
 	return (
 		<FormControl isRequired={isRequired}>
@@ -56,7 +56,7 @@ const MailForm = () => {
 						title: "We'll get back to you shortly!",
 						isClosable: true,
 						variant: "left-accent",
-						status: "info",
+						status: "info"
 					});
 					setLoading(false);
 					setForm({ name: "", email: "", message: "" });
@@ -64,11 +64,10 @@ const MailForm = () => {
 				function (error) {
 					console.log("FAILED...", error);
 					toast({
-						title:
-							"Unfortunately, the mail could not be sent, try again?",
+						title: "Unfortunately, the mail could not be sent, try again?",
 						isClosable: true,
 						variant: "left-accent",
-						status: "error",
+						status: "error"
 					});
 					setLoading(false);
 				}
