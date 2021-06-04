@@ -56,31 +56,37 @@ const MailForm = () => {
 		var templateParams = form;
 		setLoading(true);
 
-		emailjs
-			.send(REACT_APP_SERVICE_ID, REACT_APP_TEMPLATE_ID, templateParams)
-			.then(
-				function (response) {
-					console.log("SUCCESS!", response.status, response.text);
-					toast({
-						title: "We'll get back to you shortly!",
-						isClosable: true,
-						variant: "left-accent",
-						status: "info"
-					});
-					setLoading(false);
-					setForm({ name: "", email: "", message: "" });
-				},
-				function (error) {
-					console.log("FAILED...", error);
-					toast({
-						title: "Unfortunately, the mail could not be sent, try again?",
-						isClosable: true,
-						variant: "left-accent",
-						status: "error"
-					});
-					setLoading(false);
-				}
-			);
+		if (REACT_APP_SERVICE_ID != null && REACT_APP_TEMPLATE_ID != null) {
+			emailjs
+				.send(
+					REACT_APP_SERVICE_ID,
+					REACT_APP_TEMPLATE_ID,
+					templateParams
+				)
+				.then(
+					function (response) {
+						console.log("SUCCESS!", response.status, response.text);
+						toast({
+							title: "We'll get back to you shortly!",
+							isClosable: true,
+							variant: "left-accent",
+							status: "info"
+						});
+						setLoading(false);
+						setForm({ name: "", email: "", message: "" });
+					},
+					function (error) {
+						console.log("FAILED...", error);
+						toast({
+							title: "Unfortunately, the mail could not be sent, try again?",
+							isClosable: true,
+							variant: "left-accent",
+							status: "error"
+						});
+						setLoading(false);
+					}
+				);
+		}
 	};
 	const toast = useToast();
 

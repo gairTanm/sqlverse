@@ -22,7 +22,9 @@ const App = (): JSX.Element => {
 	const location = useLocation();
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
-		init(REACT_APP_EMAIL_USER_ID);
+		if (REACT_APP_EMAIL_USER_ID != null) {
+			init(REACT_APP_EMAIL_USER_ID);
+		}
 	}, []);
 
 	useEffect(() => {

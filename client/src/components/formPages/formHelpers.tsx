@@ -61,8 +61,8 @@ interface FormItemBase {
 	placeholder: string;
 	value: string;
 	onChange: React.ChangeEventHandler;
-	error: string;
-	touched: boolean;
+	error: string | undefined;
+	touched: boolean | undefined;
 	variant?: "filled" | "ghost" | "outline" | "solid";
 }
 
