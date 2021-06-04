@@ -1,6 +1,5 @@
 import { Box, Center } from "@chakra-ui/layout";
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
 import skater from "../assets/skaterwolf.gif";
 
 const container = {
@@ -19,10 +18,14 @@ const container = {
 
 const MotionBox = motion(Box);
 
-const Loading = ({ loading }) => {
+interface LoadingProps{
+	loading?: boolean;
+}
+
+const Loading = ({loading}: LoadingProps): JSX.Element => {
 	return (
 		<AnimatePresence>
-			{loading && (
+			{(loading&&
 				<MotionBox
 					variants={container}
 					initial="initial"
