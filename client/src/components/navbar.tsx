@@ -9,7 +9,12 @@ import icon from "../assets/icon.png";
 
 const MotionButton = motion(Button);
 
-const BarButton = ({ text, clickHandler }) => {
+interface BarButtonProps {
+	text: string;
+	clickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const BarButton = ({ text, clickHandler }: BarButtonProps) => {
 	return (
 		<MotionButton
 			style={{ marginLeft: "2px", marginRight: "2px" }}
