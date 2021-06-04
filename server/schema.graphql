@@ -2,6 +2,7 @@ type User{
     username: String!
     name: String!
     password: String!
+    friends: [User!]!
 }
 
 type UserDetails{
@@ -26,6 +27,7 @@ type Mutation {
     deleteUser(username: String!): User!,
     login(username: String!, password: String!): Token,
     refreshToken(rti: RefreshTokenInput!): Token,
+    addAsFriend(username: String!): User,
 }
 
 type Token{
