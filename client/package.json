@@ -36,6 +36,7 @@
 		"prettier-format": "prettier --config .prettierrc 'src/**/*.(js|ts|tsx)' --write",
 		"build": "react-scripts build",
 		"lint": "eslint . --ext .ts",
+		"lint-and-fix": "eslint . --fix",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
@@ -60,6 +61,7 @@
 	"devDependencies": {
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^3.4.0",
+		"eslint-plugin-unused-imports": "^1.1.1",
 		"prettier": "^2.2.1"
 	}
 }

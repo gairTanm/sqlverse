@@ -1,13 +1,13 @@
 import {
 	Box,
-	HStack,
-	Container,
 	Center,
-	Text,
-	VStack,
+	Container,
+	HStack,
+	ListItem,
 	Spacer,
+	Text,
 	UnorderedList,
-	ListItem
+	VStack
 } from "@chakra-ui/layout";
 import React from "react";
 import tanmay from "../assets/tanmay.png";

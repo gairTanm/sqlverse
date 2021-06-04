@@ -13,9 +13,9 @@ import Copyright from "../../copyright";
 import {
 	FormHeading,
 	FormItem,
+	MotionButton,
 	OrDivider,
-	SecureFormItem,
-	MotionButton
+	SecureFormItem
 } from "../formHelpers";
 import { useFormik } from "formik";
 import * as Yup from "yup";

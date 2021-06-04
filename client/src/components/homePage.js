@@ -1,11 +1,11 @@
 import {
-	Center,
 	Box,
-	Text,
-	Flex,
+	Center,
 	Container,
+	Flex,
 	HStack,
-	Spacer
+	Spacer,
+	Text
 } from "@chakra-ui/layout";
 import React from "react";
 import Copyright from "./copyright";
