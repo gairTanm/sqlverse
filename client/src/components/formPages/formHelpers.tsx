@@ -7,9 +7,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import {
-	FormItemBase,
+	AuthFormItemProps,
 	MotionButtonProps,
-	SecureFormItemProps
+	SecureAuthFormItemProps
 } from "../../types";
 
 const ButtonWMotion = motion(Button);
@@ -59,7 +59,7 @@ export const FormItem = ({
 	error,
 	touched,
 	variant = "filled"
-}: FormItemBase) => {
+}: AuthFormItemProps) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -90,7 +90,7 @@ export const SecureFormItem = ({
 	error,
 	touched,
 	placeholder
-}: SecureFormItemProps) => {
+}: SecureAuthFormItemProps) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>

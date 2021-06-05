@@ -42,21 +42,19 @@ export interface FormItemBase {
 	placeholder: string;
 	value: string;
 	onChange: React.ChangeEventHandler;
-	error: string | undefined;
-	touched: boolean | undefined;
 	variant?: "filled" | "ghost" | "outline" | "solid";
 }
 
-export interface SecureFormItemProps extends FormItemBase {
+export interface AuthFormItemProps extends FormItemBase {
+	error: string | undefined;
+	touched: boolean | undefined;
+}
+
+export interface SecureAuthFormItemProps extends AuthFormItemProps {
 	show: boolean;
 	toggle: React.MouseEventHandler;
 }
 
-export interface MailFormItemProps {
-	isRequired?: boolean;
+export interface MailFormItemProps extends FormItemBase {
 	type: "email" | "text";
-	value: string;
-	onChange: React.ChangeEventHandler;
-	label: string;
-	placeholder: string;
 }
