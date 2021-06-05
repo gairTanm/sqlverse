@@ -4,11 +4,11 @@ import { useQuery } from "@apollo/client";
 import { Box, Flex } from "@chakra-ui/layout";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import { Checkbox } from "@chakra-ui/checkbox";
-import { User } from "../../types";
+import { User, UserData } from "../../types";
 import AwShucks from "../awShucks";
 
 const People = () => {
-	const { loading, error, data } = useQuery(ALL_USERS);
+	const { loading, error, data } = useQuery<UserData>(ALL_USERS);
 	if (loading) {
 		return <div>Loading...</div>;
 	}
@@ -16,7 +16,7 @@ const People = () => {
 	if (error) {
 		return <AwShucks />;
 	}
-	var i = 0;
+	let i = 0;
 	return (
 		<Flex justify="center">
 			<Box w="70vw">
@@ -30,19 +30,20 @@ const People = () => {
 						</Tr>
 					</Thead>
 					<Tbody>
-						{data.getUsers.map((user: User) => {
-							i += 1;
-							return (
-								<Tr key={user.username}>
-									<Td>{i}</Td>
-									<Td>{user.name}</Td>
-									<Td>{user.username}</Td>
-									<Td>
-										<Checkbox colorScheme="cyan" />
-									</Td>
-								</Tr>
-							);
-						})}
+						{data &&
+							data.getUsers.map((user: User) => {
+								i += 1;
+								return (
+									<Tr key={user.username}>
+										<Td>{i}</Td>
+										<Td>{user.name}</Td>
+										<Td>{user.username}</Td>
+										<Td>
+											<Checkbox colorScheme="cyan" />
+										</Td>
+									</Tr>
+								);
+							})}
 					</Tbody>
 				</Table>
 			</Box>
