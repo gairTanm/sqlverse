@@ -45,7 +45,7 @@ const MailForm = () => {
 	const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		var templateParams = form;
+		let templateParams = form;
 		setLoading(true);
 
 		if (REACT_APP_SERVICE_ID != null && REACT_APP_TEMPLATE_ID != null) {

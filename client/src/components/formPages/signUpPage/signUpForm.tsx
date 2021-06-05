@@ -21,6 +21,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { CREATE_USER } from "../../../mutations";
 import { useMutation } from "@apollo/client";
+import { NewUserDetails, UserDetails } from "../../../types";
 
 const validationSchema = Yup.object({
 	name: Yup.string().required("Name is required"),
@@ -37,7 +38,7 @@ const validationSchema = Yup.object({
 });
 
 const SignUpForm = () => {
-	const [createUser] = useMutation(CREATE_USER);
+	const [createUser] = useMutation<NewUserDetails, UserDetails>(CREATE_USER);
 	const [loading, setLoading] = useState(false);
 	const toast = useToast();
 	const formik = useFormik({
@@ -52,7 +53,7 @@ const SignUpForm = () => {
 			setLoading(true);
 			try {
 				console.log(values);
-				var res = await createUser({
+				let res = await createUser({
 					variables: {
 						name: values.name,
 						username: values.username,
@@ -62,7 +63,7 @@ const SignUpForm = () => {
 				setTimeout(() => {
 					setLoading(false);
 					toast({
-						title: `Signed up successfully, ${res.data.name}`,
+						title: `Signed up successfully, ${res.data?.name}`,
 						isClosable: true,
 						variant: "left-accent",
 						status: "success"

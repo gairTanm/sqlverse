@@ -58,3 +58,16 @@ export interface SecureAuthFormItemProps extends AuthFormItemProps {
 export interface MailFormItemProps extends FormItemBase {
 	type: "email" | "text";
 }
+
+export interface NewUserDetails {
+	username: string;
+	name: string;
+}
+
+export interface UserDetails extends NewUserDetails {
+	password: string;
+}
+
+export interface UserData {
+	getUsers: User[];
+}
