@@ -73,11 +73,11 @@ const LoginForm = () => {
 	});
 
 	const [show, setShow] = useState(false);
-	const handleClick = (e) => {
+	const handleClick = (e: React.MouseEvent) => {
 		e.preventDefault();
 		setShow(!show);
 	};
-	const handleSignUp = (e) => {
+	const handleSignUp = (e: React.MouseEvent) => {
 		e.preventDefault();
 		push("/signup");
 	};

@@ -12,3 +12,7 @@
 -   [ ] Animate the children components (maybe?)
 -   [ ] DeleteUser resolver
 -   [x] Shell script to start client and server
+-   [x] Migrate to TypeScript
+-   [x] Integrate ESLint
+-   [ ] Extract out type definitions
+-   [ ] Stricter tsconfig

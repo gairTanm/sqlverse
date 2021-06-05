@@ -1,5 +1,6 @@
 import { Box, Center, Container, Flex, Spacer, Text } from "@chakra-ui/layout";
 import React from "react";
+import { TestimonialTemplateProps } from "../types";
 import { HomeButton } from "./team";
 import one from "../assets/one.png";
 import two from "../assets/two.png";
@@ -17,15 +18,6 @@ const useStyles = createUseStyles({
 		}
 	}
 });
-
-interface TestimonialTemplateProps {
-	image: string;
-	text: string;
-	left: boolean;
-	name: string;
-	alt: string;
-	title: string;
-}
 
 const TestimonialTemplate = ({
 	image,

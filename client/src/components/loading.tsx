@@ -1,6 +1,7 @@
 import { Box, Center } from "@chakra-ui/layout";
 import { AnimatePresence, motion } from "framer-motion";
 import skater from "../assets/skaterwolf.gif";
+import { LoadingProps } from "../types";
 
 const container = {
 	initial: { opacity: 0 },
@@ -17,10 +18,6 @@ const container = {
 };
 
 const MotionBox = motion(Box);
-
-interface LoadingProps {
-	loading?: boolean;
-}
 
 const Loading = ({ loading }: LoadingProps) => {
 	return (

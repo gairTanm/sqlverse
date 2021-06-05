@@ -8,19 +8,20 @@ import emailjs from "emailjs-com";
 import { Center, Flex, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
 import "dotenv";
+import { MailFormItemProps } from "../../types";
 
 const { REACT_APP_TEMPLATE_ID, REACT_APP_SERVICE_ID } = process.env;
 
 const MotionButton = motion(Button);
 
-const FormItem = ({
+const MailFormItem = ({
 	isRequired = true,
 	type = "text",
 	value,
 	onChange,
 	label,
 	placeholder
-}) => {
+}: MailFormItemProps) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -41,47 +42,53 @@ const MailForm = () => {
 	const [form, setForm] = useState({ name: "", email: "", message: "" });
 	const [loading, setLoading] = useState(false);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		var templateParams = form;
 		setLoading(true);
 
-		emailjs
-			.send(REACT_APP_SERVICE_ID, REACT_APP_TEMPLATE_ID, templateParams)
-			.then(
-				function (response) {
-					console.log("SUCCESS!", response.status, response.text);
-					toast({
-						title: "We'll get back to you shortly!",
-						isClosable: true,
-						variant: "left-accent",
-						status: "info"
-					});
-					setLoading(false);
-					setForm({ name: "", email: "", message: "" });
-				},
-				function (error) {
-					console.log("FAILED...", error);
-					toast({
-						title: "Unfortunately, the mail could not be sent, try again?",
-						isClosable: true,
-						variant: "left-accent",
-						status: "error"
-					});
-					setLoading(false);
-				}
-			);
+		if (REACT_APP_SERVICE_ID != null && REACT_APP_TEMPLATE_ID != null) {
+			emailjs
+				.send(
+					REACT_APP_SERVICE_ID,
+					REACT_APP_TEMPLATE_ID,
+					templateParams
+				)
+				.then(
+					function (response) {
+						console.log("SUCCESS!", response.status, response.text);
+						toast({
+							title: "We'll get back to you shortly!",
+							isClosable: true,
+							variant: "left-accent",
+							status: "info"
+						});
+						setLoading(false);
+						setForm({ name: "", email: "", message: "" });
+					},
+					function (error) {
+						console.log("FAILED...", error);
+						toast({
+							title: "Unfortunately, the mail could not be sent, try again?",
+							isClosable: true,
+							variant: "left-accent",
+							status: "error"
+						});
+						setLoading(false);
+					}
+				);
+		}
 	};
 	const toast = useToast();
 
-	const handleNameChange = (e) => {
+	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, name: e.target.value });
 	};
-	const handleEmailChange = (e) => {
+	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, email: e.target.value });
 	};
-	const handleMessageChange = (e) => {
+	const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setForm({ ...form, message: e.target.value });
 	};
 
@@ -99,13 +106,14 @@ const MailForm = () => {
 							We would love to hear from you!
 						</Text>
 					</Center>
-					<FormItem
+					<MailFormItem
+						type="text"
 						value={form.name}
 						onChange={handleNameChange}
 						label="Name"
 						placeholder="Enter your name..."
 					/>
-					<FormItem
+					<MailFormItem
 						label="Mail"
 						value={form.email}
 						onChange={handleEmailChange}

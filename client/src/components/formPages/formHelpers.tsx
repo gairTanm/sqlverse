@@ -6,6 +6,11 @@ import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import {
+	FormItemBase,
+	MotionButtonProps,
+	SecureFormItemProps
+} from "../../types";
 
 const ButtonWMotion = motion(Button);
 
@@ -27,7 +32,7 @@ export const MotionButton = ({
 	variant = "ghost",
 	onClick,
 	isDisabled = false
-}) => {
+}: MotionButtonProps) => {
 	return (
 		<ButtonWMotion
 			whileHover={{ scale: 1.1 }}
@@ -54,7 +59,7 @@ export const FormItem = ({
 	error,
 	touched,
 	variant = "filled"
-}) => {
+}: FormItemBase) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -85,7 +90,7 @@ export const SecureFormItem = ({
 	error,
 	touched,
 	placeholder
-}) => {
+}: SecureFormItemProps) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -124,7 +129,7 @@ export const OrDivider = () => {
 	);
 };
 
-export const FormHeading = ({ heading }) => {
+export const FormHeading = ({ heading }: { heading: string }) => {
 	return (
 		<Center>
 			<Text

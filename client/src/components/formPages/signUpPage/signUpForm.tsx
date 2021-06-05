@@ -62,7 +62,7 @@ const SignUpForm = () => {
 				setTimeout(() => {
 					setLoading(false);
 					toast({
-						title: `Signed up successfully, ${res.name}`,
+						title: `Signed up successfully, ${res.data.name}`,
 						isClosable: true,
 						variant: "left-accent",
 						status: "success"
@@ -91,16 +91,16 @@ const SignUpForm = () => {
 	const [showConfirm, setShowConfirm] = useState(false);
 	const [agree, setAgree] = useState(false);
 	const handleAgreeClick = () => setAgree(!agree);
-	const handlePassClick = (e) => {
+	const handlePassClick = (e: React.MouseEvent) => {
 		e.preventDefault();
 		setShowPass(!showPass);
 	};
-	const handleConfirmClick = (e) => {
+	const handleConfirmClick = (e: React.MouseEvent) => {
 		e.preventDefault();
 		setShowConfirm(!showConfirm);
 	};
 	const { push } = useHistory();
-	const handleLogin = (e) => {
+	const handleLogin = (e: React.MouseEvent) => {
 		e.preventDefault();
 		push("/login");
 	};
