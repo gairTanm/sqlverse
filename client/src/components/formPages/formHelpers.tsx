@@ -6,6 +6,11 @@ import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import {
+	FormItemBase,
+	MotionButtonProps,
+	SecureFormItemProps
+} from "../../types";
 
 const ButtonWMotion = motion(Button);
 
@@ -18,16 +23,6 @@ export const Brand = () => {
 		</Link>
 	);
 };
-
-interface MotionButtonProps {
-	type?: "submit";
-	variant?: "solid" | "ghost" | "outline" | "link";
-	label: string;
-	loading?: boolean;
-	colorScheme: string;
-	isDisabled?: boolean;
-	onClick?: React.MouseEventHandler;
-}
 
 export const MotionButton = ({
 	type,
@@ -54,17 +49,6 @@ export const MotionButton = ({
 		</ButtonWMotion>
 	);
 };
-
-interface FormItemBase {
-	isRequired?: boolean;
-	label: string;
-	placeholder: string;
-	value: string;
-	onChange: React.ChangeEventHandler;
-	error: string | undefined;
-	touched: boolean | undefined;
-	variant?: "filled" | "ghost" | "outline" | "solid";
-}
 
 export const FormItem = ({
 	isRequired = true,
@@ -95,11 +79,6 @@ export const FormItem = ({
 		</FormControl>
 	);
 };
-
-interface SecureFormItemProps extends FormItemBase {
-	show: boolean;
-	toggle: React.MouseEventHandler;
-}
 
 export const SecureFormItem = ({
 	isRequired = true,

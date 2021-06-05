@@ -4,12 +4,8 @@ import { useQuery } from "@apollo/client";
 import { Box, Flex } from "@chakra-ui/layout";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import { Checkbox } from "@chakra-ui/checkbox";
+import { User } from "../../types";
 import AwShucks from "../awShucks";
-
-interface User {
-	username: string;
-	name: string;
-}
 
 const People = () => {
 	const { loading, error, data } = useQuery(ALL_USERS);

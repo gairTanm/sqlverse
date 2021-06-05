@@ -8,28 +8,20 @@ import emailjs from "emailjs-com";
 import { Center, Flex, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
 import "dotenv";
+import { MailFormItemProps } from "../../types";
 
 const { REACT_APP_TEMPLATE_ID, REACT_APP_SERVICE_ID } = process.env;
 
 const MotionButton = motion(Button);
 
-interface FormItemProps {
-	isRequired?: boolean;
-	type: "email" | "text";
-	value: string;
-	onChange: React.ChangeEventHandler;
-	label: string;
-	placeholder: string;
-}
-
-const FormItem = ({
+const MailFormItem = ({
 	isRequired = true,
 	type = "text",
 	value,
 	onChange,
 	label,
 	placeholder
-}: FormItemProps) => {
+}: MailFormItemProps) => {
 	return (
 		<FormControl isRequired={isRequired}>
 			<FormLabel>{label}</FormLabel>
@@ -114,14 +106,14 @@ const MailForm = () => {
 							We would love to hear from you!
 						</Text>
 					</Center>
-					<FormItem
+					<MailFormItem
 						type="text"
 						value={form.name}
 						onChange={handleNameChange}
 						label="Name"
 						placeholder="Enter your name..."
 					/>
-					<FormItem
+					<MailFormItem
 						label="Mail"
 						value={form.email}
 						onChange={handleEmailChange}
