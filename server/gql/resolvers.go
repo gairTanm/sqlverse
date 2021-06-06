@@ -38,7 +38,7 @@ func (r *userResolver)Friends(ctx context.Context, obj *db.User)([]db.User, erro
 	if user==nil{
 		return []db.User{}, fmt.Errorf("access denied")
 	}
-	friends, err := r.Repository.GetFriends(ctx, user.Username)
+	friends, err := r.Repository.GetFriends(ctx, obj.Username)
 	if err!=nil {
 		return []db.User{}, err
 	}

@@ -47,7 +47,7 @@ const People = () => {
 						<Thead>
 							<Tr>
 								{TableHeaders.map((h) => (
-									<Th>{h}</Th>
+									<Th key={h}>{h}</Th>
 								))}
 							</Tr>
 						</Thead>
@@ -56,7 +56,7 @@ const People = () => {
 								data.getUsers.map((user: User) => {
 									i += 1;
 									return (
-										<Tr key={user.username}>
+										<Tr key={i}>
 											<Td>{i}.</Td>
 											<Td>{user.name}</Td>
 											<Td>{user.username}</Td>

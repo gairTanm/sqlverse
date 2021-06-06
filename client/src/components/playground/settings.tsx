@@ -75,7 +75,11 @@ const Settings = () => {
 					<MenuGroup>
 						{MenuItems.map((mi) => {
 							return (
-								<MenuItem icon={mi.icon} onClick={mi.onClick}>
+								<MenuItem
+									key={mi.text}
+									icon={mi.icon}
+									onClick={mi.onClick}
+								>
 									{mi.text}
 								</MenuItem>
 							);
