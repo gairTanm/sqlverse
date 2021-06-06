@@ -39,6 +39,30 @@ const Settings = () => {
 		});
 		localStorage.removeItem("login-token");
 	};
+
+	const MenuItems = [
+		{
+			icon: <SearchIcon />,
+			onClick: handleFriends,
+			text: "Find Friends"
+		},
+		{
+			icon: <EditIcon />,
+			onClick: undefined,
+			text: "Profile"
+		},
+		{
+			icon: <QuestionIcon />,
+			onClick: undefined,
+			text: "Help"
+		},
+		{
+			icon: <></>,
+			onClick: undefined,
+			text: "My Friends"
+		}
+	];
+
 	return (
 		<Menu>
 			<MenuButton
@@ -49,11 +73,13 @@ const Settings = () => {
 			<Portal>
 				<MenuList>
 					<MenuGroup>
-						<MenuItem icon={<SearchIcon />} onClick={handleFriends}>
-							Find Friends
-						</MenuItem>
-						<MenuItem icon={<EditIcon />}>Profile</MenuItem>
-						<MenuItem icon={<QuestionIcon />}>Help</MenuItem>
+						{MenuItems.map((mi) => {
+							return (
+								<MenuItem icon={mi.icon} onClick={mi.onClick}>
+									{mi.text}
+								</MenuItem>
+							);
+						})}
 					</MenuGroup>
 
 					<MenuDivider />

@@ -131,7 +131,7 @@ const Tanmay = () => {
 	);
 };
 
-export const HomeButton = () => {
+export const BackButton = ({ to = "home" }: { to?: string }) => {
 	const { push } = useHistory();
 	return (
 		<Box position="absolute" top="2vh" left="2vw">
@@ -147,7 +147,7 @@ export const HomeButton = () => {
 					background: "black"
 				}}
 				icon={<ArrowBackIcon h="30px" w="30px" />}
-				onClick={() => push("/home")}
+				onClick={() => push(to)}
 			/>
 		</Box>
 	);
@@ -156,7 +156,7 @@ export const HomeButton = () => {
 const Team = () => {
 	return (
 		<Box h="100vh" bg="white" w="100vw">
-			<HomeButton />
+			<BackButton />
 			<Center>
 				<VStack alignItems="center">
 					<Text fontSize="7vw" fontFamily="Indie Flower">

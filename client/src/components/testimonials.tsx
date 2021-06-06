@@ -1,7 +1,7 @@
 import { Box, Center, Container, Flex, Spacer, Text } from "@chakra-ui/layout";
 import React from "react";
 import { TestimonialTemplateProps } from "../types";
-import { HomeButton } from "./team";
+import { BackButton } from "./team";
 import one from "../assets/one.png";
 import two from "../assets/two.png";
 import three from "../assets/three.png";
@@ -69,10 +69,45 @@ const TestimonialTemplate = ({
 	);
 };
 
+const TestimonialValues = [
+	{
+		image: one,
+		alt: "hewwo",
+		title: "Student",
+		text: "Lorem ipsum dolor sit",
+		name: "Tanmay",
+		left: true
+	},
+	{
+		image: two,
+		alt: "gg",
+		title: "Student",
+		text: "Lorem ipsum dolor sit",
+		name: "Amogh",
+		left: false
+	},
+	{
+		image: three,
+		alt: "exo",
+		title: "SWE",
+		text: "Lorem ipsum dolor sit",
+		name: "Jane",
+		left: true
+	},
+	{
+		image: four,
+		alt: "ji",
+		title: "SDE",
+		text: "Lorem ipsum dolor sit",
+		name: "Doe",
+		left: false
+	}
+];
+
 const Testimonials = () => {
 	return (
 		<Box w="100%" h="200vh">
-			<HomeButton />
+			<BackButton />
 			<Center>
 				<Flex w="100vw" direction="column">
 					<Center>
@@ -98,38 +133,16 @@ const Testimonials = () => {
 					</Center>
 					<Spacer />
 					<Flex justifyContent="space-evenly" direction="column">
-						<TestimonialTemplate
-							image={one}
-							alt="hewwo"
-							title="Student"
-							text="Lorem ipsum dolor"
-							name="Tanmay"
-							left={true}
-						/>
-						<TestimonialTemplate
-							image={two}
-							left={false}
-							alt="gg"
-							title="Student"
-							text="Lorem ipsum dolor sit"
-							name="Amogh"
-						/>
-						<TestimonialTemplate
-							image={three}
-							left={true}
-							alt="exo"
-							title="SWE"
-							text="Lorem ipsum dolor sit"
-							name="Jane"
-						/>
-						<TestimonialTemplate
-							image={four}
-							left={false}
-							alt="ji"
-							title="SDE"
-							text="Lorem ipsum dolor sit"
-							name="Doe"
-						/>
+						{TestimonialValues.map((tv) => (
+							<TestimonialTemplate
+								image={tv.image}
+								alt={tv.alt}
+								title={tv.title}
+								text={tv.text}
+								name={tv.name}
+								left={tv.left}
+							/>
+						))}
 					</Flex>
 				</Flex>
 				<Footer />
