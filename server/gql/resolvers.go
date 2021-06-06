@@ -33,8 +33,16 @@ func comparePasswords(hashed string, plain string) bool{
 	return true
 }
 
-func (r *userResolver)Friends(ctx context.Context, user *db.User)([]db.User, error){
-	panic("??")
+func (r *userResolver)Friends(ctx context.Context, obj *db.User)([]db.User, error){
+	user := ForContext(ctx)
+	if user==nil{
+		return []db.User{}, fmt.Errorf("access denied")
+	}
+	friends, err := r.Repository.GetFriends(ctx, user.Username)
+	if err!=nil {
+		return []db.User{}, err
+	}
+	return friends, err
 }
 
 func (r *mutationResolver) CreateUser(ctx context.Context, data UserInput) (*db.User, error) {
