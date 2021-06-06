@@ -69,6 +69,41 @@ const TestimonialTemplate = ({
 	);
 };
 
+const TestimonialValues = [
+	{
+		image: one,
+		alt: "hewwo",
+		title: "Student",
+		text: "Lorem ipsum dolor sit",
+		name: "Tanmay",
+		left: true
+	},
+	{
+		image: two,
+		alt: "gg",
+		title: "Student",
+		text: "Lorem ipsum dolor sit",
+		name: "Amogh",
+		left: false
+	},
+	{
+		image: three,
+		alt: "exo",
+		title: "SWE",
+		text: "Lorem ipsum dolor sit",
+		name: "Jane",
+		left: true
+	},
+	{
+		image: four,
+		alt: "ji",
+		title: "SDE",
+		text: "Lorem ipsum dolor sit",
+		name: "Doe",
+		left: false
+	}
+];
+
 const Testimonials = () => {
 	return (
 		<Box w="100%" h="200vh">
@@ -98,38 +133,16 @@ const Testimonials = () => {
 					</Center>
 					<Spacer />
 					<Flex justifyContent="space-evenly" direction="column">
-						<TestimonialTemplate
-							image={one}
-							alt="hewwo"
-							title="Student"
-							text="Lorem ipsum dolor"
-							name="Tanmay"
-							left={true}
-						/>
-						<TestimonialTemplate
-							image={two}
-							left={false}
-							alt="gg"
-							title="Student"
-							text="Lorem ipsum dolor sit"
-							name="Amogh"
-						/>
-						<TestimonialTemplate
-							image={three}
-							left={true}
-							alt="exo"
-							title="SWE"
-							text="Lorem ipsum dolor sit"
-							name="Jane"
-						/>
-						<TestimonialTemplate
-							image={four}
-							left={false}
-							alt="ji"
-							title="SDE"
-							text="Lorem ipsum dolor sit"
-							name="Doe"
-						/>
+						{TestimonialValues.map((tv) => (
+							<TestimonialTemplate
+								image={tv.image}
+								alt={tv.alt}
+								title={tv.title}
+								text={tv.text}
+								name={tv.name}
+								left={tv.left}
+							/>
+						))}
 					</Flex>
 				</Flex>
 				<Footer />

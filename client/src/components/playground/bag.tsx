@@ -5,7 +5,7 @@ import { Slide } from "@chakra-ui/transition";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 
-const queryLiterals = [
+const queryLiterals: string[] = [
 	"SELECT",
 	"*",
 	"FROM",

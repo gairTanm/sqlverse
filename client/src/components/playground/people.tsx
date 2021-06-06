@@ -9,6 +9,8 @@ import { User, UserData } from "../../types";
 import AwShucks from "../awShucks";
 import { BackButton } from "../team";
 
+const TableHeaders: string[] = ["S. No.", "Name", "Username", "Add Friend"];
+
 const People = () => {
 	const { loading, error, data, refetch } = useQuery<UserData>(ALL_USERS);
 
@@ -44,10 +46,9 @@ const People = () => {
 					<Table variant="simple">
 						<Thead>
 							<Tr>
-								<Th>S. No.</Th>
-								<Th>Name</Th>
-								<Th>Username</Th>
-								<Th>Add Friend</Th>
+								{TableHeaders.map((h) => (
+									<Th>{h}</Th>
+								))}
 							</Tr>
 						</Thead>
 						<Tbody>
