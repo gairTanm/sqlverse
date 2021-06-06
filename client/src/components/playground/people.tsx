@@ -7,6 +7,7 @@ import { Checkbox } from "@chakra-ui/checkbox";
 import { Button, Skeleton } from "@chakra-ui/react";
 import { User, UserData } from "../../types";
 import AwShucks from "../awShucks";
+import { BackButton } from "../team";
 
 const People = () => {
 	const { loading, error, data, refetch } = useQuery<UserData>(ALL_USERS);
@@ -26,6 +27,7 @@ const People = () => {
 			direction="column"
 			align="center"
 		>
+			<BackButton to="/playground" />
 			<Box align="center" pos="absolute" top="2vh">
 				<Heading as="h1" size="4xl">
 					Users
@@ -34,8 +36,9 @@ const People = () => {
 				<Heading as="h2" size="xl">
 					Add a friend, maybe?
 				</Heading>
+				<br />
+				<Button onClick={() => refetch()}>Update List</Button>
 			</Box>
-			<Button onClick={() => refetch()}>Update List</Button>
 			<Skeleton isLoaded={!loading}>
 				<Box w="70vw">
 					<Table variant="simple">
@@ -53,7 +56,7 @@ const People = () => {
 									i += 1;
 									return (
 										<Tr key={user.username}>
-											<Td>{i}</Td>
+											<Td>{i}.</Td>
 											<Td>{user.name}</Td>
 											<Td>{user.username}</Td>
 											<Td>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Center, Flex, Spacer, Text } from "@chakra-ui/layout";
 import MailForm from "./contactForm";
-import { HomeButton } from "../team";
+import { BackButton } from "../team";
 
 const ContactUs = () => {
 	return (
@@ -12,7 +12,7 @@ const ContactUs = () => {
 			w="100vw"
 			alignItems="center"
 		>
-			<HomeButton />
+			<BackButton />
 			<Center>
 				<Box h="10vh">
 					<Text fontSize="8vh" fontFamily="Indie Flower">

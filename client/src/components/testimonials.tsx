@@ -1,7 +1,7 @@
 import { Box, Center, Container, Flex, Spacer, Text } from "@chakra-ui/layout";
 import React from "react";
 import { TestimonialTemplateProps } from "../types";
-import { HomeButton } from "./team";
+import { BackButton } from "./team";
 import one from "../assets/one.png";
 import two from "../assets/two.png";
 import three from "../assets/three.png";
@@ -72,7 +72,7 @@ const TestimonialTemplate = ({
 const Testimonials = () => {
 	return (
 		<Box w="100%" h="200vh">
-			<HomeButton />
+			<BackButton />
 			<Center>
 				<Flex w="100vw" direction="column">
 					<Center>

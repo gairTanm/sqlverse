@@ -8,12 +8,12 @@ import awshucks from "../assets/awshucks.svg";
 
 const useStyles = createUseStyles({
 	link: {
-		boxShadow: "inset 0 -5px 0 -1px lightcyan",
+		boxShadow: "inset 0 -5px 0 -1px cyan",
 		transition: "box-shadow .2s ease-in-out",
 		color: "black",
 		lineHeight: "40px",
 		"&:hover": {
-			boxShadow: "inset 0 -40px 0 -1px lightcyan"
+			boxShadow: "inset 0 -40px 0 -1px cyan"
 		}
 	}
 });
@@ -30,14 +30,14 @@ const AwShucks = () => {
 			h="100vh"
 			justifyContent="space-evenly"
 		>
-			<Heading as="h1" size="4xl">
+			<Heading as="h1" size="4xl" fontFamily="Comfortaa">
 				Shoot!
 			</Heading>
-			<Heading as="h2" size="xl">
-				You seem to be logged out :(
+			<Heading as="h2" size="xl" fontFamily="Comfortaa">
+				You seem to be logged out : (
 			</Heading>
 			<img alt="awshucks" src={awshucks} width="300px" height="300px" />
-			<Text textAlign="center" fontSize="2xl">
+			<Text textAlign="center" fontSize="2xl" fontFamily="Comfortaa">
 				Try{" "}
 				<Link to="/login" className={classes.link}>
 					logging in
