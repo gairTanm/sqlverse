@@ -54,6 +54,7 @@ func (r *mutationResolver) CreateUser(ctx context.Context, data UserInput) (*db.
 		Username: data.Username,
 		Name:     data.Name,
 		Password: hashedPassword,
+
 	})
 	if err!=nil{
 		return nil, err

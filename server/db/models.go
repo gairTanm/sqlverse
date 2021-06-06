@@ -4,20 +4,17 @@ package db
 
 import (
 	"database/sql"
-	"time"
 )
 
 type Friendship struct {
-	Username    string
-	FriendName  string
-	CreatedDate time.Time
+	Username   string
+	FriendName string
 }
 
 type User struct {
-	Username    string
-	Name        string
-	Password    string
-	CreatedDate time.Time
+	Username string
+	Name     string
+	Password string
 }
 
 type UserDetail struct {
