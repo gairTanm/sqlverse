@@ -55,6 +55,7 @@ type ComplexityRoot struct {
 		DeleteUser   func(childComplexity int, username string) int
 		Login        func(childComplexity int, username string, password string) int
 		RefreshToken func(childComplexity int, rti RefreshTokenInput) int
+		RemoveFriend func(childComplexity int, friendname string) int
 		UpdateUser   func(childComplexity int, data UserInput) int
 	}
 
@@ -93,6 +94,7 @@ type MutationResolver interface {
 	Login(ctx context.Context, username string, password string) (*Token, error)
 	RefreshToken(ctx context.Context, rti RefreshTokenInput) (*Token, error)
 	AddAsFriend(ctx context.Context, username string) (*db.Friendship, error)
+	RemoveFriend(ctx context.Context, friendname string) (*db.Friendship, error)
 }
 type QueryResolver interface {
 	GetUser(ctx context.Context, username string) (*db.User, error)
@@ -191,6 +193,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.RefreshToken(childComplexity, args["rti"].(RefreshTokenInput)), true
+
+	case "Mutation.removeFriend":
+		if e.complexity.Mutation.RemoveFriend == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_removeFriend_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.RemoveFriend(childComplexity, args["friendname"].(string)), true
 
 	case "Mutation.updateUser":
 		if e.complexity.Mutation.UpdateUser == nil {
@@ -408,11 +422,12 @@ type Mutation {
     login(username: String!, password: String!): Token,
     refreshToken(rti: RefreshTokenInput!): Token,
     addAsFriend(username: String!): Friendship,
+    removeFriend(friendname: String!): Friendship,
 }
 
 type Friendship{
     username: String!,
-    friendName: String!
+    friendName: String!,
 }
 
 type Token{
@@ -516,6 +531,21 @@ func (ec *executionContext) field_Mutation_refreshToken_args(ctx context.Context
 		}
 	}
 	args["rti"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_removeFriend_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["friendname"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("friendname"))
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["friendname"] = arg0
 	return args, nil
 }
 
@@ -902,6 +932,45 @@ func (ec *executionContext) _Mutation_addAsFriend(ctx context.Context, field gra
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
 		return ec.resolvers.Mutation().AddAsFriend(rctx, args["username"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*db.Friendship)
+	fc.Result = res
+	return ec.marshalOFriendship2ᚖgithubᚗcomᚋgairTanmᚋsqlverseᚋdbᚐFriendship(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Mutation_removeFriend(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   true,
+		IsResolver: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Mutation_removeFriend_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().RemoveFriend(rctx, args["friendname"].(string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -2725,6 +2794,8 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			out.Values[i] = ec._Mutation_refreshToken(ctx, field)
 		case "addAsFriend":
 			out.Values[i] = ec._Mutation_addAsFriend(ctx, field)
+		case "removeFriend":
+			out.Values[i] = ec._Mutation_removeFriend(ctx, field)
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}

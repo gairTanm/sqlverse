@@ -155,6 +155,21 @@ func (r *mutationResolver) AddAsFriend(ctx context.Context, username string) (*d
 	return &friend, err
 }
 
+func (r *mutationResolver) RemoveFriend(ctx context.Context, friendname string) (*db.Friendship, error) {
+	user := ForContext(ctx)
+	if user == nil {
+		return nil, fmt.Errorf("access denied")
+	}
+	friend, err := r.Repository.RemoveFriendship(ctx, db.RemoveFriendshipParams{
+		Username:   user.Username,
+		FriendName: friendname,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &friend, err
+}
+
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 

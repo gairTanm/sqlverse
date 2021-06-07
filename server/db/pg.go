@@ -8,7 +8,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type Repository interface{
+type Repository interface {
 	AuthenticateUser(ctx context.Context, arg AuthenticateUserParams) (User, error)
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
 	DeleteUser(ctx context.Context, arg DeleteUserParams) (User, error)
@@ -16,6 +16,7 @@ type Repository interface{
 	GetUsers(ctx context.Context) ([]User, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 	GetFriends(ctx context.Context, username string) ([]User, error)
+	RemoveFriendship(ctx context.Context, arg RemoveFriendshipParams) (Friendship, error)
 	CreateFriendShip(ctx context.Context, arg CreateFriendShipParams) (Friendship, error)
 	DeleteDetails(ctx context.Context, username sql.NullString) (UserDetail, error)
 }
