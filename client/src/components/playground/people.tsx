@@ -1,5 +1,5 @@
-import React from "react";
-import { ALL_USERS } from "../../queries";
+import React, { useEffect, useState } from "react";
+import { ALL_USERS, ME } from "../../queries";
 import { useQuery } from "@apollo/client";
 import { Box, Flex, Heading } from "@chakra-ui/layout";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
@@ -12,14 +12,34 @@ import { BackButton } from "../team";
 const TableHeaders: string[] = ["S. No.", "Name", "Username", "Add Friend"];
 
 const People = () => {
-	const { loading, error, data, refetch } = useQuery<UserData>(ALL_USERS);
+	const allUsers = useQuery<UserData>(ALL_USERS);
+	const me = useQuery(ME);
+	const [friends, setFriends] = useState(["no friend"]);
 
 	/*if (loading) {
 		return <div>Loading...</div>;
 	}*/
-	if (error?.name == "") {
+	if (me.error?.name == "" || allUsers.error?.name == "") {
 		return <AwShucks />;
 	}
+
+	useEffect(() => {
+		if (me.loading) return;
+		setFriends(
+			me.data.me.friends.map((f: User) => {
+				return f.username;
+			})
+		);
+	}, [me.loading]);
+
+	//TODO: !checked=>removeFriendMutation checked=>addFriendMutation
+	const handleFriendClick = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		username: string,
+		isChecked: boolean
+	) => {
+		console.log(username, isChecked);
+	};
 
 	let i = 0;
 	return (
@@ -39,9 +59,9 @@ const People = () => {
 					Add a friend, maybe?
 				</Heading>
 				<br />
-				<Button onClick={() => refetch()}>Update List</Button>
+				<Button onClick={() => allUsers.refetch()}>Update List</Button>
 			</Box>
-			<Skeleton isLoaded={!loading}>
+			<Skeleton isLoaded={!allUsers.loading && !me.loading}>
 				<Box w="70vw">
 					<Table variant="simple">
 						<Thead>
@@ -52,16 +72,30 @@ const People = () => {
 							</Tr>
 						</Thead>
 						<Tbody>
-							{data &&
-								data.getUsers.map((user: User) => {
+							{friends &&
+								allUsers.data &&
+								allUsers.data.getUsers.map((user: User) => {
 									i += 1;
+									let checked = friends.includes(
+										user.username
+									);
 									return (
 										<Tr key={i}>
 											<Td>{i}.</Td>
 											<Td>{user.name}</Td>
 											<Td>{user.username}</Td>
 											<Td>
-												<Checkbox colorScheme="cyan" />
+												<Checkbox
+													colorScheme="cyan"
+													isChecked={checked}
+													onChange={(e) =>
+														handleFriendClick(
+															e,
+															user.username,
+															checked
+														)
+													}
+												/>
 											</Td>
 										</Tr>
 									);
