@@ -27,7 +27,12 @@ type Mutation {
     deleteUser(username: String!): User!,
     login(username: String!, password: String!): Token,
     refreshToken(rti: RefreshTokenInput!): Token,
-    addAsFriend(username: String!): User,
+    addAsFriend(username: String!): Friendship,
+}
+
+type Friendship{
+    username: String!,
+    friendName: String!
 }
 
 type Token{

@@ -16,7 +16,7 @@ type Repository interface{
 	GetUsers(ctx context.Context) ([]User, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 	GetFriends(ctx context.Context, username string) ([]User, error)
-
+	CreateFriendShip(ctx context.Context, arg CreateFriendShipParams) (Friendship, error)
 	DeleteDetails(ctx context.Context, username sql.NullString) (UserDetail, error)
 }
 

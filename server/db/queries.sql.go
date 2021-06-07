@@ -107,9 +107,13 @@ const getFriends = `-- name: GetFriends :many
 SELECT username, name, password
 FROM users AS u
 WHERE u.username IN   (
-    SELECT friend_name
-    FROM friendships AS f
-    WHERE f.username = $1
+    SELECT f1.friend_name
+    FROM friendships AS f1
+    WHERE f1.username = $1
+    UNION
+    SELECT f2.username
+    FROM friendships AS f2
+    WHERE f2.friend_name = $1
 )
 `
 
