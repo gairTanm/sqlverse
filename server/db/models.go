@@ -6,6 +6,11 @@ import (
 	"database/sql"
 )
 
+type Friendship struct {
+	Username   string
+	FriendName string
+}
+
 type User struct {
 	Username string
 	Name     string

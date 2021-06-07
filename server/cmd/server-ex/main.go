@@ -36,8 +36,8 @@ func main() {
 	port := ":8080"
 	go func() {
 		<-time.After(100 * time.Millisecond)
-		exec.Command("open", "http://localhost:8080").Run()
+		_ = exec.Command("open", "http://localhost:8080").Run()
 	}()
-	fmt.Fprintf(os.Stdout, "Server ready at http://localhost%s\n", port)
-	fmt.Fprintln(os.Stderr, http.ListenAndServe(port,  router))
+	_, _ = fmt.Fprintf(os.Stdout, "Server ready at http://localhost%s\n", port)
+	_, _ = fmt.Fprintln(os.Stderr, http.ListenAndServe(port, router))
 }

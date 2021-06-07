@@ -26,6 +26,24 @@ func (q *Queries) AuthenticateUser(ctx context.Context, arg AuthenticateUserPara
 	return i, err
 }
 
+const createFriendShip = `-- name: CreateFriendShip :one
+INSERT INTO friendships(username, friend_name)
+VALUES ($1, $2)
+RETURNING username, friend_name
+`
+
+type CreateFriendShipParams struct {
+	Username   string
+	FriendName string
+}
+
+func (q *Queries) CreateFriendShip(ctx context.Context, arg CreateFriendShipParams) (Friendship, error) {
+	row := q.db.QueryRowContext(ctx, createFriendShip, arg.Username, arg.FriendName)
+	var i Friendship
+	err := row.Scan(&i.Username, &i.FriendName)
+	return i, err
+}
+
 const createUser = `-- name: CreateUser :one
 INSERT INTO users (username, name, password)
 VALUES ($1, $2, $3)
@@ -83,6 +101,43 @@ func (q *Queries) DeleteUser(ctx context.Context, arg DeleteUserParams) (User, e
 	var i User
 	err := row.Scan(&i.Username, &i.Name, &i.Password)
 	return i, err
+}
+
+const getFriends = `-- name: GetFriends :many
+SELECT username, name, password
+FROM users AS u
+WHERE u.username IN   (
+    SELECT f1.friend_name
+    FROM friendships AS f1
+    WHERE f1.username = $1
+    UNION
+    SELECT f2.username
+    FROM friendships AS f2
+    WHERE f2.friend_name = $1
+)
+`
+
+func (q *Queries) GetFriends(ctx context.Context, username string) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, getFriends, username)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []User
+	for rows.Next() {
+		var i User
+		if err := rows.Scan(&i.Username, &i.Name, &i.Password); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }
 
 const getUser = `-- name: GetUser :one

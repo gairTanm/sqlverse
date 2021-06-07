@@ -69,7 +69,7 @@ const TestimonialTemplate = ({
 	);
 };
 
-const TestimonialValues = [
+const TestimonialValues: TestimonialTemplateProps[] = [
 	{
 		image: one,
 		alt: "hewwo",
@@ -133,16 +133,18 @@ const Testimonials = () => {
 					</Center>
 					<Spacer />
 					<Flex justifyContent="space-evenly" direction="column">
-						{TestimonialValues.map((tv) => (
-							<TestimonialTemplate
-								image={tv.image}
-								alt={tv.alt}
-								title={tv.title}
-								text={tv.text}
-								name={tv.name}
-								left={tv.left}
-							/>
-						))}
+						{TestimonialValues.map(
+							(tv: TestimonialTemplateProps) => (
+								<TestimonialTemplate
+									image={tv.image}
+									alt={tv.alt}
+									title={tv.title}
+									text={tv.text}
+									name={tv.name}
+									left={tv.left}
+								/>
+							)
+						)}
 					</Flex>
 				</Flex>
 				<Footer />
