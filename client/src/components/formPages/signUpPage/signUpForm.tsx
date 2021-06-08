@@ -52,7 +52,6 @@ const SignUpForm = () => {
 		onSubmit: async (values) => {
 			setLoading(true);
 			try {
-				console.log(values);
 				let res = await createUser({
 					variables: {
 						name: values.name,
@@ -63,7 +62,7 @@ const SignUpForm = () => {
 				setTimeout(() => {
 					setLoading(false);
 					toast({
-						title: `Signed up successfully, ${res.data?.name}`,
+						title: `Signed up successfully, ${res.data?.createUser.name}`,
 						isClosable: true,
 						variant: "left-accent",
 						status: "success"

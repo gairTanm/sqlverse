@@ -36,7 +36,6 @@ export const REMOVE_FRIEND = gql`
 	mutation removeFriend($friendname: String!) {
 		removeFriend(friendname: $friendname) {
 			friendName
-			username
 		}
 	}
 `;
