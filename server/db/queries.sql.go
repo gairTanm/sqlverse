@@ -179,6 +179,24 @@ func (q *Queries) GetUsers(ctx context.Context) ([]User, error) {
 	return items, nil
 }
 
+const removeFriendship = `-- name: RemoveFriendship :one
+DELETE FROM friendships
+WHERE (username = $1 AND friend_name = $2) OR (username = $2 AND friend_name = $1)
+RETURNING username, friend_name
+`
+
+type RemoveFriendshipParams struct {
+	Username   string
+	FriendName string
+}
+
+func (q *Queries) RemoveFriendship(ctx context.Context, arg RemoveFriendshipParams) (Friendship, error) {
+	row := q.db.QueryRowContext(ctx, removeFriendship, arg.Username, arg.FriendName)
+	var i Friendship
+	err := row.Scan(&i.Username, &i.FriendName)
+	return i, err
+}
+
 const updateUser = `-- name: UpdateUser :one
 UPDATE users
 SET

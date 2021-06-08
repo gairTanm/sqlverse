@@ -92,12 +92,12 @@ func (r *mutationResolver) DeleteUser(ctx context.Context, username string) (*db
 	return user, nil
 }
 
-func (r *queryResolver) GetUser(ctx context.Context, username string) (*db.User, error) {
-	user, err := r.Repository.GetUser(ctx, username)
-	if err != nil {
-		return nil, err
+func (r *queryResolver) Me(ctx context.Context) (*db.User, error) {
+	user := ForContext(ctx)
+	if user == nil {
+		return nil, fmt.Errorf("access denied")
 	}
-	return &user, nil
+	return user, nil
 }
 
 func (r *queryResolver) GetUsers(ctx context.Context) ([]db.User, error) {
@@ -106,10 +106,6 @@ func (r *queryResolver) GetUsers(ctx context.Context) ([]db.User, error) {
 		return []db.User{}, fmt.Errorf("access denied")
 	}
 	return r.Repository.GetUsers(ctx)
-}
-
-func (r *queryResolver) Me(ctx context.Context) (*db.User, error) {
-	panic("??")
 }
 
 func (r *mutationResolver) Login(ctx context.Context, username string, password string) (*Token, error) {
@@ -148,6 +144,21 @@ func (r *mutationResolver) AddAsFriend(ctx context.Context, username string) (*d
 	friend, err := r.Repository.CreateFriendShip(ctx, db.CreateFriendShipParams{
 		Username:   user.Username,
 		FriendName: username,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &friend, err
+}
+
+func (r *mutationResolver) RemoveFriend(ctx context.Context, friendname string) (*db.Friendship, error) {
+	user := ForContext(ctx)
+	if user == nil {
+		return nil, fmt.Errorf("access denied")
+	}
+	friend, err := r.Repository.RemoveFriendship(ctx, db.RemoveFriendshipParams{
+		Username:   user.Username,
+		FriendName: friendname,
 	})
 	if err != nil {
 		return nil, err

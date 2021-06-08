@@ -22,3 +22,21 @@ export const LOGIN = gql`
 		}
 	}
 `;
+
+export const ADD_FRIEND = gql`
+	mutation addFriend($username: String!) {
+		addAsFriend(username: $username) {
+			friendName
+			username
+		}
+	}
+`;
+
+export const REMOVE_FRIEND = gql`
+	mutation removeFriend($friendname: String!) {
+		removeFriend(friendname: $friendname) {
+			friendName
+			username
+		}
+	}
+`;
