@@ -60,11 +60,10 @@ export interface MailFormItemProps extends FormItemBase {
 }
 
 export interface NewUserDetails {
-	username: string;
-	name: string;
+	createUser: User;
 }
 
-export interface UserDetails extends NewUserDetails {
+export interface UserDetails extends User {
 	password: string;
 }
 

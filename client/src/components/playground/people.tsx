@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Box, Flex, Heading } from "@chakra-ui/layout";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import { Checkbox } from "@chakra-ui/checkbox";
-import { Button, Skeleton } from "@chakra-ui/react";
+import { Skeleton } from "@chakra-ui/react";
 import { User, UserData } from "../../types";
 import AwShucks from "../awShucks";
 import { BackButton } from "../team";
@@ -20,10 +20,6 @@ const People = () => {
 	const [removeFriend] = useMutation(REMOVE_FRIEND);
 	const [friends, setFriends] = useState(["no friend"]);
 	const toast = useToast();
-
-	/*if (loading) {
-		return <div>Loading...</div>;
-	}*/
 
 	if (me.error?.name == "" || allUsers.error?.name == "") {
 		return <AwShucks />;
@@ -79,29 +75,39 @@ const People = () => {
 			}
 		}
 	};
+	const handleUsersRefetch = async () => {
+		console.log("rejo");
+		await allUsers.refetch();
+		console.log(allUsers.data?.getUsers);
+	};
+
 	let i = 0;
 	return (
 		<Flex
 			h="100vh"
-			justify="space-evenly"
+			justify="space-around"
 			direction="column"
 			align="center"
 		>
 			<BackButton to="/playground" />
-			<Box align="center" pos="absolute" top="2vh">
-				<Heading as="h1" size="4xl">
+			<Box align="center" top="2vh">
+				<Heading
+					onClick={handleUsersRefetch}
+					as="h1"
+					size="4xl"
+					fontFamily="Hachi Maru Pop"
+				>
 					Users
 				</Heading>
 				<br />
-				<Heading as="h2" size="xl">
+				<Heading as="h2" size="xl" fontFamily="Comfortaa">
 					Add a friend, maybe?
 				</Heading>
 				<br />
-				<Button onClick={() => me.refetch()}>Update List</Button>
 			</Box>
 			<Skeleton isLoaded={!allUsers.loading && !me.loading}>
 				<Box w="70vw">
-					<Table variant="simple">
+					<Table variant="simple" size="md">
 						<Thead>
 							<Tr>
 								{TableHeaders.map((h) => (
@@ -111,8 +117,7 @@ const People = () => {
 						</Thead>
 						<Tbody>
 							{friends &&
-								allUsers.data &&
-								allUsers.data.getUsers.map((user: User) => {
+								allUsers.data?.getUsers.map((user: User) => {
 									i += 1;
 									let checked = friends.includes(
 										user.username
