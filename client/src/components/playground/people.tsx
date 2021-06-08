@@ -1,35 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useToast } from "@chakra-ui/toast";
+import React, { useEffect, useState } from "react";
 import { ADD_FRIEND, REMOVE_FRIEND } from "../../mutations";
 import { ALL_USERS, ME } from "../../queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { Box, Flex, Heading } from "@chakra-ui/layout";
 import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/table";
 import { Checkbox } from "@chakra-ui/checkbox";
-import { Button, Skeleton, useDisclosure } from "@chakra-ui/react";
+import { Button, Skeleton } from "@chakra-ui/react";
 import { User, UserData } from "../../types";
 import AwShucks from "../awShucks";
 import { BackButton } from "../team";
 
 const TableHeaders: string[] = ["S. No.", "Name", "Username", "Add Friend"];
 
-//TODO: Add a popover confirmation to mutate list
-const ConfirmFriendMutation = (isFriend: boolean) => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
-	const cancelRef = useRef();
-
-	return <></>;
-};
-
 const People = () => {
 	const allUsers = useQuery<UserData>(ALL_USERS);
 	const me = useQuery(ME);
-	const [friends, setFriends] = useState(["no friend"]);
 	const [addFriend] = useMutation(ADD_FRIEND);
 	const [removeFriend] = useMutation(REMOVE_FRIEND);
+	const [friends, setFriends] = useState(["no friend"]);
+	const toast = useToast();
 
 	/*if (loading) {
 		return <div>Loading...</div>;
 	}*/
+
 	if (me.error?.name == "" || allUsers.error?.name == "") {
 		return <AwShucks />;
 	}
@@ -43,40 +38,47 @@ const People = () => {
 		);
 	}, [me]);
 
-	//TODO: !checked=>removeFriendMutation checked=>addFriendMutation
 	const handleFriendClick = async (
 		e: React.ChangeEvent<HTMLInputElement>,
 		username: string,
 		isChecked: boolean
 	) => {
-		console.log(username, isChecked);
 		if (isChecked) {
 			try {
-				let result = await removeFriend({
+				await removeFriend({
 					variables: {
 						friendname: username
 					}
 				});
-				console.log(result);
 				await me.refetch();
+				toast({
+					title: `Removed ${username} as a friend`,
+					variant: "left-accent",
+					status: "warning",
+					isClosable: true
+				});
 			} catch (e) {
 				console.log(e);
 			}
 		} else {
 			try {
-				let result = await addFriend({
+				await addFriend({
 					variables: {
 						username
 					}
 				});
-				console.log(result);
 				await me.refetch();
+				toast({
+					title: `Added ${username} as a friend`,
+					variant: "left-accent",
+					status: "warning",
+					isClosable: true
+				});
 			} catch (e) {
 				console.log(e);
 			}
 		}
 	};
-
 	let i = 0;
 	return (
 		<Flex
@@ -95,7 +97,7 @@ const People = () => {
 					Add a friend, maybe?
 				</Heading>
 				<br />
-				<Button onClick={() => allUsers.refetch()}>Update List</Button>
+				<Button onClick={() => me.refetch()}>Update List</Button>
 			</Box>
 			<Skeleton isLoaded={!allUsers.loading && !me.loading}>
 				<Box w="70vw">
