@@ -14,5 +14,8 @@
 -   [x] Shell script to start client and server
 -   [x] Migrate to TypeScript
 -   [x] Integrate ESLint
--   [ ] Extract out type definitions
--   [ ] Stricter tsconfig
+-   [x] Extract out type definitions
+-   [x] Stricter tsconfig
+-   [x] Friends
+-   [ ] 1v1 chat w/ friends?
+-   [ ] sql.js
