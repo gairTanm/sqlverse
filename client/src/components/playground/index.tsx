@@ -3,6 +3,7 @@ import { Box } from "@chakra-ui/layout";
 import React from "react";
 import AwShucks from "../awShucks";
 import Bag from "./bag";
+//import Bag from "./bag";
 import Settings from "./settings";
 
 const Playground = () => {
