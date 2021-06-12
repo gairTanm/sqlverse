@@ -6,14 +6,17 @@ import {
 	ChevronRightIcon
 } from "@chakra-ui/icons";
 import {
+	Box,
 	Checkbox,
 	Flex,
+	Heading,
 	IconButton,
 	NumberDecrementStepper,
 	NumberIncrementStepper,
 	NumberInput,
 	NumberInputField,
 	NumberInputStepper,
+	Skeleton,
 	Table,
 	Tbody,
 	Td,
@@ -29,6 +32,8 @@ import { Column, HeaderGroup, usePagination, useTable } from "react-table";
 import { ADD_FRIEND, REMOVE_FRIEND } from "../../mutations";
 import { ALL_USERS, ME } from "../../queries";
 import { User } from "../../types";
+import AwShucks from "../awShucks";
+import { BackButton } from "../team";
 
 interface TableData {
 	idx: number;
@@ -38,7 +43,6 @@ interface TableData {
 }
 
 interface HandleFriendClickArgs {
-	e: React.ChangeEvent<HTMLInputElement>;
 	username: string;
 	isChecked: boolean;
 }
@@ -75,13 +79,14 @@ const CustomTable = ({
 	} = useTable(
 		{
 			columns,
-			data
+			data,
+			initialState: { pageSize: 6 }
 		},
 		usePagination
 	);
 	return (
 		<>
-			<Table {...getTableProps}>
+			<Table variant="striped" colorScheme="cyan" {...getTableProps}>
 				<Thead>
 					{headerGroups.map((headerGroup: HeaderGroup<TableData>) => (
 						<Tr {...headerGroup.getHeaderGroupProps()}>
@@ -97,7 +102,7 @@ const CustomTable = ({
 					{page.map((row) => {
 						prepareRow(row);
 						return (
-							<Tr {...row.getRowProps()}>
+							<Tr alignContent="center" {...row.getRowProps()}>
 								{row.cells.map((cell) => {
 									return (
 										<>
@@ -106,10 +111,10 @@ const CustomTable = ({
 												{cell.column.Header ==
 												"Add as Friend" ? (
 													<Checkbox
+														size="lg"
 														isChecked={cell.value}
-														onChange={(e) =>
+														onChange={() =>
 															handleFriendClick({
-																e,
 																username:
 																	cell.row
 																		.original
@@ -218,7 +223,6 @@ const UserTable = () => {
 	const toast = useToast();
 
 	const handleFriendClick = async ({
-		e,
 		isChecked,
 		username
 	}: HandleFriendClickArgs) => {
@@ -310,17 +314,58 @@ const UserTable = () => {
 		);
 	}, [me]);
 
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		setTimeout(() => setLoading(false), 2000);
+	}, []);
+
+	if (allUsers.error || me.error) {
+		return <AwShucks />;
+	}
+
 	return (
 		<>
-			{users && (
-				<CustomTable
-					handleFriendClick={handleFriendClick}
-					data={users}
-					columns={columns}
-				/>
-			)}
+			<Skeleton isLoaded={!loading}>
+				{users && (
+					<CustomTable
+						handleFriendClick={handleFriendClick}
+						data={users}
+						columns={columns}
+					/>
+				)}
+			</Skeleton>
 		</>
 	);
 };
 
-export default UserTable;
+const UserPage = () => {
+	return (
+		<Box w="100vw" h="100vh">
+			<Flex
+				h="100vh"
+				w="100vw"
+				justify="space-around"
+				direction="column"
+				align="center"
+			>
+				<BackButton to="/playground" />
+				<Box align="center">
+					<Heading as="h1" size="4xl" fontFamily="Comfortaa">
+						Users
+					</Heading>
+					<br />
+					<Heading as="h2" size="xl" fontFamily="Comfortaa">
+						Add a friend, maybe?
+					</Heading>
+					<br />
+				</Box>
+				<Box w="80vw">
+					<UserTable />
+				</Box>
+			</Flex>
+		</Box>
+	);
+};
+
+export default UserPage;
