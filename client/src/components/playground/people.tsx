@@ -3,7 +3,8 @@ import {
 	ArrowLeftIcon,
 	ArrowRightIcon,
 	ChevronLeftIcon,
-	ChevronRightIcon
+	ChevronRightIcon,
+	RepeatIcon
 } from "@chakra-ui/icons";
 import {
 	Box,
@@ -45,22 +46,29 @@ interface TableData {
 interface HandleFriendClickArgs {
 	username: string;
 	isChecked: boolean;
+	e: React.ChangeEvent<HTMLInputElement>;
 }
 
 interface HandleFriendClick {
 	(args: HandleFriendClickArgs): Promise<void>;
 }
 
+interface Refetch {
+	(): Promise<void>;
+}
+
 interface CustomTableProps {
 	data: TableData[];
 	columns: Column<TableData>[];
 	handleFriendClick: HandleFriendClick;
+	refetch: Refetch;
 }
 
 const CustomTable = ({
 	data,
 	columns,
-	handleFriendClick
+	handleFriendClick,
+	refetch
 }: CustomTableProps) => {
 	const {
 		getTableProps,
@@ -80,6 +88,7 @@ const CustomTable = ({
 		{
 			columns,
 			data,
+			autoResetPage: false,
 			initialState: { pageSize: 6 }
 		},
 		usePagination
@@ -111,10 +120,10 @@ const CustomTable = ({
 												{cell.column.Header ==
 												"Add as Friend" ? (
 													<Checkbox
-														size="lg"
 														isChecked={cell.value}
-														onChange={() =>
+														onChange={(e) =>
 															handleFriendClick({
+																e,
 																username:
 																	cell.row
 																		.original
@@ -150,7 +159,16 @@ const CustomTable = ({
 							aria-label="b"
 							onClick={previousPage}
 							isDisabled={!canPreviousPage}
+							mr={4}
 							icon={<ChevronLeftIcon h={6} w={6} />}
+						/>
+					</Tooltip>
+					<Tooltip label="Refresh">
+						<IconButton
+							aria-label="k"
+							mr={4}
+							onClick={refetch}
+							icon={<RepeatIcon h={6} w={6} />}
 						/>
 					</Tooltip>
 				</Flex>
@@ -215,7 +233,7 @@ const CustomTable = ({
 };
 
 const UserTable = () => {
-	const allUsers = useQuery(ALL_USERS);
+	const allUsers = useQuery(ALL_USERS, { partialRefetch: true });
 	const me = useQuery(ME);
 	const [addFriend] = useMutation(ADD_FRIEND);
 	const [removeFriend] = useMutation(REMOVE_FRIEND);
@@ -223,9 +241,11 @@ const UserTable = () => {
 	const toast = useToast();
 
 	const handleFriendClick = async ({
+		e,
 		isChecked,
 		username
 	}: HandleFriendClickArgs) => {
+		e.preventDefault();
 		if (isChecked) {
 			try {
 				await removeFriend({
@@ -304,7 +324,6 @@ const UserTable = () => {
 		});
 	}, [allUsers, isEmpty, friends]);
 
-	useEffect(() => console.log(friends), [friends]);
 	useEffect(() => {
 		if (me.loading) return;
 		setFriends(
@@ -324,6 +343,11 @@ const UserTable = () => {
 		return <AwShucks />;
 	}
 
+	const refetch = async () => {
+		await allUsers.refetch();
+		await me.refetch();
+	};
+
 	return (
 		<>
 			<Skeleton isLoaded={!loading}>
@@ -331,6 +355,7 @@ const UserTable = () => {
 					<CustomTable
 						handleFriendClick={handleFriendClick}
 						data={users}
+						refetch={refetch}
 						columns={columns}
 					/>
 				)}
