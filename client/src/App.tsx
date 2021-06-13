@@ -6,7 +6,7 @@ import LoginPage from "./components/formPages/loginPage";
 import SignUpPage from "./components/formPages/signUpPage";
 import { useLocation } from "react-router-dom";
 import { Box } from "@chakra-ui/layout";
-import UserTable from "./components/playground/people";
+import UserPage from "./components/playground/people";
 import Team from "./components/team";
 import RoutingAnimation from "./components/routingAnimation";
 import Testimonials from "./components/testimonials";
@@ -66,7 +66,7 @@ const App = (): JSX.Element => {
 							</Route>
 							<Route exact path="/playground/friends">
 								<RoutingAnimation>
-									<UserTable />
+									<UserPage />
 								</RoutingAnimation>
 							</Route>
 							<Route exact path="/team">
