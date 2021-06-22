@@ -9,6 +9,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/gairTanm/sqlverse/dataloaders"
 	"github.com/gairTanm/sqlverse/db"
 	"github.com/gairTanm/sqlverse/gql"
 	"github.com/go-chi/chi/v5"
@@ -23,12 +24,13 @@ func main() {
 	defer d.Close()
 
 	repo := db.NewRepository(d)
+	dl := dataloaders.NewRetriever()
 
 	router := chi.NewRouter()
 
 	router.Use(cors.AllowAll().Handler)
 	router.Use(gql.Middleware(repo))
-	srv:=handler.NewDefaultServer(gql.NewExecutableSchema(gql.Config{Resolvers: &gql.Resolver{Repository: repo}}))
+	srv := handler.NewDefaultServer(gql.NewExecutableSchema(gql.Config{Resolvers: &gql.Resolver{Repository: repo, Dataloaders: dl}}))
 
 	router.Handle("/", playground.Handler("Graphql", "/graphql"))
 	router.Handle("/graphql", srv)
