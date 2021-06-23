@@ -28,7 +28,7 @@ func main() {
 
 	router.Use(cors.AllowAll().Handler)
 	router.Use(gql.Middleware(repo))
-	srv:=handler.NewDefaultServer(gql.NewExecutableSchema(gql.Config{Resolvers: &gql.Resolver{Repository: repo}}))
+	srv := handler.NewDefaultServer(gql.NewExecutableSchema(gql.Config{Resolvers: &gql.Resolver{Repository: repo}}))
 
 	router.Handle("/", playground.Handler("Graphql", "/graphql"))
 	router.Handle("/graphql", srv)
