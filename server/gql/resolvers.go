@@ -5,14 +5,12 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gairTanm/sqlverse/dataloaders"
 	"github.com/gairTanm/sqlverse/db"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type Resolver struct {
-	Repository  db.Repository
-	Dataloaders dataloaders.Retriever
+	Repository db.Repository
 }
 
 func hashAndSalt(password string) (string, error) {
