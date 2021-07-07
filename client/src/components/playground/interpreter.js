@@ -2,17 +2,25 @@ import React, { useState, useEffect } from "react";
 import "./styles.css";
 import initSqlJs from "sql.js";
 import { Textarea } from "@chakra-ui/react";
+import database from "../../assets/Northwind_small.sqlite";
 
 import sqlWasm from "!!file-loader?name=sql-wasm-[contenthash].wasm!sql.js/dist/sql-wasm.wasm";
 
 const Interpreter = () => {
-	const [db, setDb] = useState(null);
+	const [db, setDb] = useState();
 	const [error, setError] = useState(null);
 
 	useEffect(async () => {
 		try {
 			const SQL = await initSqlJs({ locateFile: () => sqlWasm });
-			setDb(new SQL.Database());
+			let xhr = new XMLHttpRequest();
+			xhr.open("GET", database, true);
+			xhr.responseType = "arraybuffer";
+			xhr.onload = () => {
+				let uInt8Array = new Uint8Array(xhr.response);
+				setDb(new SQL.Database(uInt8Array));
+			};
+			xhr.send();
 		} catch (err) {
 			setError(err);
 		}
@@ -23,25 +31,29 @@ const Interpreter = () => {
 	else return <SQLRepl db={db} />;
 };
 
-function SQLRepl({ db }) {
+const SQLRepl = ({ db }) => {
 	const [error, setError] = useState(null);
 	const [results, setResults] = useState([]);
+	const [sql, setSql] = useState("select * from employee");
 
-	function exec(sql) {
+	useEffect(() => {
+		exec(sql);
+	}, []);
+
+	const exec = (sql) => {
 		try {
-			setResults(db.exec(sql)); // an array of objects is returned
+			setResults(db.exec(sql));
 			setError(null);
 		} catch (err) {
 			setError(err);
 			setResults([]);
 		}
-	}
+	};
 
 	return (
 		<div className="App">
-			<h1>React SQL interpreter</h1>
-
 			<Textarea
+				value={sql}
 				onChange={(e) => exec(e.target.value)}
 				placeholder="Enter some SQL. No inspiration ? Try “select sqlite_version()”"
 			/>
@@ -55,9 +67,9 @@ function SQLRepl({ db }) {
 			</pre>
 		</div>
 	);
-}
+};
 
-function ResultsTable({ columns, values }) {
+const ResultsTable = ({ columns, values }) => {
 	return (
 		<table>
 			<thead>
@@ -79,6 +91,6 @@ function ResultsTable({ columns, values }) {
 			</tbody>
 		</table>
 	);
-}
+};
 
 export default Interpreter;
