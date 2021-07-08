@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 import initSqlJs from "sql.js";
-import { Textarea } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import database from "../../assets/Northwind_small.sqlite";
 
 import sqlWasm from "!!file-loader?name=sql-wasm-[contenthash].wasm!sql.js/dist/sql-wasm.wasm";
+import Editor from "@monaco-editor/react";
 
 const Interpreter = () => {
 	const [db, setDb] = useState();
@@ -31,18 +32,30 @@ const Interpreter = () => {
 	else return <SQLRepl db={db} />;
 };
 
+const SQLEditor = ({ handleSqlChange }) => {
+	return (
+		<Editor
+			height="100%"
+			fontSize="10px"
+			onChange={handleSqlChange}
+			defaultLanguage="sql"
+			theme="vs-dark"
+			defaultValue="select * from employee"
+		/>
+	);
+};
+
 const SQLRepl = ({ db }) => {
 	const [error, setError] = useState(null);
 	const [results, setResults] = useState([]);
 	const [sql, setSql] = useState("select * from employee");
 
-	useEffect(() => {
-		exec(sql);
-	}, []);
+	useEffect(() => {}, []);
 
-	const exec = (sql) => {
+	const handleSqlChange = (value, event) => {
+		console.log("editor value: ", value);
 		try {
-			setResults(db.exec(sql));
+			setResults(db.exec(value));
 			setError(null);
 		} catch (err) {
 			setError(err);
@@ -52,12 +65,9 @@ const SQLRepl = ({ db }) => {
 
 	return (
 		<div className="App">
-			<Textarea
-				value={sql}
-				onChange={(e) => exec(e.target.value)}
-				placeholder="Enter some SQL. No inspiration ? Try “select sqlite_version()”"
-			/>
-
+			<Box position="absolute" left={0} w="40vw" h="100vh">
+				<SQLEditor handleSqlChange={handleSqlChange} />
+			</Box>
 			<pre className="error">{(error || "").toString()}</pre>
 
 			<pre>
