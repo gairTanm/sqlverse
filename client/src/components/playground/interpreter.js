@@ -8,6 +8,7 @@ import {
 	TableContainer,
 	Tbody,
 	Td,
+	Text,
 	Th,
 	Thead,
 	Tr
@@ -43,14 +44,18 @@ const Interpreter = () => {
 };
 const SQLEditor = ({ handleSqlChange }) => {
 	return (
-		<Editor
-			height="100%"
-			fontSize="10px"
-			onChange={handleSqlChange}
-			defaultLanguage="sql"
-			theme="vs-dark"
-			defaultValue="select * from employee"
-		/>
+		<>
+			<Text fontFamily="Hachi Maru Pop" fontStyle="oblique">
+				Try writing SQL commands and watch for changes!
+			</Text>
+			<Editor
+				height="100%"
+				onChange={handleSqlChange}
+				defaultLanguage="sql"
+				theme="vs-dark"
+				defaultValue="select * from employee"
+			/>
+		</>
 	);
 };
 
@@ -59,10 +64,12 @@ const SQLRepl = ({ db }) => {
 	const [results, setResults] = useState([]);
 	const [sql, setSql] = useState("select * from employee");
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		setResults(db.exec(sql));
+		setError(null);
+	}, []);
 
 	const handleSqlChange = (value, event) => {
-		console.log("editor value: ", value);
 		try {
 			setResults(db.exec(value));
 			setError(null);
@@ -77,13 +84,12 @@ const SQLRepl = ({ db }) => {
 			<Box left={0} w="40vw" h="50vh">
 				<SQLEditor handleSqlChange={handleSqlChange} />
 			</Box>
-
-			<Box h="100vh" w="60vw">
+			<Flex direction="column" w="60vw">
 				<pre className="error">{(error || "").toString()}</pre>
 				{results.map(({ columns, values }, i) => (
 					<ResultsTable key={i} columns={columns} values={values} />
 				))}
-			</Box>
+			</Flex>
 		</Flex>
 	);
 };
@@ -99,7 +105,6 @@ const ResultsTable = ({ columns, values }) => {
 						))}
 					</Tr>
 				</Thead>
-
 				<Tbody>
 					{values.map((row, i) => (
 						<Tr key={i}>
@@ -107,8 +112,7 @@ const ResultsTable = ({ columns, values }) => {
 								value = String(value);
 								return (
 									<Td fontSize="xs" key={i}>
-										{value.substring(0, 10)}
-										{value.length > 10 ? "..." : ""}
+										{value}
 									</Td>
 								);
 							})}
