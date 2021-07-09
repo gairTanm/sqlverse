@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 import initSqlJs from "sql.js";
-import { Textarea } from "@chakra-ui/react";
+import {
+	Box,
+	Flex,
+	Table,
+	TableContainer,
+	Tbody,
+	Td,
+	Th,
+	Thead,
+	Tr
+} from "@chakra-ui/react";
 import database from "../../assets/Northwind_small.sqlite";
 
 import sqlWasm from "!!file-loader?name=sql-wasm-[contenthash].wasm!sql.js/dist/sql-wasm.wasm";
+import Editor from "@monaco-editor/react";
 
 const Interpreter = () => {
 	const [db, setDb] = useState();
@@ -30,19 +41,30 @@ const Interpreter = () => {
 	else if (!db) return <pre>Loading...</pre>;
 	else return <SQLRepl db={db} />;
 };
+const SQLEditor = ({ handleSqlChange }) => {
+	return (
+		<Editor
+			height="100%"
+			fontSize="10px"
+			onChange={handleSqlChange}
+			defaultLanguage="sql"
+			theme="vs-dark"
+			defaultValue="select * from employee"
+		/>
+	);
+};
 
 const SQLRepl = ({ db }) => {
 	const [error, setError] = useState(null);
 	const [results, setResults] = useState([]);
 	const [sql, setSql] = useState("select * from employee");
 
-	useEffect(() => {
-		exec(sql);
-	}, []);
+	useEffect(() => {}, []);
 
-	const exec = (sql) => {
+	const handleSqlChange = (value, event) => {
+		console.log("editor value: ", value);
 		try {
-			setResults(db.exec(sql));
+			setResults(db.exec(value));
 			setError(null);
 		} catch (err) {
 			setError(err);
@@ -51,45 +73,50 @@ const SQLRepl = ({ db }) => {
 	};
 
 	return (
-		<div className="App">
-			<Textarea
-				value={sql}
-				onChange={(e) => exec(e.target.value)}
-				placeholder="Enter some SQL. No inspiration ? Try “select sqlite_version()”"
-			/>
+		<Flex direction="row">
+			<Box left={0} w="40vw" h="50vh">
+				<SQLEditor handleSqlChange={handleSqlChange} />
+			</Box>
 
-			<pre className="error">{(error || "").toString()}</pre>
-
-			<pre>
+			<Box h="100vh" w="60vw">
+				<pre className="error">{(error || "").toString()}</pre>
 				{results.map(({ columns, values }, i) => (
 					<ResultsTable key={i} columns={columns} values={values} />
 				))}
-			</pre>
-		</div>
+			</Box>
+		</Flex>
 	);
 };
 
 const ResultsTable = ({ columns, values }) => {
 	return (
-		<table>
-			<thead>
-				<tr>
-					{columns.map((columnName, i) => (
-						<td key={i}>{columnName}</td>
-					))}
-				</tr>
-			</thead>
-
-			<tbody>
-				{values.map((row, i) => (
-					<tr key={i}>
-						{row.map((value, i) => (
-							<td key={i}>{value}</td>
+		<TableContainer>
+			<Table size="sm" colorScheme="teal" variant="striped">
+				<Thead>
+					<Tr>
+						{columns.map((columnName, i) => (
+							<Th key={i}>{columnName}</Th>
 						))}
-					</tr>
-				))}
-			</tbody>
-		</table>
+					</Tr>
+				</Thead>
+
+				<Tbody>
+					{values.map((row, i) => (
+						<Tr key={i}>
+							{row.map((value, i) => {
+								value = String(value);
+								return (
+									<Td fontSize="xs" key={i}>
+										{value.substring(0, 10)}
+										{value.length > 10 ? "..." : ""}
+									</Td>
+								);
+							})}
+						</Tr>
+					))}
+				</Tbody>
+			</Table>
+		</TableContainer>
 	);
 };
 

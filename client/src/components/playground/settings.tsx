@@ -15,13 +15,27 @@ import {
 	MenuList
 } from "@chakra-ui/menu";
 import { Portal } from "@chakra-ui/portal";
+import {
+	Button,
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay,
+	useDisclosure
+} from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/toast";
 import React from "react";
 import { useHistory } from "react-router";
 
+import schema from "../../assets/schema.svg";
+
 const Settings = () => {
 	const { push } = useHistory();
 	const toast = useToast();
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const handleFriends = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -53,7 +67,7 @@ const Settings = () => {
 		},
 		{
 			icon: <QuestionIcon />,
-			onClick: undefined,
+			onClick: onOpen,
 			text: "Help"
 		},
 		{
@@ -64,37 +78,56 @@ const Settings = () => {
 	];
 
 	return (
-		<Menu>
-			<MenuButton
-				as={IconButton}
-				icon={<HamburgerIcon />}
-				variant="outline"
-			/>
-			<Portal>
-				<MenuList>
-					<MenuGroup>
-						{MenuItems.map((mi) => {
-							return (
-								<MenuItem
-									key={mi.text}
-									icon={mi.icon}
-									onClick={mi.onClick}
-								>
-									{mi.text}
-								</MenuItem>
-							);
-						})}
-					</MenuGroup>
+		<>
+			<Modal size="full" onClose={onClose} isOpen={isOpen}>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>Schema</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						<img src={schema} alt="schema" />
+					</ModalBody>
+					<ModalFooter>
+						<Button onClick={onClose}>Close</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
 
-					<MenuDivider />
-					<MenuGroup>
-						<MenuItem icon={<CloseIcon />} onClick={handleLogout}>
-							Logout
-						</MenuItem>
-					</MenuGroup>
-				</MenuList>
-			</Portal>
-		</Menu>
+			<Menu>
+				<MenuButton
+					as={IconButton}
+					icon={<HamburgerIcon />}
+					variant="outline"
+				/>
+				<Portal>
+					<MenuList>
+						<MenuGroup>
+							{MenuItems.map((mi) => {
+								return (
+									<MenuItem
+										key={mi.text}
+										icon={mi.icon}
+										onClick={mi.onClick}
+									>
+										{mi.text}
+									</MenuItem>
+								);
+							})}
+						</MenuGroup>
+
+						<MenuDivider />
+						<MenuGroup>
+							<MenuItem
+								icon={<CloseIcon />}
+								onClick={handleLogout}
+							>
+								Logout
+							</MenuItem>
+						</MenuGroup>
+					</MenuList>
+				</Portal>
+			</Menu>
+		</>
 	);
 };
 
