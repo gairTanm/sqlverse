@@ -4,6 +4,7 @@ import initSqlJs from "sql.js";
 import {
 	Box,
 	Flex,
+	Spinner,
 	Table,
 	TableContainer,
 	Tbody,
@@ -45,10 +46,11 @@ const Interpreter = () => {
 const SQLEditor = ({ handleSqlChange }) => {
 	return (
 		<>
-			<Text fontFamily="Hachi Maru Pop" fontStyle="oblique">
+			<Text fontFamily="Comfortaa" fontWeight="bold">
 				Try writing SQL commands and watch for changes!
 			</Text>
 			<Editor
+				loading={<Spinner size="xl" color="teal" />}
 				height="100%"
 				onChange={handleSqlChange}
 				defaultLanguage="sql"
