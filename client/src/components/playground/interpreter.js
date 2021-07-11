@@ -114,31 +114,33 @@ const SQLRepl = ({ db }) => {
 
 const ResultsTable = ({ columns, values }) => {
 	return (
-		<TableContainer>
-			<Table size="sm" colorScheme="teal" variant="striped">
-				<Thead>
-					<Tr>
-						{columns.map((columnName, i) => (
-							<Th key={i}>{columnName}</Th>
-						))}
-					</Tr>
-				</Thead>
-				<Tbody>
-					{values.map((row, i) => (
-						<Tr key={i}>
-							{row.map((value, i) => {
-								value = String(value);
-								return (
-									<Td fontSize="xs" key={i}>
-										{value}
-									</Td>
-								);
-							})}
+		<>
+			<TableContainer>
+				<Table size="sm" colorScheme="teal" variant="striped">
+					<Thead>
+						<Tr>
+							{columns.map((columnName, i) => (
+								<Th key={i}>{columnName}</Th>
+							))}
 						</Tr>
-					))}
-				</Tbody>
-			</Table>
-		</TableContainer>
+					</Thead>
+					<Tbody>
+						{values.map((row, i) => (
+							<Tr key={i}>
+								{row.map((value, i) => {
+									value = String(value);
+									return (
+										<Td fontSize="xs" key={i}>
+											{value}
+										</Td>
+									);
+								})}
+							</Tr>
+						))}
+					</Tbody>
+				</Table>
+			</TableContainer>
+		</>
 	);
 };
 

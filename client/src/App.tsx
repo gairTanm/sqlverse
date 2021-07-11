@@ -36,7 +36,7 @@ const App = (): JSX.Element => {
 			{loading ? (
 				<Loading loading={loading} />
 			) : (
-				<Box overflowX="hidden" overflowY="auto">
+				<Box overflowX="hidden" overflowY="hidden">
 					<AnimatePresence exitBeforeEnter>
 						<Switch location={location} key={location.pathname}>
 							<Route exact path="/home">
