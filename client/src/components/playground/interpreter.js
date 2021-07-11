@@ -4,10 +4,12 @@ import initSqlJs from "sql.js";
 import {
 	Box,
 	Flex,
+	Spinner,
 	Table,
 	TableContainer,
 	Tbody,
 	Td,
+	Text,
 	Th,
 	Thead,
 	Tr
@@ -43,26 +45,37 @@ const Interpreter = () => {
 };
 const SQLEditor = ({ handleSqlChange }) => {
 	return (
-		<Editor
-			height="100%"
-			fontSize="10px"
-			onChange={handleSqlChange}
-			defaultLanguage="sql"
-			theme="vs-dark"
-			defaultValue="select * from employee"
-		/>
+		<>
+			<Text fontFamily="Comfortaa" fontWeight="bold">
+				Try writing SQL commands and watch for changes!
+			</Text>
+			<Editor
+				loading={<Spinner size="xl" color="teal" />}
+				height="100%"
+				onChange={handleSqlChange}
+				defaultLanguage="sql"
+				theme="vs-dark"
+				defaultValue="select count(*) as total
+				from employee
+				join employeeTerritory;"
+			/>
+		</>
 	);
 };
 
 const SQLRepl = ({ db }) => {
 	const [error, setError] = useState(null);
 	const [results, setResults] = useState([]);
-	const [sql, setSql] = useState("select * from employee");
+	const [sql, setSql] = useState(
+		"select count(*) as total from employee join employeeTerritory;"
+	);
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		setResults(db.exec(sql));
+		setError(null);
+	}, []);
 
 	const handleSqlChange = (value, event) => {
-		console.log("editor value: ", value);
 		try {
 			setResults(db.exec(value));
 			setError(null);
@@ -74,49 +87,60 @@ const SQLRepl = ({ db }) => {
 
 	return (
 		<Flex direction="row">
-			<Box left={0} w="40vw" h="50vh">
+			<Box position="fixed" left={0} w="40vw" h="50vh">
 				<SQLEditor handleSqlChange={handleSqlChange} />
 			</Box>
-
-			<Box h="100vh" w="60vw">
-				<pre className="error">{(error || "").toString()}</pre>
-				{results.map(({ columns, values }, i) => (
-					<ResultsTable key={i} columns={columns} values={values} />
-				))}
-			</Box>
+			<Flex flexDirection="column">
+				<Flex
+					marginLeft="40vw"
+					flexDirection="column"
+					flexGrow={1}
+					overflow="auto"
+					w="60vw"
+				>
+					<pre className="error">{(error || "").toString()}</pre>
+					{results.map(({ columns, values }, i) => (
+						<ResultsTable
+							key={i}
+							columns={columns}
+							values={values}
+						/>
+					))}
+				</Flex>
+			</Flex>
 		</Flex>
 	);
 };
 
 const ResultsTable = ({ columns, values }) => {
 	return (
-		<TableContainer>
-			<Table size="sm" colorScheme="teal" variant="striped">
-				<Thead>
-					<Tr>
-						{columns.map((columnName, i) => (
-							<Th key={i}>{columnName}</Th>
-						))}
-					</Tr>
-				</Thead>
-
-				<Tbody>
-					{values.map((row, i) => (
-						<Tr key={i}>
-							{row.map((value, i) => {
-								value = String(value);
-								return (
-									<Td fontSize="xs" key={i}>
-										{value.substring(0, 10)}
-										{value.length > 10 ? "..." : ""}
-									</Td>
-								);
-							})}
+		<>
+			<TableContainer>
+				<Table size="sm" colorScheme="teal" variant="striped">
+					<Thead>
+						<Tr>
+							{columns.map((columnName, i) => (
+								<Th key={i}>{columnName}</Th>
+							))}
 						</Tr>
-					))}
-				</Tbody>
-			</Table>
-		</TableContainer>
+					</Thead>
+					<Tbody>
+						{values.map((row, i) => (
+							<Tr key={i}>
+								{row.map((value, i) => {
+									value = String(value);
+									return (
+										<Td fontSize="xs" key={i}>
+											{value}
+										</Td>
+									);
+								})}
+							</Tr>
+						))}
+					</Tbody>
+				</Table>
+			</TableContainer>
+		</>
 	);
 };
 

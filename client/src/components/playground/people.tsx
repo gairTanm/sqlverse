@@ -22,13 +22,14 @@ import {
 	Tbody,
 	Td,
 	Text,
+	Th,
 	Thead,
 	Tooltip,
 	Tr
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/toast";
 import React, { useEffect, useMemo, useState } from "react";
-import { Column, usePagination, useTable } from "react-table";
+import { Column, HeaderGroup, usePagination, useTable } from "react-table";
 import { ADD_FRIEND, REMOVE_FRIEND } from "../../mutations";
 import { ALL_USERS, ME } from "../../queries";
 import { User } from "../../types";
@@ -95,7 +96,17 @@ const CustomTable = ({
 	return (
 		<>
 			<Table variant="striped" colorScheme="cyan" {...getTableProps}>
-				<Thead>"Tanmay"</Thead>
+				<Thead>
+					{headerGroups.map((headerGroup: HeaderGroup<TableData>) => (
+						<Tr {...headerGroup.getHeaderGroupProps()}>
+							{headerGroup.headers.map((column) => (
+								<Th {...column.getHeaderProps()}>
+									{column.render("Header")}
+								</Th>
+							))}
+						</Tr>
+					))}
+				</Thead>
 				<Tbody {...getTableBodyProps()}>
 					{page.map((row) => {
 						prepareRow(row);
@@ -114,7 +125,10 @@ const CustomTable = ({
 															handleFriendClick({
 																e,
 																username:
-																	"tanmay",
+																	// @ts-ignore
+																	cell.row
+																		.original // @ts-ignore
+																		.username,
 																isChecked:
 																	cell.value
 															})
