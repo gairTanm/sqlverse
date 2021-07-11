@@ -55,7 +55,9 @@ const SQLEditor = ({ handleSqlChange }) => {
 				onChange={handleSqlChange}
 				defaultLanguage="sql"
 				theme="vs-dark"
-				defaultValue="select * from employee"
+				defaultValue="select count(*) as total
+				from employee
+				join employeeTerritory;"
 			/>
 		</>
 	);
@@ -64,7 +66,9 @@ const SQLEditor = ({ handleSqlChange }) => {
 const SQLRepl = ({ db }) => {
 	const [error, setError] = useState(null);
 	const [results, setResults] = useState([]);
-	const [sql, setSql] = useState("select * from employee");
+	const [sql, setSql] = useState(
+		"select count(*) as total from employee join employeeTerritory;"
+	);
 
 	useEffect(() => {
 		setResults(db.exec(sql));
@@ -83,14 +87,26 @@ const SQLRepl = ({ db }) => {
 
 	return (
 		<Flex direction="row">
-			<Box left={0} w="40vw" h="50vh">
+			<Box position="fixed" left={0} w="40vw" h="50vh">
 				<SQLEditor handleSqlChange={handleSqlChange} />
 			</Box>
-			<Flex direction="column" w="60vw">
-				<pre className="error">{(error || "").toString()}</pre>
-				{results.map(({ columns, values }, i) => (
-					<ResultsTable key={i} columns={columns} values={values} />
-				))}
+			<Flex flexDirection="column">
+				<Flex
+					marginLeft="40vw"
+					flexDirection="column"
+					flexGrow={1}
+					overflow="auto"
+					w="60vw"
+				>
+					<pre className="error">{(error || "").toString()}</pre>
+					{results.map(({ columns, values }, i) => (
+						<ResultsTable
+							key={i}
+							columns={columns}
+							values={values}
+						/>
+					))}
+				</Flex>
 			</Flex>
 		</Flex>
 	);
