@@ -54,6 +54,11 @@ const Settings = () => {
 		localStorage.removeItem("login-token");
 	};
 
+	const handleProfile = (e: React.MouseEvent) => {
+		e.preventDefault();
+		push("/playground/profile");
+	};
+
 	const MenuItems = [
 		{
 			icon: <SearchIcon />,
@@ -62,7 +67,7 @@ const Settings = () => {
 		},
 		{
 			icon: <EditIcon />,
-			onClick: undefined,
+			onClick: handleProfile,
 			text: "Profile"
 		},
 		{

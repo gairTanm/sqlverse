@@ -43,6 +43,7 @@ const Interpreter = () => {
 	else if (!db) return <pre>Loading...</pre>;
 	else return <SQLRepl db={db} />;
 };
+
 const SQLEditor = ({ handleSqlChange }) => {
 	return (
 		<>
