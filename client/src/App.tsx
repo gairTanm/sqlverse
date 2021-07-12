@@ -15,6 +15,7 @@ import { init } from "emailjs-com";
 import Loading from "./components/loading";
 import Playground from "./components/playground";
 import React from "react";
+import Profile from "./components/playground/profile";
 
 const { REACT_APP_EMAIL_USER_ID } = process.env;
 
@@ -36,7 +37,7 @@ const App = (): JSX.Element => {
 			{loading ? (
 				<Loading loading={loading} />
 			) : (
-				<Box overflowX="hidden" overflowY="hidden">
+				<Box overflowX="hidden" overflowY="auto">
 					<AnimatePresence exitBeforeEnter>
 						<Switch location={location} key={location.pathname}>
 							<Route exact path="/home">
@@ -67,6 +68,11 @@ const App = (): JSX.Element => {
 							<Route exact path="/playground/friends">
 								<RoutingAnimation>
 									<UserPage />
+								</RoutingAnimation>
+							</Route>
+							<Route exact path="/playground/profile">
+								<RoutingAnimation>
+									<Profile />
 								</RoutingAnimation>
 							</Route>
 							<Route exact path="/team">

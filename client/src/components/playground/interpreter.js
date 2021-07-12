@@ -43,6 +43,7 @@ const Interpreter = () => {
 	else if (!db) return <pre>Loading...</pre>;
 	else return <SQLRepl db={db} />;
 };
+
 const SQLEditor = ({ handleSqlChange }) => {
 	return (
 		<>
@@ -90,12 +91,11 @@ const SQLRepl = ({ db }) => {
 			<Box position="fixed" left={0} w="40vw" h="50vh">
 				<SQLEditor handleSqlChange={handleSqlChange} />
 			</Box>
-			<Flex flexDirection="column">
+			<Flex flexDirection="column" overflow="auto">
 				<Flex
 					marginLeft="40vw"
 					flexDirection="column"
 					flexGrow={1}
-					overflow="auto"
 					w="60vw"
 				>
 					<pre className="error">{(error || "").toString()}</pre>
