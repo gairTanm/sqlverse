@@ -88,7 +88,7 @@ const SQLRepl = ({ db }) => {
 
 	return (
 		<Flex direction="row">
-			<Box position="fixed" left={0} w="40vw" h="50vh">
+			<Box position="fixed" left={0} w="40vw" h="100vh">
 				<SQLEditor handleSqlChange={handleSqlChange} />
 			</Box>
 			<Flex flexDirection="column" overflow="auto">
