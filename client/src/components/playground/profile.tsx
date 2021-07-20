@@ -8,17 +8,12 @@ import {
 	Text,
 	Wrap
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import React from "react";
 import { ME } from "../../queries";
 import { BackButton } from "../team";
 
-const sqlDecoration = () => {
-	return (
-		<Box>
-			<Text>select * from profile;</Text>
-		</Box>
-	);
-};
+const MotionFlex = motion(Flex);
 
 const Profile = () => {
 	const { loading, data, refetch } = useQuery(ME);
@@ -48,12 +43,16 @@ const Profile = () => {
 						/>
 					</Box>
 					<Skeleton isLoaded={!loading}>
-						<Flex
+						<MotionFlex
 							align="center"
 							alignContent="center"
 							justifyContent="space-around"
 							minH="sm"
 							minW="sm"
+							style={{ x: 100, opacity: 0 }}
+							animate={{ x: 0, opacity: 1 }}
+							transition={{ duration: 1 }}
+							whileHover={{ scale: 1.04 }}
 							borderRadius="lg"
 							borderWidth="1px"
 							fontFamily="Comfortaa"
@@ -78,7 +77,7 @@ const Profile = () => {
 										);
 									})}
 							</Wrap>
-						</Flex>
+						</MotionFlex>
 					</Skeleton>
 				</Flex>
 			</Flex>

@@ -18,6 +18,7 @@ import database from "../../assets/Northwind_small.sqlite";
 
 import sqlWasm from "!!file-loader?name=sql-wasm-[contenthash].wasm!sql.js/dist/sql-wasm.wasm";
 import Editor from "@monaco-editor/react";
+import { motion } from "framer-motion";
 
 const Interpreter = () => {
 	const [db, setDb] = useState();
@@ -112,6 +113,17 @@ const SQLRepl = ({ db }) => {
 	);
 };
 
+const variants = {
+	open: {
+		transition: {
+			staggerChildren: 0.1,
+			delayChildren: 0.2
+		}
+	}
+};
+
+const MotionTbody = motion(Tbody);
+
 const ResultsTable = ({ columns, values }) => {
 	return (
 		<>
@@ -124,7 +136,7 @@ const ResultsTable = ({ columns, values }) => {
 							))}
 						</Tr>
 					</Thead>
-					<Tbody>
+					<MotionTbody variants={variants}>
 						{values.map((row, i) => (
 							<Tr key={i}>
 								{row.map((value, i) => {
@@ -137,7 +149,7 @@ const ResultsTable = ({ columns, values }) => {
 								})}
 							</Tr>
 						))}
-					</Tbody>
+					</MotionTbody>
 				</Table>
 			</TableContainer>
 		</>
