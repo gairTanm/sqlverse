@@ -8,7 +8,7 @@ import {
 	Text,
 	Wrap
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { ME } from "../../queries";
 import { BackButton } from "../team";
 
@@ -22,10 +22,6 @@ const sqlDecoration = () => {
 
 const Profile = () => {
 	const { loading, data, refetch } = useQuery(ME);
-
-	useEffect(() => {
-		console.log(data);
-	}, [loading]);
 
 	return (
 		<>
@@ -75,8 +71,11 @@ const Profile = () => {
 							<Wrap>
 								{data &&
 									data.me.friends.map((f) => {
-										console.log(f);
-										return <Flex>{f.username}</Flex>;
+										return (
+											<Flex key={f.username}>
+												{f.username}
+											</Flex>
+										);
 									})}
 							</Wrap>
 						</Flex>
