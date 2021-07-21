@@ -44,7 +44,6 @@ const LoginForm = () => {
 						password: values.password
 					}
 				});
-				console.log(data);
 				localStorage.setItem("login-token", data.login.value);
 				setTimeout(() => {
 					setLoading(false);
@@ -58,7 +57,6 @@ const LoginForm = () => {
 					push("/playground");
 				}, 1500);
 			} catch (e) {
-				console.log(e);
 				setTimeout(() => {
 					setLoading(false);
 					toast({
