@@ -1,7 +1,7 @@
 import React from "react";
 
 const View = () => {
-	return <div>Jello</div>;
+	return <div>view</div>;
 };
 
 export default View;

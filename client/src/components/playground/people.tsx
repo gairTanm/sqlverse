@@ -262,7 +262,7 @@ const UserTable = () => {
 					isClosable: true
 				});
 			} catch (e) {
-				console.log(e);
+
 			}
 		} else {
 			try {
